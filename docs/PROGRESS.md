@@ -7,7 +7,7 @@
 - Nhiệm vụ chưa nghiệm thu đầu tiên: **ENV-03 — xác nhận runtime Kaggle**. ENV-02 đã PASS với checkpoint thật sau khi người dùng cho phép tải CLIP.
 - **ENV-01/02/04/05 PASS local**. `.venv-repro` CPython 3.13.5 Windows x64 tái tạo đúng 31 package; torch 2.8.0+cpu, transformers 4.57.6, huggingface-hub 0.36.0, pytest 8.4.2; import CLIP và pip check đạt. **10 pytest PASS**, CPU smoke và auto fallback PASS.
 - Luồng mới: VS Code → GitHub `hoan25/BaiqiL-GenAI-Bench` → Kaggle → artifact về máy. Notebook clone GitHub và xuất `g0-<thời_gian>.zip`; không dùng bundle upload trong luồng chính.
-- Tiếp theo: hoàn tất push GitHub, người dùng chạy notebook theo `docs/G0_KAGGLE.md`, gửi ZIP kết quả và notebook có output để nghiệm thu ENV-03/06. Không cài lại môi trường local đã kiểm chứng.
+- GitHub đã nhận commit triển khai `970e304` trên nhánh `main`: https://github.com/hoan25/BaiqiL-GenAI-Bench . Tiếp theo: người dùng chạy notebook theo `docs/G0_KAGGLE.md`, gửi ZIP kết quả và notebook có output để nghiệm thu ENV-03/06. Không làm lại push khởi tạo hoặc cài lại môi trường local đã kiểm chứng.
 - Không bắt đầu G1 trước khi G0 qua gate. Chưa có phần ML/API/UI nào được nghiệm thu.
 
 ## Quy tắc khôi phục sau hết quota / phiên mới
@@ -131,6 +131,14 @@ Log cài: `reports/results/G0_torch_install.log`, `G0_dependencies_install.log` 
 - Cập nhật hướng dẫn và README; ignore verbose install logs và trọng số `.bin`.
 - Kiểm thử: **13 PASS, 0 FAIL, 0 SKIP**; có ca lỗi setup vẫn tạo ZIP, clone mới/resume thành công và dirty checkout được giữ nguyên. Log: `reports/results/G0_github_workflow_tests.txt`.
 - GitHub đang chuẩn bị commit/push, chưa khẳng định đã upload trước khi kiểm tra remote. ENV-03/06 vẫn NOT RUN trên Kaggle.
+
+## 2026-10-19 — Khôi phục sau quota, hoàn tất cập nhật GitHub
+
+- Đã đọc lại PROJECT_PLAN.md, TEST_PLAN.md, nhật ký; kiểm tra index, working tree, remote và lịch sử. Trước khi tiếp tục: nhánh main chưa có commit, 46 file đã stage; hướng dẫn và notebook còn bản sửa Unicode chưa stage.
+- Lần commit ở phiên trước bị bộ xét duyệt tự động chặn do hết quota, không phải kết luận thao tác không an toàn; lệnh đó chưa thực thi. Phiên này đã thực thi thành công với quyền đã được cấp.
+- Stage bản sửa Unicode, kiểm tra diff; giữ hai Markdown hard break có sẵn trong PROJECT_PLAN.md. Không thay đổi logic hoặc chạy lại phần đã có bằng chứng PASS (13 test trong G0_github_workflow_tests.txt).
+- Tạo commit `970e304` (46 file), push `main` lên origin thành công, thiết lập tracking origin/main. Không đưa .venv, checkpoint, dataset hoặc bundle ZIP lên GitHub.
+- Cập nhật checkpoint và biên bản G0 để phản ánh GitHub đã hoàn tất. Nhiệm vụ đầu tiên chưa nghiệm thu vẫn ENV-03/06: người dùng chạy Kaggle và gửi `g0-*.zip` cùng notebook có output. Review chéo còn chờ; chưa chuyển G1.
 
 ## Mẫu ghi cho nhóm công việc tiếp theo
 
