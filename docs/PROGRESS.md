@@ -4,7 +4,7 @@
 
 - Ngày cập nhật: **2026-10-20**, múi giờ Asia/Saigon.
 - Mốc phát triển hiện tại: **G1-local — pipeline dữ liệu** theo lộ trình điều chỉnh được người dùng yêu cầu ngày 2026-10-20. G0-local đủ điều kiện phát triển; G0 toàn mốc vẫn chờ ENV-06 Kaggle và review.
-- Nhiệm vụ chưa nghiệm thu đầu tiên trong lộ trình local: **adapter Parquet + integration test + báo cáo QA/near-duplicate**. Contract, validation và split đã có 13 test PASS; chưa nghiệm thu G1 toàn mốc.
+- Nhiệm vụ tiếp theo trong lộ trình phát triển local: **G2-local — metrics, mean baseline và frozen CLIP encoder/extraction**. G1-local đã có adapter Parquet, CLI QA, near-duplicate report và integration test PASS; G1 toàn mốc vẫn chờ 12 shard thật và review.
 - **ENV-01/02/04/05 PASS local**. `.venv-repro` CPython 3.13.5 Windows x64 tái tạo đúng 31 package; torch 2.8.0+cpu, transformers 4.57.6, huggingface-hub 0.36.0, pytest 8.4.2; import CLIP và pip check đạt. **10 pytest PASS**, CPU smoke và auto fallback PASS.
 - Luồng mới: VS Code → GitHub `hoan25/BaiqiL-GenAI-Bench` → Kaggle → artifact về máy. Notebook clone GitHub và xuất `g0-<thời_gian>.zip`; không dùng bundle upload trong luồng chính.
 - Người dùng đã gửi ZIP và notebook Kaggle chạy commit `f48f135`: 13 test PASS, CPU/CUDA PASS, đủ checksum. Bản sửa bootstrap có 16 test local PASS và phép thử venv thật PASS. ENV-06 được hoãn đến tích hợp GPU; hiện không yêu cầu người dùng chạy 00b.
@@ -23,7 +23,7 @@
 | Mốc | Trạng thái | Bằng chứng / phần còn thiếu |
 |---|---|---|
 | G0 | LOCAL READY; nghiệm thu toàn mốc còn chờ | Giữ CPU/CUDA PASS; ENV-06 và review chuyển sang tích hợp GPU |
-| G1 | IN PROGRESS local; full-data NOT RUN | Contract/validation/split 13 test PASS; CLI 60 cặp tổng hợp; còn adapter, QA report, dữ liệu thật và review |
+| G1 | LOCAL CHECKS PASS; full-data NOT RUN | Adapter/QA/CLI có integration test; toàn suite 34 PASS; còn kiểm chứng nguồn thật, khóa split và review |
 | G2 | NOT RUN | Chưa có baseline, encoder hoặc metrics |
 | G3 | NOT RUN | Chưa có training/checkpoint |
 | G4 | NOT RUN | Chưa có backend |
@@ -162,6 +162,17 @@ Log cài: `reports/results/G0_torch_install.log`, `G0_dependencies_install.log` 
 - Lệnh `.venv\Scripts\python.exe -X utf8 scripts/data_smoke.py --output reports/results/G1_fixture_smoke.json`: exit 0, 10 hàng/60 cặp tổng hợp, train/val/test = 42/6/12. Output từ chối ghi đè. Không phải số liệu GenAI-Bench hoặc metric mô hình.
 - Không thay dependency hoặc chạy lại CLIP/GPU. Các test G0 đã đạt được giữ nguyên.
 - **Còn thiếu:** adapter Parquet xác minh schema nguồn thật; integration test file nhỏ; báo cáo exact/near-duplicate và provenance; DATA-01–12 trên toàn bộ dữ liệu; review chéo. Nhiệm vụ tiếp theo là adapter và QA local, chưa yêu cầu chạy Kaggle.
+
+## 2026-10-20 — Adapter Parquet và QA G1-local
+
+- Đọc kế hoạch/test/nhật ký và kiểm tra repo sạch tại `ea6b5b1` (đã push ở phiên trước). Giữ các kiểm chứng CLIP đã đạt, không tải lại model/dataset.
+- Đối chiếu schema công bố trên `https://huggingface.co/datasets/BaiqiL/GenAI-Bench/blob/main/README.md`: Prompt, HumanRatings, sáu cột ảnh. Chưa đọc file Parquet thật; không coi tài liệu nguồn là nghiệm thu dataset.
+- Cài `pyarrow==21.0.0` vào `.venv`, ghi `requirements-data.in`; không thay lock G0 lịch sử. `pip check`: **PASS**, No broken requirements found.
+- Thêm `src/data/ingest.py`, `qa.py`, `scripts/prepare_data.py`: đọc batch nhỏ, ID tương đối gồm shard/hàng/model, checksum file/manifest, provenance Git/package, thống kê lỗi/count/split, exact/normalized/near-duplicate report. Thiếu cột FAIL; ảnh/nhãn lỗi loại có log; run cần review trả exit 2. Không tải dataset và không ghi đè output.
+- Thêm `tests/integration/test_parquet_pipeline.py`: nhiều shard/row group, prompt trùng xuyên shard, manifest tái lập, ảnh hỏng, cột thiếu, path ảnh ngoài, CLI và bảo toàn output. Lần đầu unit data + integration **18 PASS**; sau thêm provenance chạy toàn suite do thêm dependency: **34 PASS, 0 FAIL, 0 SKIP**, 3.60 giây, exit 0. Log tự lưu: `reports/results/G1_parquet_tests.txt`.
+- Hướng dẫn: `docs/DATA_PIPELINE.md`. Các file Parquet kiểm thử được tạo trong thư mục tạm; không commit dữ liệu ảnh/Parquet.
+- **G1-local checks PASS; toàn mốc chưa DONE:** thiếu full-data QA, review, xử lý ứng viên gần trùng và khóa split. ENV-06 sạch vẫn chờ tích hợp Kaggle. Near-duplicate là heuristic từ vựng, không chứng minh tương đồng ngữ nghĩa.
+- Tiếp theo G2-local theo kế hoạch local-first: implement metrics (Spearman constant = N/A, pairwise cùng prompt), mean baseline và frozen encoder/extraction với fixture; không công bố metric thật trước QA đầy đủ.
 
 ## Mẫu ghi cho nhóm công việc tiếp theo
 

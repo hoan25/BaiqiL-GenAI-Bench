@@ -66,4 +66,6 @@ Luồng chính: **VS Code → [GitHub](https://github.com/hoan25/BaiqiL-GenAI-Be
 .\.venv\Scripts\python.exe -X utf8 scripts/data_smoke.py --output reports/results/G1_fixture_smoke_new.json
 ```
 
-Chọn đường dẫn output chưa tồn tại. CLI tạo ảnh tổng hợp trong bộ nhớ, kiểm tra 60 cặp và xuất thống kê split; không tải dataset. Contract đầu vào `src/data/manifest.py`: `shard`, `row`, `prompt`, `images[model]` dạng bytes và `ratings[model]` gồm ba số nguyên 1–5. Adapter Parquet và QA toàn bộ dữ liệu là bước tiếp theo; kết quả fixture không phải nghiệm thu GenAI-Bench.
+Chọn đường dẫn output chưa tồn tại. CLI tạo ảnh tổng hợp trong bộ nhớ, kiểm tra 60 cặp và xuất thống kê split; không tải dataset. Contract đầu vào `src/data/manifest.py`: `shard`, `row`, `prompt`, `images[model]` dạng bytes và `ratings[model]` gồm ba số nguyên 1–5.
+
+Đã có adapter Parquet và CLI `scripts/prepare_data.py`, hướng dẫn tại [pipeline dữ liệu](docs/DATA_PIPELINE.md). Toàn suite hiện có **34 test PASS**, bao gồm integration với file Parquet tổng hợp. QA trên 12 shard thật và khóa split vẫn chưa chạy; fixture không thay thế nghiệm thu GenAI-Bench.
