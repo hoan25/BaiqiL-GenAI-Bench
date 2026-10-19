@@ -1,0 +1,14 @@
+{
+  "scope": "synthetic_contract_only",
+  "seed": 42,
+  "source_rows": 10,
+  "expected_pairs": 60,
+  "valid_pairs": 60,
+  "rejected_pairs": 0,
+  "rejections": [],
+  "split_counts": {
+    "train": 42,
+    "val": 6,
+    "test": 12
+  }
+}

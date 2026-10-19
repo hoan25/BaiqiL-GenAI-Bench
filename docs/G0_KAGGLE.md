@@ -6,7 +6,7 @@ Code/test phát triển trong VS Code, đồng bộ qua GitHub; Kaggle thực th
 
 ## 1. Chuẩn bị Kaggle
 
-**Cập nhật 20/10:** kết quả CPU/CUDA và 13 test bạn gửi đã được kiểm chứng. Bước hiện tại chỉ cần tải **`notebooks/00b_bootstrap_check.ipynb`** từ GitHub, bật Internet (không cần GPU), restart kernel rồi Run All. Gửi ZIP mới và notebook có output. Notebook này không tải CLIP hoặc chạy lại inference; nó kiểm chứng cách tạo venv không dùng ensurepip và việc hết lỗi sitecustomize. Không dùng notebook cũ pin commit `f48f135` cho phép thử sửa này; notebook mới mặc định lấy `main`.
+**Lộ trình điều chỉnh 20/10:** hiện phát triển và kiểm thử module trong VS Code, chưa cần chạy thêm notebook. Kết quả CPU/CUDA đã được kiểm chứng. Kiểm tra bootstrap sạch (ENV-06) sẽ thực hiện khi tích hợp GPU; `00b_bootstrap_check.ipynb` giữ lại làm công cụ chẩn đoán. Hướng dẫn G0 bên dưới là tài liệu tham chiếu, không phải nhiệm vụ tiếp theo. Notebook huấn luyện sẽ chỉ gọi script đã kiểm thử khi pipeline sẵn sàng.
 
 1. Tải `notebooks/00_environment.ipynb` từ GitHub hoặc workspace, rồi import vào notebook Kaggle.
 2. Trong Settings bật Internet và chọn GPU được cấp (T4/P100). Nếu không có GPU, đổi `DEVICE = "cpu"`; kết quả ghi rõ CPU.

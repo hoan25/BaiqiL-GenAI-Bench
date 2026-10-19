@@ -1,6 +1,14 @@
 # PROMPTALIGN AI — KẾ HOẠCH KIỂM THỬ CHI TIẾT
 
-> Đây là **test specification** để viết và chạy trong repository VS Code khi triển khai. Các test dưới đây CHƯA ĐƯỢC CHẠY TRONG REPO của người dùng. Không được đánh dấu PASS trước khi có log thật.
+> Đây là **test specification**. Trạng thái thực tế và bằng chứng nằm trong `docs/PROGRESS.md` và `reports/results/`; không suy ra PASS từ danh mục test.
+
+## Điều chỉnh 2026-10-20: kiểm thử local trước
+
+- G0-local đã có bằng chứng môi trường/CPU; CUDA Kaggle cũng đã được kiểm chứng. ENV-06 bootstrap sạch còn chờ và được kiểm tra lúc tích hợp GPU, không chặn phát triển module local.
+- G1-local kiểm contract chuẩn hóa bằng ảnh tổng hợp: mapping sáu model, nhãn, ảnh hỏng, nguồn trùng, split tái lập và chống rò rỉ. Chạy `python -m pytest tests/unit/test_data.py -q` và `python scripts/data_smoke.py --output reports/results/G1_fixture_smoke.json` (chọn tên output mới nếu đã tồn tại).
+- G1-local chưa hoàn tất cho đến khi adapter Parquet và QA report cũng có integration test. DATA-01–12 trên 12 shard vẫn NOT RUN cho đến khi có dữ liệu thật; fixture không xác nhận schema nguồn, near-duplicate hay số lượng dataset.
+- G2/G3 được kiểm thử bằng fixture sau khi contract dữ liệu local đạt; G4/G5 được phát triển theo contract với mock có nhãn. Không công bố chất lượng mô hình từ fixture.
+- Trước train chính thức: ENV-06 sạch, full-data QA, split khóa và provenance phải đạt. Trước release: toàn bộ exit gate bắt buộc, checkpoint thật, review và UAT vẫn phải đạt.
 
 ## 0. Chiến lược test và công cụ
 

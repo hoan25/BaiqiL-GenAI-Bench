@@ -1,7 +1,7 @@
 # PromptAlign AI
 
 Hệ thống đánh giá prompt–image theo `PROJECT_PLAN.md` và `TEST_PLAN.md`.
-Đang nghiệm thu G0: CLIP pretrained đã chạy được trên CPU; chưa có mô hình chấm điểm đã huấn luyện hoặc ứng dụng web.
+Đang phát triển G1-local: kiểm nhãn/ảnh, manifest và group split đã có kiểm thử. CLIP CPU/CUDA đã có bằng chứng; chưa có mô hình chấm điểm đã huấn luyện hoặc ứng dụng web.
 
 ## Tiếp tục công việc
 
@@ -57,4 +57,13 @@ Exit code: 0 PASS, 1 lỗi thực thi, 2 BLOCKED do không truy cập được t
 
 Luồng chính: **VS Code → [GitHub](https://github.com/hoan25/BaiqiL-GenAI-Bench) → Kaggle → artifact về VS Code**. Notebook clone source GitHub, tạo môi trường Kaggle riêng, tải CLIP và xuất `g0-<thời_gian>.zip` kể cả khi kiểm tra lỗi. Xem [hướng dẫn chạy và gửi kết quả](docs/G0_KAGGLE.md). Bundle 609 MB của phiên trước là phương án cũ; không cần upload cho luồng này.
 
-Đã nhận kết quả Kaggle: 13 test PASS, CPU/CUDA CLIP PASS. Phát hiện lỗi bootstrap ensurepip và startup sitecustomize; bản sửa có 16 test local PASS và bootstrap thật local PASS. Bước tiếp theo chỉ chạy `notebooks/00b_bootstrap_check.ipynb` trên Kaggle, không chạy lại inference đã đạt. G0 chờ bootstrap sạch từ repository và review.
+Đã nhận kết quả Kaggle: 13 test PASS, CPU/CUDA CLIP PASS. Bản sửa bootstrap có 16 test local PASS và bootstrap thật local PASS. Theo lộ trình điều chỉnh, xác nhận bootstrap Kaggle sạch được thực hiện khi tích hợp GPU; hiện chưa cần chạy thêm notebook.
+
+## Pipeline dữ liệu local
+
+```powershell
+.\.venv\Scripts\python.exe -X utf8 -m pytest tests/unit/test_data.py -q
+.\.venv\Scripts\python.exe -X utf8 scripts/data_smoke.py --output reports/results/G1_fixture_smoke_new.json
+```
+
+Chọn đường dẫn output chưa tồn tại. CLI tạo ảnh tổng hợp trong bộ nhớ, kiểm tra 60 cặp và xuất thống kê split; không tải dataset. Contract đầu vào `src/data/manifest.py`: `shard`, `row`, `prompt`, `images[model]` dạng bytes và `ratings[model]` gồm ba số nguyên 1–5. Adapter Parquet và QA toàn bộ dữ liệu là bước tiếp theo; kết quả fixture không phải nghiệm thu GenAI-Bench.

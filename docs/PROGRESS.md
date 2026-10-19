@@ -3,12 +3,12 @@
 ## Checkpoint hiện tại
 
 - Ngày cập nhật: **2026-10-20**, múi giờ Asia/Saigon.
-- Mốc hiện tại: **G0 — Môi trường**; trạng thái nghiệm thu **BLOCKED**.
-- Nhiệm vụ chưa nghiệm thu đầu tiên: **ENV-06 — tái lập bootstrap Kaggle từ code trong repository**, đồng thời kiểm tra hết lỗi startup của ENV-01. ENV-03 đã PASS với CUDA trong ZIP người dùng gửi; không chạy lại inference đã đạt.
+- Mốc phát triển hiện tại: **G1-local — pipeline dữ liệu** theo lộ trình điều chỉnh được người dùng yêu cầu ngày 2026-10-20. G0-local đủ điều kiện phát triển; G0 toàn mốc vẫn chờ ENV-06 Kaggle và review.
+- Nhiệm vụ chưa nghiệm thu đầu tiên trong lộ trình local: **adapter Parquet + integration test + báo cáo QA/near-duplicate**. Contract, validation và split đã có 13 test PASS; chưa nghiệm thu G1 toàn mốc.
 - **ENV-01/02/04/05 PASS local**. `.venv-repro` CPython 3.13.5 Windows x64 tái tạo đúng 31 package; torch 2.8.0+cpu, transformers 4.57.6, huggingface-hub 0.36.0, pytest 8.4.2; import CLIP và pip check đạt. **10 pytest PASS**, CPU smoke và auto fallback PASS.
 - Luồng mới: VS Code → GitHub `hoan25/BaiqiL-GenAI-Bench` → Kaggle → artifact về máy. Notebook clone GitHub và xuất `g0-<thời_gian>.zip`; không dùng bundle upload trong luồng chính.
-- Người dùng đã gửi ZIP và notebook Kaggle chạy commit `f48f135`: 13 test PASS, CPU/CUDA PASS, đủ checksum. Bản sửa bootstrap đã có 16 test local PASS và phép thử venv thật PASS. Tiếp theo chạy **notebooks/00b_bootstrap_check.ipynb** trên Kaggle (Internet, không cần GPU), gửi ZIP mới và notebook có output; không tải lại CLIP hoặc chạy lại bộ inference.
-- Không bắt đầu G1 trước khi G0 qua gate. Chưa có phần ML/API/UI nào được nghiệm thu.
+- Người dùng đã gửi ZIP và notebook Kaggle chạy commit `f48f135`: 13 test PASS, CPU/CUDA PASS, đủ checksum. Bản sửa bootstrap có 16 test local PASS và phép thử venv thật PASS. ENV-06 được hoãn đến tích hợp GPU; hiện không yêu cầu người dùng chạy 00b.
+- Chưa có mô hình huấn luyện/API/UI được nghiệm thu. Không dùng fixture để công bố chất lượng thực nghiệm. Các mục nhật ký cũ bên dưới giữ nguyên để truy vết; checkpoint này thay thế chỉ dẫn tiếp tục cũ.
 
 ## Quy tắc khôi phục sau hết quota / phiên mới
 
@@ -22,8 +22,8 @@
 
 | Mốc | Trạng thái | Bằng chứng / phần còn thiếu |
 |---|---|---|
-| G0 | BLOCKED | CPU/CUDA và 13 test Kaggle PASS; 16 test bản sửa local PASS; chờ xác nhận bootstrap Kaggle sạch từ repository và review |
-| G1 | NOT RUN | Chưa có dataset/manifest/split thực tế trong workspace |
+| G0 | LOCAL READY; nghiệm thu toàn mốc còn chờ | Giữ CPU/CUDA PASS; ENV-06 và review chuyển sang tích hợp GPU |
+| G1 | IN PROGRESS local; full-data NOT RUN | Contract/validation/split 13 test PASS; CLI 60 cặp tổng hợp; còn adapter, QA report, dữ liệu thật và review |
 | G2 | NOT RUN | Chưa có baseline, encoder hoặc metrics |
 | G3 | NOT RUN | Chưa có training/checkpoint |
 | G4 | NOT RUN | Chưa có backend |
@@ -151,6 +151,17 @@ Log cài: `reports/results/G0_torch_install.log`, `G0_dependencies_install.log` 
 - Sửa `check_environment.py` không báo PASS khi pip check chứa lỗi sitecustomize/usercustomize. Thêm regression tests cho bootstrap không dùng ensurepip, lọc env và zero-exit startup errors.
 - **16 test PASS, 0 FAIL, 0 SKIP** (`G0_bootstrap_fix_tests.txt`). Phép thử bootstrap thật local lần đầu phát hiện lỗi encoding đường dẫn tiếng Việt; đã thêm UTF-8 cho subprocess. Lần sau **PASS**, venv tách biệt và pip check sạch (`G0_bootstrap_local_validation.json` lưu cả lần lỗi và lần sửa đạt).
 - Không chạy lại CLIP/GPU đã đạt. **G0 vẫn BLOCKED**: cần xác nhận bootstrap sửa trên Kaggle và review; chưa bắt đầu G1.
+
+## 2026-10-20 — Điều chỉnh lộ trình và bắt đầu G1-local
+
+- Đọc kế hoạch/test/nhật ký, đối chiếu Git sạch tại `c61f3d7`; chưa có `src/`. Người dùng yêu cầu phát triển trong VS Code trước, tránh lặp sửa notebook.
+- Sửa `PROJECT_PLAN.md`, `TEST_PLAN.md`, `AGENTS.md`, README và hướng dẫn Kaggle: tách cổng local với nghiệm thu thực nghiệm; giữ yêu cầu full-data QA trước train và toàn bộ gate trước release. Không hạ ENV-06 thành PASS.
+- Thêm `src/data/validate.py`, `manifest.py`, `split.py`, `scripts/data_smoke.py`, `tests/unit/test_data.py`. Contract chuẩn hóa độc lập với Parquet; giữ ratings gốc/mean/std, nguồn shard-row-model, checksum ảnh, lý do loại mẫu. Feature input chỉ prompt + image.
+- Split chuẩn hóa Unicode NFKC/casefold/khoảng trắng, nhóm cùng prompt cùng split, seed ổn định không phụ thuộc thứ tự hàng. Tối thiểu 3 nhóm; tỷ lệ trên fixture nhỏ có làm tròn, thống kê thực được ghi ra.
+- Lệnh `.venv\Scripts\python.exe -X utf8 -m pytest tests/unit/test_data.py -q`: **13 PASS, 0 FAIL**, exit 0, 0.44 giây. Bằng chứng: `reports/results/G1_local_tests.txt`.
+- Lệnh `.venv\Scripts\python.exe -X utf8 scripts/data_smoke.py --output reports/results/G1_fixture_smoke.json`: exit 0, 10 hàng/60 cặp tổng hợp, train/val/test = 42/6/12. Output từ chối ghi đè. Không phải số liệu GenAI-Bench hoặc metric mô hình.
+- Không thay dependency hoặc chạy lại CLIP/GPU. Các test G0 đã đạt được giữ nguyên.
+- **Còn thiếu:** adapter Parquet xác minh schema nguồn thật; integration test file nhỏ; báo cáo exact/near-duplicate và provenance; DATA-01–12 trên toàn bộ dữ liệu; review chéo. Nhiệm vụ tiếp theo là adapter và QA local, chưa yêu cầu chạy Kaggle.
 
 ## Mẫu ghi cho nhóm công việc tiếp theo
 

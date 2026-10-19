@@ -4,6 +4,23 @@
 **Nhóm:** 3 người · **Dự kiến:** 5 tuần · **Phát triển:** VS Code · **GPU:** Kaggle khi cần.  
 **Dataset chính:** `BaiqiL/GenAI-Bench` (12 Parquet shards; mục tiêu theo mô tả là 1.600 prompt × 6 ảnh = 9.600 cặp, cần xác nhận sau khi nạp đầy đủ).
 
+## Lộ trình điều chỉnh 2026-10-20 — phát triển trong VS Code trước
+
+Theo yêu cầu người dùng, triển khai và kiểm thử code local trước; Kaggle chỉ chạy script đã kiểm thử để QA dữ liệu đầy đủ, trích embeddings và huấn luyện. Không cần chạy lại notebook môi trường ở thời điểm này.
+
+Tách **cổng phát triển local** và **cổng nghiệm thu thực nghiệm**. Các exit gate G0–G7 bên dưới vẫn áp dụng cho nghiệm thu toàn mốc; không dùng fixture để tuyên bố đã đạt trên dữ liệu thật. Code của bước tiếp theo được triển khai khi hợp đồng đầu vào và kiểm thử local của bước phụ thuộc đã đạt. Review chéo vẫn bắt buộc trước khi đánh dấu DONE toàn mốc.
+
+| Thứ tự | Công việc trong VS Code | Điều kiện / bằng chứng |
+|---|---|---|
+| 1. G0-local | Giữ môi trường và CLIP đã kiểm chứng | ENV-01/02/04/05 local PASS; CUDA đã PASS; không chạy lại vô cớ |
+| 2. G1-local | Contract dữ liệu, kiểm nhãn/ảnh, manifest, group split; sau đó adapter Parquet và báo cáo QA | Fixture hợp lệ/lỗi, không rò rỉ prompt, CLI local; chưa thay thế DATA-01–12 full |
+| 3. G2/G3-local | Metrics, frozen encoder, extraction, Ridge/MLP, save/load, training CLI | Test số học, batch, fit chỉ train, overfit fixture, reload |
+| 4. G4/G5-local | FastAPI và React theo contract đã kiểm thử | Mock chỉ trong test hoặc giao diện ghi rõ mock; chưa có checkpoint thì báo chưa sẵn sàng |
+| 5. Tích hợp Kaggle | Bootstrap sạch, QA tất cả 12 shard, khóa split, extract/train/validation | ENV-06 và DATA full phải đạt trước thực nghiệm chính thức; notebook chỉ gọi script, xuất log/config/checkpoint |
+| 6. G7 | Nhận artifact, tích hợp CPU thật, holdout và demo | Tất cả gate nghiệm thu bắt buộc đạt, review/UAT; G6 chỉ sau MVP |
+
+Nhiệm vụ bắt đầu: G1-local. Chưa tải toàn bộ dataset. Adapter nguồn thật phải kiểm schema thực tế trước khi nghiệm thu; contract chuẩn hóa không tự chứng minh tương thích Parquet.
+
 ## A. Phạm vi và định nghĩa thành công
 
 ### MVP — PHẢI HOÀN THÀNH
@@ -69,7 +86,9 @@ promptalign-ai/
   frontend/src/{pages/,components/,services/,hooks/}
   tests/{unit/,integration/,e2e/,fixtures/}
   reports/{figures/,results/,model_card.md}
-  docs/{PROJECT_PLAN.md,TEST_PLAN.md}
+  PROJECT_PLAN.md
+  TEST_PLAN.md
+  docs/PROGRESS.md
 ```
 
 ## D. Chia việc

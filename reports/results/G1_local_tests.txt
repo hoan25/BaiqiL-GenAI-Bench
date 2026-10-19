@@ -1,0 +1,7 @@
+Date: 2026-10-20 (Asia/Saigon)
+Scope: synthetic canonical-data contract; not GenAI-Bench acceptance
+Command: .venv\Scripts\python.exe -X utf8 -m pytest tests/unit/test_data.py -q
+Captured result:
+.............                                                            [100%]
+13 passed in 0.44s
+Exit code: 0
