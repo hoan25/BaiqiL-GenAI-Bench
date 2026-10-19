@@ -3,8 +3,8 @@
 ## Checkpoint hiện tại
 
 - Ngày cập nhật: **2026-10-20**, múi giờ Asia/Saigon.
-- Mốc phát triển hiện tại: **G1-local — pipeline dữ liệu** theo lộ trình điều chỉnh được người dùng yêu cầu ngày 2026-10-20. G0-local đủ điều kiện phát triển; G0 toàn mốc vẫn chờ ENV-06 Kaggle và review.
-- Nhiệm vụ tiếp theo trong lộ trình phát triển local: **G2-local — metrics, mean baseline và frozen CLIP encoder/extraction**. G1-local đã có adapter Parquet, CLI QA, near-duplicate report và integration test PASS; G1 toàn mốc vẫn chờ 12 shard thật và review.
+- Mốc phát triển hiện tại: **G2-local đã có kiểm chứng code; tiếp theo G3-local** theo lộ trình local-first. G0 toàn mốc vẫn chờ ENV-06 Kaggle và review; G1 vẫn chờ QA dữ liệu thật.
+- Nhiệm vụ tiếp theo: **G3-local — Ridge/MLP, fit chỉ train, validation/early stopping, save/load và test overfit fixture**. G2 mới dùng fixture, chưa có metric GenAI-Bench. Trước thực nghiệm thật cần bổ sung provenance Git/config/tokenizer đầy đủ và kiểm chứng GPU extraction.
 - **ENV-01/02/04/05 PASS local**. `.venv-repro` CPython 3.13.5 Windows x64 tái tạo đúng 31 package; torch 2.8.0+cpu, transformers 4.57.6, huggingface-hub 0.36.0, pytest 8.4.2; import CLIP và pip check đạt. **10 pytest PASS**, CPU smoke và auto fallback PASS.
 - Luồng mới: VS Code → GitHub `hoan25/BaiqiL-GenAI-Bench` → Kaggle → artifact về máy. Notebook clone GitHub và xuất `g0-<thời_gian>.zip`; không dùng bundle upload trong luồng chính.
 - Người dùng đã gửi ZIP và notebook Kaggle chạy commit `f48f135`: 13 test PASS, CPU/CUDA PASS, đủ checksum. Bản sửa bootstrap có 16 test local PASS và phép thử venv thật PASS. ENV-06 được hoãn đến tích hợp GPU; hiện không yêu cầu người dùng chạy 00b.
@@ -24,7 +24,7 @@
 |---|---|---|
 | G0 | LOCAL READY; nghiệm thu toàn mốc còn chờ | Giữ CPU/CUDA PASS; ENV-06 và review chuyển sang tích hợp GPU |
 | G1 | LOCAL CHECKS PASS; full-data NOT RUN | Adapter/QA/CLI có integration test; toàn suite 34 PASS; còn kiểm chứng nguồn thật, khóa split và review |
-| G2 | NOT RUN | Chưa có baseline, encoder hoặc metrics |
+| G2 | LOCAL CHECKS PASS; full-data NOT RUN | 13 test mới PASS; CLIP encoder CPU/batch/frozen PASS; CLI 18 cặp tổng hợp PASS; thiếu review và thực nghiệm thật |
 | G3 | NOT RUN | Chưa có training/checkpoint |
 | G4 | NOT RUN | Chưa có backend |
 | G5 | NOT RUN | Chưa có frontend |
@@ -173,6 +173,18 @@ Log cài: `reports/results/G0_torch_install.log`, `G0_dependencies_install.log` 
 - Hướng dẫn: `docs/DATA_PIPELINE.md`. Các file Parquet kiểm thử được tạo trong thư mục tạm; không commit dữ liệu ảnh/Parquet.
 - **G1-local checks PASS; toàn mốc chưa DONE:** thiếu full-data QA, review, xử lý ứng viên gần trùng và khóa split. ENV-06 sạch vẫn chờ tích hợp Kaggle. Near-duplicate là heuristic từ vựng, không chứng minh tương đồng ngữ nghĩa.
 - Tiếp theo G2-local theo kế hoạch local-first: implement metrics (Spearman constant = N/A, pairwise cùng prompt), mean baseline và frozen encoder/extraction với fixture; không công bố metric thật trước QA đầy đủ.
+
+## 2026-10-20 — G2-local metrics, encoder và extraction
+
+- Đọc kế hoạch/test/nhật ký, xác nhận Git sạch tại `8f99c81` đã push. Không đổi dependency, không tải thêm model/dataset.
+- Thêm `src/evaluation/metrics.py`, `baselines.py`: MAE/RMSE, Spearman average-rank ties/constant null, pairwise chỉ cùng prompt; M0 fit train, M1 cosine thô, validation không đọc nhãn test; chặn prompt leakage.
+- Thêm frozen `src/models/clip_encoder.py` và `src/training/extract_embeddings.py`: CPU/CUDA rõ ràng, model local, batch, text truncation, đối chiếu nguồn/checksum, giữ thứ tự pair ID, không đưa ratings/generator vào encoder.
+- Thêm CLI `scripts/extract_embeddings.py` yêu cầu `--development`, lưu NPZ (Git ignore), result/checksum, fingerprint model trước/sau; từ chối ghi đè run. Entry point thực nghiệm chính thức vẫn chưa có.
+- 13 test mới PASS: metric tham chiếu, ties, input lỗi, leakage, nguồn stale, thứ tự manifest và batch cuối thiếu; log `reports/results/G2_local_tests.txt` (0.54 giây, exit 0). Không chạy lại suite G0/G1 vì không thay code/dependency liên quan.
+- `scripts/check_encoder.py --model .cache/models/clip-vit-base-patch32/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268 --output reports/results/G2_encoder_checks.json`: PASS, batch/single max delta 1.7881393432617188e-07, [2,512], unit norm, truncation, frozen weights/no gradients. Đây là test module mới, không lặp lại G0 environment smoke.
+- Tạo fixture Parquet 3 prompt/18 cặp trong `.cache/g2-pipeline-fixture`, QA CHECKS_PASS ở scope fixture. Chạy extraction CPU batch 4 từ manifest vào `reports/results/G2_fixture_extraction`: PASS, 18x512, 6.95 giây. M0 MAE=0 do toàn nhãn tổng hợp bằng 2; không dùng làm chất lượng mô hình. File NPZ giữ local và được ignore.
+- Hướng dẫn `docs/EMBEDDINGS.md`; biên bản `reports/results/G2_validation.md`. **G2-local checks PASS**, full-data/GPU/review còn chờ. Thiếu provenance Git/config/tokenizer cho thực nghiệm chính thức được ghi rõ.
+- Tiếp theo G3-local: scaler/Ridge/MLP, fit chỉ train, early stopping theo val, save/load và overfit fixture. Không chạm test holdout.
 
 ## Mẫu ghi cho nhóm công việc tiếp theo
 

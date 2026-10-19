@@ -20,3 +20,4 @@ artifacts/*.zip
 reports/results/*install.log
 *.bin
 reports/results/kaggle/
+*.npz

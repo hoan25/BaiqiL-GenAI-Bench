@@ -1,7 +1,7 @@
 # PromptAlign AI
 
 Hệ thống đánh giá prompt–image theo `PROJECT_PLAN.md` và `TEST_PLAN.md`.
-Đang phát triển G1-local: kiểm nhãn/ảnh, manifest và group split đã có kiểm thử. CLIP CPU/CUDA đã có bằng chứng; chưa có mô hình chấm điểm đã huấn luyện hoặc ứng dụng web.
+Đã có kiểm chứng G1/G2-local: pipeline dữ liệu, metrics, mean baseline và frozen CLIP extraction. Tiếp theo G3-local huấn luyện head; chưa có mô hình chấm điểm được nghiệm thu hoặc ứng dụng web.
 
 ## Tiếp tục công việc
 
@@ -69,3 +69,5 @@ Luồng chính: **VS Code → [GitHub](https://github.com/hoan25/BaiqiL-GenAI-Be
 Chọn đường dẫn output chưa tồn tại. CLI tạo ảnh tổng hợp trong bộ nhớ, kiểm tra 60 cặp và xuất thống kê split; không tải dataset. Contract đầu vào `src/data/manifest.py`: `shard`, `row`, `prompt`, `images[model]` dạng bytes và `ratings[model]` gồm ba số nguyên 1–5.
 
 Đã có adapter Parquet và CLI `scripts/prepare_data.py`, hướng dẫn tại [pipeline dữ liệu](docs/DATA_PIPELINE.md). Toàn suite hiện có **34 test PASS**, bao gồm integration với file Parquet tổng hợp. QA trên 12 shard thật và khóa split vẫn chưa chạy; fixture không thay thế nghiệm thu GenAI-Bench.
+
+G2 bổ sung **13 test PASS** cho metrics/extraction và kiểm chứng CLIP thật trên CPU với dữ liệu tổng hợp. Xem [hướng dẫn embeddings/baseline](docs/EMBEDDINGS.md). Các kết quả G0/G1 được giữ nguyên, không coi fixture là benchmark GenAI-Bench.

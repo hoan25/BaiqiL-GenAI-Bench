@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "scope": "synthetic_encoder_checks_only",
+  "device": "cpu",
+  "shape": [
+    2,
+    512
+  ],
+  "max_batch_single_delta": 1.7881393432617188e-07,
+  "model_state_sha256": "12f1a938acc3449fcf1a9acfe20a35e200eced3fe9e7b755362374b9fc103aa8",
+  "frozen_unchanged": true,
+  "long_prompt_truncation": true
+}
