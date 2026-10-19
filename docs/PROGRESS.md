@@ -2,12 +2,12 @@
 
 ## Checkpoint hiện tại
 
-- Ngày cập nhật: **2026-10-19**, múi giờ Asia/Saigon.
+- Ngày cập nhật: **2026-10-20**, múi giờ Asia/Saigon.
 - Mốc hiện tại: **G0 — Môi trường**; trạng thái nghiệm thu **BLOCKED**.
-- Nhiệm vụ chưa nghiệm thu đầu tiên: **ENV-03 — xác nhận runtime Kaggle**. ENV-02 đã PASS với checkpoint thật sau khi người dùng cho phép tải CLIP.
+- Nhiệm vụ chưa nghiệm thu đầu tiên: **ENV-06 — tái lập bootstrap Kaggle từ code trong repository**, đồng thời kiểm tra hết lỗi startup của ENV-01. ENV-03 đã PASS với CUDA trong ZIP người dùng gửi; không chạy lại inference đã đạt.
 - **ENV-01/02/04/05 PASS local**. `.venv-repro` CPython 3.13.5 Windows x64 tái tạo đúng 31 package; torch 2.8.0+cpu, transformers 4.57.6, huggingface-hub 0.36.0, pytest 8.4.2; import CLIP và pip check đạt. **10 pytest PASS**, CPU smoke và auto fallback PASS.
 - Luồng mới: VS Code → GitHub `hoan25/BaiqiL-GenAI-Bench` → Kaggle → artifact về máy. Notebook clone GitHub và xuất `g0-<thời_gian>.zip`; không dùng bundle upload trong luồng chính.
-- GitHub đã nhận commit triển khai `970e304` trên nhánh `main`: https://github.com/hoan25/BaiqiL-GenAI-Bench . Tiếp theo: người dùng chạy notebook theo `docs/G0_KAGGLE.md`, gửi ZIP kết quả và notebook có output để nghiệm thu ENV-03/06. Không làm lại push khởi tạo hoặc cài lại môi trường local đã kiểm chứng.
+- Người dùng đã gửi ZIP và notebook Kaggle chạy commit `f48f135`: 13 test PASS, CPU/CUDA PASS, đủ checksum. Bản sửa bootstrap đã có 16 test local PASS và phép thử venv thật PASS. Tiếp theo chạy **notebooks/00b_bootstrap_check.ipynb** trên Kaggle (Internet, không cần GPU), gửi ZIP mới và notebook có output; không tải lại CLIP hoặc chạy lại bộ inference.
 - Không bắt đầu G1 trước khi G0 qua gate. Chưa có phần ML/API/UI nào được nghiệm thu.
 
 ## Quy tắc khôi phục sau hết quota / phiên mới
@@ -22,7 +22,7 @@
 
 | Mốc | Trạng thái | Bằng chứng / phần còn thiếu |
 |---|---|---|
-| G0 | BLOCKED | ENV-01/02/04/05 PASS local, 10 test PASS; chờ ENV-03/06 trên Kaggle và review |
+| G0 | BLOCKED | CPU/CUDA và 13 test Kaggle PASS; 16 test bản sửa local PASS; chờ xác nhận bootstrap Kaggle sạch từ repository và review |
 | G1 | NOT RUN | Chưa có dataset/manifest/split thực tế trong workspace |
 | G2 | NOT RUN | Chưa có baseline, encoder hoặc metrics |
 | G3 | NOT RUN | Chưa có training/checkpoint |
@@ -139,6 +139,18 @@ Log cài: `reports/results/G0_torch_install.log`, `G0_dependencies_install.log` 
 - Stage bản sửa Unicode, kiểm tra diff; giữ hai Markdown hard break có sẵn trong PROJECT_PLAN.md. Không thay đổi logic hoặc chạy lại phần đã có bằng chứng PASS (13 test trong G0_github_workflow_tests.txt).
 - Tạo commit `970e304` (46 file), push `main` lên origin thành công, thiết lập tracking origin/main. Không đưa .venv, checkpoint, dataset hoặc bundle ZIP lên GitHub.
 - Cập nhật checkpoint và biên bản G0 để phản ánh GitHub đã hoàn tất. Nhiệm vụ đầu tiên chưa nghiệm thu vẫn ENV-03/06: người dùng chạy Kaggle và gửi `g0-*.zip` cùng notebook có output. Review chéo còn chờ; chưa chuyển G1.
+
+## 2026-10-20 — Kiểm tra kết quả Kaggle và sửa bootstrap
+
+- Đã đọc kế hoạch/nhật ký và kiểm tra Git; người dùng bổ sung `reports/results/kaggle/g0-20261019T175231Z.zip` cùng `genai-bench-data-preparation.ipynb`. Giữ nguyên file gốc, không thực thi code notebook do người dùng gửi. File gốc được ignore khỏi Git, chỉ commit báo cáo kiểm chứng.
+- ZIP CRC PASS, đủ 5 lệnh exit 0, commit `f48f135752e769fa5025a39896fcbb0475900e05`; revision và SHA-256 của 8 file CLIP khớp local. Notebook có execution counts 1–5, không có error output; phiên chạy 00:52 ngày 20/10 giờ Việt Nam.
+- Kaggle Python 3.13.15, torch 2.8.0+cu126, 2 Tesla T4 được liệt kê. **13 test PASS**, CLIP CPU và CUDA thực sự PASS, embedding `[1,512]`. **ENV-03 PASS**. Báo cáo: `reports/results/G0_kaggle_review.json`; versions thực tế: `G0_kaggle_packages.txt`.
+- Phát hiện notebook người dùng thêm cell tạo venv `--without-pip` rồi dùng pip gốc `--python` để cài pip, trong khi code GitHub cũ dùng ensurepip mặc định. Ngoài ra 9 log có `Error in sitecustomize / No module named wrapt` dù exit 0; không coi toàn bộ G0 sạch chỉ vì result.json ghi PASS.
+- Sửa `scripts/kaggle_g0.py`: tạo venv không phụ thuộc ensurepip, cài pip 26.2.1 bằng pip gốc, loại PYTHONPATH/PYTHONHOME kế thừa ở subprocess, dùng isolated startup probe, phát hiện lỗi startup kể cả exit 0; không xóa venv/checkpoint cũ. Nguyên nhân sitecustomize từ đường dẫn kế thừa là giả thuyết cần xác nhận Kaggle; không tự cài wrapt để che lỗi.
+- Thêm `--bootstrap-only`: venv mới có tên riêng, chỉ kiểm startup và pip check, không cài torch/tải CLIP/inference. Notebook `00b_bootstrap_check.ipynb` dùng chế độ này để chỉ nghiệm thu phần thay đổi.
+- Sửa `check_environment.py` không báo PASS khi pip check chứa lỗi sitecustomize/usercustomize. Thêm regression tests cho bootstrap không dùng ensurepip, lọc env và zero-exit startup errors.
+- **16 test PASS, 0 FAIL, 0 SKIP** (`G0_bootstrap_fix_tests.txt`). Phép thử bootstrap thật local lần đầu phát hiện lỗi encoding đường dẫn tiếng Việt; đã thêm UTF-8 cho subprocess. Lần sau **PASS**, venv tách biệt và pip check sạch (`G0_bootstrap_local_validation.json` lưu cả lần lỗi và lần sửa đạt).
+- Không chạy lại CLIP/GPU đã đạt. **G0 vẫn BLOCKED**: cần xác nhận bootstrap sửa trên Kaggle và review; chưa bắt đầu G1.
 
 ## Mẫu ghi cho nhóm công việc tiếp theo
 

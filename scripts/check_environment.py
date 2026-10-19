@@ -34,7 +34,10 @@ def collect_environment() -> dict:
         "huggingface_hub": check_module("huggingface_hub"),
         "pytest": check_module("pytest"),
         "pip_check": {
-            "status": "PASS" if pip_check.returncode == 0 else "FAIL",
+            "status": "PASS" if pip_check.returncode == 0 and not any(
+                marker in pip_check.stdout + pip_check.stderr
+                for marker in ("Error in sitecustomize", "Error in usercustomize")
+            ) else "FAIL",
             "output": (pip_check.stdout + pip_check.stderr).strip(),
         },
     }

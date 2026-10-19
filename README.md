@@ -57,4 +57,4 @@ Exit code: 0 PASS, 1 lỗi thực thi, 2 BLOCKED do không truy cập được t
 
 Luồng chính: **VS Code → [GitHub](https://github.com/hoan25/BaiqiL-GenAI-Bench) → Kaggle → artifact về VS Code**. Notebook clone source GitHub, tạo môi trường Kaggle riêng, tải CLIP và xuất `g0-<thời_gian>.zip` kể cả khi kiểm tra lỗi. Xem [hướng dẫn chạy và gửi kết quả](docs/G0_KAGGLE.md). Bundle 609 MB của phiên trước là phương án cũ; không cần upload cho luồng này.
 
-Luồng notebook GitHub đã kiểm thử clone/resume và bảo toàn thay đổi; test xuất ZIP khi setup thất bại cũng đạt. Tổng 13 unit test PASS. Chưa có log thực thi Kaggle: ENV-03/06 và review còn chờ, nên G0 chưa nghiệm thu toàn bộ.
+Đã nhận kết quả Kaggle: 13 test PASS, CPU/CUDA CLIP PASS. Phát hiện lỗi bootstrap ensurepip và startup sitecustomize; bản sửa có 16 test local PASS và bootstrap thật local PASS. Bước tiếp theo chỉ chạy `notebooks/00b_bootstrap_check.ipynb` trên Kaggle, không chạy lại inference đã đạt. G0 chờ bootstrap sạch từ repository và review.

@@ -6,6 +6,8 @@ Code/test phát triển trong VS Code, đồng bộ qua GitHub; Kaggle thực th
 
 ## 1. Chuẩn bị Kaggle
 
+**Cập nhật 20/10:** kết quả CPU/CUDA và 13 test bạn gửi đã được kiểm chứng. Bước hiện tại chỉ cần tải **`notebooks/00b_bootstrap_check.ipynb`** từ GitHub, bật Internet (không cần GPU), restart kernel rồi Run All. Gửi ZIP mới và notebook có output. Notebook này không tải CLIP hoặc chạy lại inference; nó kiểm chứng cách tạo venv không dùng ensurepip và việc hết lỗi sitecustomize. Không dùng notebook cũ pin commit `f48f135` cho phép thử sửa này; notebook mới mặc định lấy `main`.
+
 1. Tải `notebooks/00_environment.ipynb` từ GitHub hoặc workspace, rồi import vào notebook Kaggle.
 2. Trong Settings bật Internet và chọn GPU được cấp (T4/P100). Nếu không có GPU, đổi `DEVICE = "cpu"`; kết quả ghi rõ CPU.
 3. Giữ REPO_URL trỏ tới repository trên. `GIT_REF = "main"` lấy bản hiện tại; có thể thay bằng commit hash để tái lập chính xác.
@@ -16,6 +18,8 @@ Code/test phát triển trong VS Code, đồng bộ qua GitHub; Kaggle thực th
 Restart kernel rồi Run All. Cell đầu clone/fetch source vào `/kaggle/working/promptalign-ai`, checkout revision và in commit hash. Nếu checkout có thay đổi, cell dừng để giữ nguyên chúng.
 
 Cell thứ hai gọi `scripts/kaggle_g0.py`: tạo venv riêng, cài PyTorch 2.8.0 CUDA 12.6 (hoặc CPU), cài dependencies trực tiếp đã pin, tải đúng revision CLIP và chạy import/pip check, pytest, CLIP CPU/GPU.
+
+Bootstrap dùng `venv --without-pip` và pip gốc với `--python`, theo [tài liệu pip](https://pip.pypa.io/en/stable/topics/python-option/). Chế độ bootstrap-only tạo venv mới, lưu `create_venv.log`, `bootstrap_pip.log`, `startup.log`, `pip_check.log`, `provenance.json` và `result.json`; không yêu cầu có các file checks/CLIP của lần full run.
 
 Lần đầu cần thời gian tải thư viện/model. Không cần upload bundle 609 MB của cách cũ. Không tải dataset GenAI-Bench trong G0.
 

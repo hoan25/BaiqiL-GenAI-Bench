@@ -26,6 +26,10 @@ class EnvironmentTests(unittest.TestCase):
         self.assertEqual(result["status"], "FAIL")
         self.assertEqual(result["checks"]["pip_check"]["output"], "conflict")
 
+    def test_startup_error_cannot_pass_with_zero_exit_code(self):
+        with patch("scripts.check_environment.check_module", return_value={"status": "PASS"}), patch("scripts.check_environment.subprocess.run", return_value=SimpleNamespace(returncode=0, stdout="No broken requirements found.", stderr="Error in sitecustomize: missing wrapt")):
+            self.assertEqual(collect_environment()["status"], "FAIL")
+
 
 if __name__ == "__main__":
     unittest.main()

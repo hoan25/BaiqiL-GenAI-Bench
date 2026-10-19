@@ -1,0 +1,28 @@
+[
+  {
+    "archive": ".cache\\g0-bootstrap-validation\\g0-20261019T182241642779Z.zip",
+    "result": {
+      "status": "FAIL",
+      "scope": "Fresh venv bootstrap only; does not rerun or certify GPU inference"
+    },
+    "logs": {
+      "bootstrap_pip.log": "Collecting pip==26.2.1\r\n  Using cached pip-26.2.1-py3-none-any.whl.metadata (4.6 kB)\r\nUsing cached pip-26.2.1-py3-none-any.whl (1.8 MB)\r\nInstalling collected packages: pip\r\nSuccessfully installed pip-26.2.1\r\n",
+      "create_venv.log": "",
+      "error.txt": "CalledProcessError: Command '['.cache\\\\g0-bootstrap-validation\\\\.promptalign-bootstrap-20261019T182241642779Z\\\\Scripts\\\\python.exe', '-I', '-c', 'import sys; print(sys.version); print(sys.prefix); assert sys.prefix != sys.base_prefix']' returned non-zero exit status 1.\r\n",
+      "startup.log": "Traceback (most recent call last):\r\n  File \"<string>\", line 1, in <module>\r\n    import sys; print(sys.version); print(sys.prefix); assert sys.prefix != sys.base_prefix\r\n                                    ~~~~~^^^^^^^^^^^^\r\n  File \"C:\\Users\\20146\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\encodings\\cp1252.py\", line 19, in encode\r\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\r\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nUnicodeEncodeError: 'charmap' codec can't encode character '\\u1ecd' in position 25: character maps to <undefined>\r\n3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]\r\n"
+    }
+  },
+  {
+    "archive": ".cache\\g0-bootstrap-validation\\g0-20261019T182323652774Z.zip",
+    "result": {
+      "status": "PASS",
+      "scope": "Fresh venv bootstrap only; does not rerun or certify GPU inference"
+    },
+    "logs": {
+      "bootstrap_pip.log": "Collecting pip==26.2.1\r\n  Using cached pip-26.2.1-py3-none-any.whl.metadata (4.6 kB)\r\nUsing cached pip-26.2.1-py3-none-any.whl (1.8 MB)\r\nInstalling collected packages: pip\r\nSuccessfully installed pip-26.2.1\r\n",
+      "create_venv.log": "",
+      "pip_check.log": "No broken requirements found.\r\n",
+      "startup.log": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]\r\nD:\\c\u00e1c m\u00f4n chuy\u00ean ng\u00e0nh\\H\u1ecdc m\u00e1y\\h\u1ecdc m\u00e1y n\u00e2ng cao\\BTL\\.cache\\g0-bootstrap-validation\\.promptalign-bootstrap-20261019T182323652774Z\r\n"
+    }
+  }
+]

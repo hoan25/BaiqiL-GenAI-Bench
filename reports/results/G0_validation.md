@@ -1,6 +1,6 @@
 # G0 — Môi trường (cập nhật sau thiết lập .venv, chưa nghiệm thu toàn mốc)
 
-- Ngày kiểm tra: 2026-10-19 (Asia/Saigon).
+- Ngày kiểm tra: 2026-10-20 (Asia/Saigon).
 - Người thực hiện: Codex; người review/xác nhận: chưa có.
 - Commit triển khai: `970e304`, đã push nhánh main lên `https://github.com/hoan25/BaiqiL-GenAI-Bench`. Commit tài liệu tiếp theo cập nhật checkpoint, không thay logic đã kiểm thử.
 - Dataset/split: chưa áp dụng; chỉ smoke pretrained CLIP, không train/evaluate dataset. Model: `openai/clip-vit-base-patch32`, revision `3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268`.
@@ -16,11 +16,13 @@
 |---|---|---|
 | ENV-01 | PASS | Import thư viện, CLIPModel/CLIPProcessor, pip check thành công trong .venv |
 | ENV-02 | PASS | Checkpoint thật chạy offline CPU; text/image embedding [1,512], finite |
-| ENV-03 | NOT RUN | CPU fallback đã PASS local; chưa chạy trên Kaggle, không tuyên bố GPU PASS |
+| ENV-03 | PASS | ZIP Kaggle commit f48f135: cuda_available=true, device=cuda; CPU smoke cũng PASS; notebook liệt kê Tesla T4 |
 | ENV-04 | PASS | Môi trường sạch từ lock khớp 31/31 package; import, pip check, 10 test đạt |
 | ENV-05 | PASS | Các đường dẫn nhạy cảm/checkpoint/môi trường được ignore; đã commit/push source và bằng chứng nhỏ, không upload dataset/checkpoint |
-| ENV-06 | NOT RUN | Mã cell chạy được trong Python process mới; chưa có Jupyter/Kaggle clean kernel run |
+| ENV-06 | BLOCKED | Notebook gửi lại chạy counts 1–5 nhưng thêm bootstrap ngoài repo; code sửa cần xác nhận bằng 00b_bootstrap_check.ipynb |
 
 - Quyết định: **BLOCKED** ở gate G0; không chuyển G1.
 - Lỗi đã xử lý: chọn CPython chuẩn thay MSYS2; dùng quyền mạng để tải thư viện; pip lỗi encoding đường dẫn tiếng Việt được khắc phục với `-X utf8`.
-- Bước tiếp theo: người dùng chạy bundle và notebook trên Kaggle theo `docs/G0_KAGGLE.md`, gửi notebook có output cùng log; review chéo trước đóng G0. Không làm lại phần local đã PASS nếu không thay đổi môi trường/code liên quan.
+- Bằng chứng mới: `G0_kaggle_review.json` xác nhận ZIP CRC, 8 checksum CLIP, commit, 13 test và CPU/CUDA; `G0_kaggle_packages.txt` lưu versions. Log có startup error sitecustomize/wrapt, nên ENV-01 trên Kaggle chưa sạch dù import và pip dependency check thành công. ENV-01 local vẫn PASS.
+- Bản sửa: 16 test PASS trong `G0_bootstrap_fix_tests.txt`; bootstrap thực local PASS sau sửa UTF-8, giữ log cả lần lỗi và lần thành công trong `G0_bootstrap_local_validation.json`.
+- Bước tiếp theo: người dùng chạy **00b_bootstrap_check.ipynb**, gửi ZIP nhỏ và notebook có output; không lặp lại CPU/GPU inference đã PASS. Review chéo còn chờ.
