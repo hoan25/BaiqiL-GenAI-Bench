@@ -1,0 +1,5 @@
+{
+  "exit_code": 2,
+  "stdout": "{\n  \"status\": \"BLOCKED\",\n  \"error\": \"Can't load image processor for 'openai/clip-vit-base-patch32'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'openai/clip-vit-base-patch32' is the correct path to a directory containing a preprocessor_config.json file\",\n  \"model\": \"openai/clip-vit-base-patch32\"\n}\n",
+  "stderr": "Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.\n"
+}

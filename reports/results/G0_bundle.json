@@ -1,0 +1,29 @@
+{
+  "path": "artifacts/G0_kaggle_bundle.zip",
+  "bytes": 608886973,
+  "sha256": "ccbef718a0548a111c21d73f55f7c25ecd9b9688abb9737908ec423a375f1aa3",
+  "files": [
+    "scripts/check_environment.py",
+    "scripts/download_clip.py",
+    "scripts/package_g0.py",
+    "scripts/run_g0_checks.py",
+    "scripts/smoke_clip.py",
+    "tests/unit/test_environment.py",
+    "tests/unit/test_smoke_device.py",
+    "pyproject.toml",
+    "requirements-g0.in",
+    "requirements-g0-win-cpu.lock.txt",
+    "notebooks/00_environment.ipynb",
+    "docs/G0_KAGGLE.md",
+    "reports/results/clip_download.json",
+    "models/clip-vit-base-patch32/config.json",
+    "models/clip-vit-base-patch32/merges.txt",
+    "models/clip-vit-base-patch32/preprocessor_config.json",
+    "models/clip-vit-base-patch32/pytorch_model.bin",
+    "models/clip-vit-base-patch32/special_tokens_map.json",
+    "models/clip-vit-base-patch32/tokenizer.json",
+    "models/clip-vit-base-patch32/tokenizer_config.json",
+    "models/clip-vit-base-patch32/vocab.json"
+  ],
+  "zip_integrity": "PASS"
+}

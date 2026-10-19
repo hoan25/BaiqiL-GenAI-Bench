@@ -1,0 +1,74 @@
+[
+  {
+    "name": "environment",
+    "command": [
+      "D:\\c\u00e1c m\u00f4n chuy\u00ean ng\u00e0nh\\H\u1ecdc m\u00e1y\\h\u1ecdc m\u00e1y n\u00e2ng cao\\BTL\\.venv-repro\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "scripts/check_environment.py",
+      "--output",
+      "D:\\c\u00e1c m\u00f4n chuy\u00ean ng\u00e0nh\\H\u1ecdc m\u00e1y\\h\u1ecdc m\u00e1y n\u00e2ng cao\\BTL\\reports\\results\\G0_notebook_local\\environment.json"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "pytest",
+    "command": [
+      "D:\\c\u00e1c m\u00f4n chuy\u00ean ng\u00e0nh\\H\u1ecdc m\u00e1y\\h\u1ecdc m\u00e1y n\u00e2ng cao\\BTL\\.venv-repro\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "-m",
+      "pytest",
+      "tests/unit",
+      "-q",
+      "-p",
+      "no:cacheprovider"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "clip_cpu",
+    "command": [
+      "D:\\c\u00e1c m\u00f4n chuy\u00ean ng\u00e0nh\\H\u1ecdc m\u00e1y\\h\u1ecdc m\u00e1y n\u00e2ng cao\\BTL\\.venv-repro\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "scripts/smoke_clip.py",
+      "--model",
+      "D:\\c\u00e1c m\u00f4n chuy\u00ean ng\u00e0nh\\H\u1ecdc m\u00e1y\\h\u1ecdc m\u00e1y n\u00e2ng cao\\BTL\\.cache\\models\\clip-vit-base-patch32\\3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+      "--device",
+      "cpu",
+      "--output",
+      "D:\\c\u00e1c m\u00f4n chuy\u00ean ng\u00e0nh\\H\u1ecdc m\u00e1y\\h\u1ecdc m\u00e1y n\u00e2ng cao\\BTL\\reports\\results\\G0_notebook_local\\clip_cpu.json"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "clip_auto",
+    "command": [
+      "D:\\c\u00e1c m\u00f4n chuy\u00ean ng\u00e0nh\\H\u1ecdc m\u00e1y\\h\u1ecdc m\u00e1y n\u00e2ng cao\\BTL\\.venv-repro\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "scripts/smoke_clip.py",
+      "--model",
+      "D:\\c\u00e1c m\u00f4n chuy\u00ean ng\u00e0nh\\H\u1ecdc m\u00e1y\\h\u1ecdc m\u00e1y n\u00e2ng cao\\BTL\\.cache\\models\\clip-vit-base-patch32\\3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+      "--device",
+      "auto",
+      "--output",
+      "D:\\c\u00e1c m\u00f4n chuy\u00ean ng\u00e0nh\\H\u1ecdc m\u00e1y\\h\u1ecdc m\u00e1y n\u00e2ng cao\\BTL\\reports\\results\\G0_notebook_local\\clip_auto.json"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "versions",
+    "command": [
+      "D:\\c\u00e1c m\u00f4n chuy\u00ean ng\u00e0nh\\H\u1ecdc m\u00e1y\\h\u1ecdc m\u00e1y n\u00e2ng cao\\BTL\\.venv-repro\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "-m",
+      "pip",
+      "freeze",
+      "--all"
+    ],
+    "exit_code": 0
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "command": [
+      "git",
+      "check-ignore",
+      "--no-index",
+      ".cache/models/clip-vit-base-patch32/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/pytorch_model.bin",
+      "artifacts/G0_kaggle_bundle.zip",
+      ".venv-repro/Scripts/python.exe"
+    ],
+    "exit_code": 0,
+    "stdout": ".cache/models/clip-vit-base-patch32/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/pytorch_model.bin\nartifacts/G0_kaggle_bundle.zip\n.venv-repro/Scripts/python.exe\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "ls-files"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "status",
+      "--short"
+    ],
+    "exit_code": 0,
+    "stdout": "?? .gitignore\n?? AGENTS.md\n?? PROJECT_PLAN.md\n?? README.md\n?? TEST_PLAN.md\n?? docs/\n?? notebooks/\n?? pyproject.toml\n?? reports/\n?? requirements-g0-win-cpu.lock.txt\n?? requirements-g0.in\n?? scripts/\n?? tests/\n",
+    "stderr": ""
+  }
+]

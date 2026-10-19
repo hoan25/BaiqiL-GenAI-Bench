@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "device": "cpu",
+  "requested_device": "auto",
+  "cuda_available": false,
+  "model": "D:\\c\u00e1c m\u00f4n chuy\u00ean ng\u00e0nh\\H\u1ecdc m\u00e1y\\h\u1ecdc m\u00e1y n\u00e2ng cao\\BTL\\.cache\\models\\clip-vit-base-patch32\\3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+  "embedding_shape": [
+    1,
+    512
+  ],
+  "fixture": "synthetic red square, 224x224; pipeline check only",
+  "scope": "Environment inference smoke; not a quality metric or score calibration"
+}

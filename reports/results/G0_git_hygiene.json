@@ -1,0 +1,41 @@
+[
+  {
+    "command": [
+      "git",
+      "check-ignore",
+      "--no-index",
+      ".env",
+      ".venv/Scripts/python.exe",
+      "data/raw/example.png",
+      "data/raw/example.jpg",
+      "data/raw/example.webp",
+      "sample.parquet",
+      "model.pt",
+      "model.pth",
+      "model.safetensors",
+      "model.ckpt"
+    ],
+    "exit_code": 0,
+    "stdout": ".env\n.venv/Scripts/python.exe\ndata/raw/example.png\ndata/raw/example.jpg\ndata/raw/example.webp\nsample.parquet\nmodel.pt\nmodel.pth\nmodel.safetensors\nmodel.ckpt\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "ls-files"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "status",
+      "--short"
+    ],
+    "exit_code": 0,
+    "stdout": "?? .gitignore\n?? AGENTS.md\n?? PROJECT_PLAN.md\n?? README.md\n?? TEST_PLAN.md\n?? docs/\n?? pyproject.toml\n?? reports/\n?? requirements-g0.in\n?? scripts/\n?? tests/\n",
+    "stderr": ""
+  }
+]

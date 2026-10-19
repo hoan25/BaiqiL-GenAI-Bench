@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "device": "cpu",
+  "model": ".cache/models/clip-vit-base-patch32/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+  "embedding_shape": [
+    1,
+    512
+  ],
+  "fixture": "synthetic red square, 224x224; pipeline check only",
+  "scope": "ENV-02 CPU inference; not a quality metric or score calibration"
+}

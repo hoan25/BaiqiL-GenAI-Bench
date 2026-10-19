@@ -1,0 +1,6 @@
+{
+  "scope": "Notebook code cells in a fresh Python process, not a Jupyter kernel or Kaggle run",
+  "exit_code": 0,
+  "stdout": "environment: exit 0\npytest: exit 0\nclip_cpu: exit 0\nclip_auto: exit 0\nversions: exit 0\nLogs: D:\\c\u00e1c m\u00f4n chuy\u00ean ng\u00e0nh\\H\u1ecdc m\u00e1y\\h\u1ecdc m\u00e1y n\u00e2ng cao\\BTL\\reports\\results\\G0_notebook_local\n",
+  "stderr": ""
+}

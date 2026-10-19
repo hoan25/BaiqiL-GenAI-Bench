@@ -1,0 +1,29 @@
+{
+  "python": "3.11.9",
+  "executable": "C:\\msys64\\ucrt64\\bin\\python.exe",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "checks": {
+    "torch": {
+      "status": "FAIL",
+      "error": "ModuleNotFoundError: No module named 'torch'"
+    },
+    "transformers": {
+      "status": "FAIL",
+      "error": "ModuleNotFoundError: No module named 'transformers'"
+    },
+    "huggingface_hub": {
+      "status": "FAIL",
+      "error": "ModuleNotFoundError: No module named 'huggingface_hub'"
+    },
+    "pytest": {
+      "status": "FAIL",
+      "error": "ModuleNotFoundError: No module named 'pytest'"
+    },
+    "pip_check": {
+      "status": "PASS",
+      "output": "No broken requirements found."
+    }
+  },
+  "status": "FAIL",
+  "scope": "Local dependency imports only; ENV-02 through ENV-06 are not certified."
+}

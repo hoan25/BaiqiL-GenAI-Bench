@@ -1,0 +1,29 @@
+{
+  "python": "3.13.5",
+  "executable": "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\.venv-repro\\Scripts\\python.exe",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "checks": {
+    "torch": {
+      "status": "PASS",
+      "version": "2.8.0+cpu"
+    },
+    "transformers": {
+      "status": "PASS",
+      "version": "4.57.6"
+    },
+    "huggingface_hub": {
+      "status": "PASS",
+      "version": "0.36.0"
+    },
+    "pytest": {
+      "status": "PASS",
+      "version": "8.4.2"
+    },
+    "pip_check": {
+      "status": "PASS",
+      "output": "No broken requirements found."
+    }
+  },
+  "status": "PASS",
+  "scope": "Local dependency imports only; ENV-02 through ENV-06 are not certified."
+}
