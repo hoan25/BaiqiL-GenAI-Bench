@@ -1,0 +1,16 @@
+# Bước cần chạy trên Kaggle: QA đủ dữ liệu
+
+Code dữ liệu, embeddings, training head và web đã được phát triển/kiểm thử local. Chưa có QA trên 12 shard thật nên chưa được chạy thực nghiệm chính thức. Đây là bước lấy báo cáo dữ liệu, không phải chạy lại notebook G0 hoặc huấn luyện ngay.
+
+1. Lấy `notebooks/01_data_qa.ipynb` từ [repository GitHub](https://github.com/hoan25/BaiqiL-GenAI-Bench/blob/main/notebooks/01_data_qa.ipynb), import vào Kaggle.
+2. Bật **Internet**, chọn **CPU / không cần accelerator GPU** để tiết kiệm quota.
+3. Cell đầu lấy source từ GitHub. Cell sau gọi `scripts/kaggle_data.py`; không sửa logic Python trong notebook.
+4. Mặc định `DOWNLOAD_DATASET = True`: khi bạn chạy cell, script tải khoảng **4,76 GB** GenAI-Bench vào Kaggle, chốt revision và tái sử dụng cache theo revision. Nếu đã có **đủ 12 shard** trong Kaggle Input, đặt False và sửa `DATA_ROOT` đúng thư mục chứa các file đó.
+5. **Run All**. Không cần cài thư viện thủ công hoặc chạy 00b trước. Script tạo venv riêng, kiểm startup/pip/tests, QA dữ liệu và luôn đóng gói báo cáo kể cả lỗi. Không tải CLIP, không train model.
+6. Tải `data-qa-*.zip` từ `/kaggle/working` cùng notebook có output, lưu vào `reports/results/kaggle/` trên máy rồi báo đã lưu.
+
+ZIP gồm logs, versions, dataset revision (nếu tải bằng script), source checksum, candidate manifest và báo cáo QA/near-duplicate. Không kèm ảnh/Parquet/checkpoint. **REVIEW_REQUIRED là trạng thái dự kiến**, không đồng nghĩa lỗi thực thi: cần xem dữ liệu bị loại, count và prompt gần trùng trước khi khóa split. Nếu FAIL, gửi nguyên ZIP để xác định lỗi; không sửa nhiều cell thử ngẫu nhiên.
+
+Sau khi kiểm tra ZIP, sẽ xử lý/giải trình vấn đề dữ liệu rồi khóa split và nối cùng source scripts cho extraction/training GPU. Chưa khẳng định runner đã PASS trên Kaggle; kiểm chứng local và thực tế Kaggle là hai bằng chứng khác nhau.
+
+Runner đã được kiểm chứng end-to-end bằng venv sạch Windows trên fixture nhỏ: 18 test dữ liệu PASS, startup/pip check đạt, xuất ZIP CRC hợp lệ. Bằng chứng: `reports/results/Kaggle_data_local_validation.json`. Môi trường Linux/Kaggle và dữ liệu đầy đủ cần kết quả từ phiên của bạn.

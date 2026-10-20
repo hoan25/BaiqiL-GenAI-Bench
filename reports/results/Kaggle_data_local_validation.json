@@ -1,0 +1,103 @@
+{
+  "scope": "isolated_windows_fixture_only_not_kaggle",
+  "runs": [
+    {
+      "path": ".cache\\data-run-validation\\data-qa-20261020T053253111158Z",
+      "result": {
+        "status": "FAIL",
+        "scope": "data_qa_only_no_training",
+        "started_utc": "20261020T053253111158Z",
+        "commands": [],
+        "error": "CalledProcessError: Command '['git', 'rev-parse', 'HEAD']' returned non-zero exit status 128."
+      }
+    },
+    {
+      "path": ".cache\\data-run-validation\\data-qa-20261020T053304771539Z",
+      "result": {
+        "status": "FAIL",
+        "scope": "data_qa_only_no_training",
+        "started_utc": "20261020T053304771539Z",
+        "commands": [
+          {
+            "name": "create_venv",
+            "returncode": 0
+          },
+          {
+            "name": "bootstrap_pip",
+            "returncode": 0
+          },
+          {
+            "name": "startup",
+            "returncode": 0
+          },
+          {
+            "name": "dependencies",
+            "returncode": 0
+          },
+          {
+            "name": "pip_check",
+            "returncode": 0
+          },
+          {
+            "name": "versions",
+            "returncode": 0
+          },
+          {
+            "name": "data_tests",
+            "returncode": 1
+          }
+        ],
+        "git_commit": "3a1310b37fd6f0b4bac0e7eaed84892d831e6e26",
+        "error": "RuntimeError: data_tests failed; see log"
+      }
+    },
+    {
+      "path": ".cache\\data-run-validation\\data-qa-20261020T053500355457Z",
+      "result": {
+        "status": "REVIEW_REQUIRED",
+        "scope": "data_qa_only_no_training",
+        "started_utc": "20261020T053500355457Z",
+        "commands": [
+          {
+            "name": "create_venv",
+            "returncode": 0
+          },
+          {
+            "name": "bootstrap_pip",
+            "returncode": 0
+          },
+          {
+            "name": "startup",
+            "returncode": 0
+          },
+          {
+            "name": "dependencies",
+            "returncode": 0
+          },
+          {
+            "name": "pip_check",
+            "returncode": 0
+          },
+          {
+            "name": "versions",
+            "returncode": 0
+          },
+          {
+            "name": "data_tests",
+            "returncode": 0
+          },
+          {
+            "name": "prepare_data",
+            "returncode": 2
+          }
+        ],
+        "git_commit": "3a1310b37fd6f0b4bac0e7eaed84892d831e6e26",
+        "qa_status": "REVIEW_REQUIRED"
+      }
+    }
+  ],
+  "latest_data_test_log": "..................                                                       [100%]\n18 passed in 4.24s\n",
+  "latest_qa_status": "REVIEW_REQUIRED",
+  "archive_crc_ok": true,
+  "archive_contains_no_parquet": true
+}

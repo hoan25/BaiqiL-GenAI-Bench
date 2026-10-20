@@ -3,8 +3,8 @@
 ## Checkpoint hiện tại
 
 - Ngày cập nhật: **2026-10-20**, múi giờ Asia/Saigon.
-- Mốc phát triển hiện tại: **G3-local — Ridge/MLP và checkpoint đã có kiểm chứng**, chưa nghiệm thu thực nghiệm. G0 toàn mốc vẫn chờ ENV-06 Kaggle và review; G1 vẫn chờ QA dữ liệu thật.
-- Nhiệm vụ tiếp theo: **G4-local — predictor nối CLIP/head và FastAPI theo contract, kiểm thử bằng fixture/mock rõ phạm vi**. Không phục vụ checkpoint tổng hợp như model thật. Trước thực nghiệm vẫn cần full-data QA, provenance encoder/tokenizer và kiểm chứng GPU extraction.
+- Mốc phát triển hiện tại: **G4/G5-local checks PASS**, sau G3-local PASS. Các mốc toàn phần vẫn chưa nghiệm thu khi chưa có dữ liệu/checkpoint thật và review.
+- Nhiệm vụ cần người dùng tiếp theo: **chạy notebooks/01_data_qa.ipynb trên Kaggle CPU, gửi data-qa-*.zip và notebook output** theo docs/KAGGLE_DATA_QA.md. Kiểm bootstrap sạch và QA đủ 12 shard trước khóa split/huấn luyện. Runner đã chạy thành công trong venv sạch Windows trên fixture; Kaggle/full-data vẫn NOT RUN.
 - **ENV-01/02/04/05 PASS local**. `.venv-repro` CPython 3.13.5 Windows x64 tái tạo đúng 31 package; torch 2.8.0+cpu, transformers 4.57.6, huggingface-hub 0.36.0, pytest 8.4.2; import CLIP và pip check đạt. **10 pytest PASS**, CPU smoke và auto fallback PASS.
 - Luồng mới: VS Code → GitHub `hoan25/BaiqiL-GenAI-Bench` → Kaggle → artifact về máy. Notebook clone GitHub và xuất `g0-<thời_gian>.zip`; không dùng bundle upload trong luồng chính.
 - Người dùng đã gửi ZIP và notebook Kaggle chạy commit `f48f135`: 13 test PASS, CPU/CUDA PASS, đủ checksum. Bản sửa bootstrap có 16 test local PASS và phép thử venv thật PASS. ENV-06 được hoãn đến tích hợp GPU; hiện không yêu cầu người dùng chạy 00b.
@@ -26,8 +26,8 @@
 | G1 | LOCAL CHECKS PASS; full-data NOT RUN | Adapter/QA/CLI có integration test; toàn suite 34 PASS; còn kiểm chứng nguồn thật, khóa split và review |
 | G2 | LOCAL CHECKS PASS; full-data NOT RUN | 13 test mới PASS; CLIP encoder CPU/batch/frozen PASS; CLI 18 cặp tổng hợp PASS; thiếu review và thực nghiệm thật |
 | G3 | LOCAL CHECKS PASS; full-data NOT RUN | 10 test PASS; Ridge/MLP, early stopping, scaler train-only và save/load đã chạy; checkpoint fixture không dùng làm model sản phẩm |
-| G4 | NOT RUN | Chưa có backend |
-| G5 | NOT RUN | Chưa có frontend |
+| G4 | LOCAL CHECKS PASS; full acceptance pending | API tests và HTTP CLIP thật + head fixture PASS; chưa có checkpoint thực nghiệm/review |
+| G5 | LOCAL CHECKS PASS; full acceptance pending | React build và 10 E2E mock desktop/mobile PASS; chưa full-stack E2E với checkpoint thật/UAT |
 | G6 | NOT RUN | Optional; chỉ sau MVP |
 | G7 | NOT RUN | Chưa đủ điều kiện release |
 
@@ -195,6 +195,27 @@ Log cài: `reports/results/G0_torch_install.log`, `G0_dependencies_install.log` 
 - CLI dùng lại embeddings G2, không chạy lại CLIP: `python scripts/train_regression.py --manifest .cache/g2-pipeline-fixture/qa/manifest.jsonl --extraction reports/results/G2_fixture_extraction --output reports/results/G3_fixture_training --epochs 30 --patience 5 --development`: **PASS**, exit 0. Cả ba reload delta = 0; mean được chọn trên fixture toàn nhãn 2, không phải metric GenAI-Bench.
 - Thêm CLI integration kiểm checksum sai → FAIL, train/reload thành công và output không bị ghi đè. Unit + integration **10 PASS, 0 FAIL, 0 SKIP**, 22.41 giây, exit 0; log `reports/results/G3_local_tests.txt`. Không đổi dependency hoặc chạy lại các test G0–G2 đã đạt.
 - Hướng dẫn `docs/TRAINING.md`, biên bản `reports/results/G3_validation.md`. Chưa full-data train, review/multi-seed trên dataset; không đánh dấu toàn mốc DONE. Tiếp theo predictor/HTTP contract G4-local; checkpoint thật và gate Kaggle vẫn chờ.
+
+## 2026-10-20 — Checkpoint đang triển khai G4/G5-local
+
+- Người dùng yêu cầu tiếp tục tự động đến khi cần họ hoặc hết quota. Repo bắt đầu sạch tại `3a1310b`; đã đọc lại kế hoạch/test/nhật ký.
+- Thêm predictor nối CLIP/head, checksum/fingerprint, chỉ cho checkpoint fixture khi bật development rõ ràng. API mặc định không cấu hình model trả 503, không fake score.
+- Thêm backend routes health/evaluate/compare/metrics/sessions/uploads/chat; session riêng TTL/giới hạn RAM, validate bytes/dimensions, request size kể cả chunked, lỗi an toàn. Cài API deps vào .venv, `pip check` PASS.
+- API test lần đầu có lỗi pytest setup do parameter ID chứa 10 MB payload làm vượt giới hạn biến môi trường Windows; sửa ID ngắn. Sau sửa **10 test PASS**; thêm test chunked đang chờ chạy cùng suite cuối. Có một DeprecationWarning Starlette/AnyIO, không ảnh hưởng kết quả.
+- `check_predictor_api.py` dùng CLIP thật và checkpoint G3 tổng hợp: **PASS**, evidence `reports/results/G4_predictor_http.json`. Không coi đây là model/dataset acceptance.
+- Thêm frontend React/Vite, upload/preview/chat/ranking/metrics/error/empty states; build **PASS**. Cài browser trong `.cache/playwright`; lệnh đầu fail do PowerShell Get-Location không có Parent và npx.cmd không tồn tại, đã đổi sang Split-Path + Node CLI. E2E desktop/mobile đang chuẩn bị chạy, chưa đánh dấu PASS.
+- Hướng dẫn local: `docs/WEB_LOCAL.md`. Chưa commit/push nhóm G4/G5 tại checkpoint này; kiểm Git thực tế trước khi resume.
+
+## 2026-10-20 — Hoàn tất kiểm thử G4/G5-local và chuẩn bị handoff dữ liệu
+
+- Toàn suite Python sau thêm API dependencies: **68 PASS**, 40.66 giây, exit 0, 1 cảnh báo deprecation Starlette/AnyIO (`G4_python_tests.txt`). Sau chỉnh follow-up giữ index ảnh thứ hai và thêm runner QA: **14 test liên quan PASS**, 1.55 giây (`G4_handoff_tests.txt`).
+- React build PASS; Chromium E2E **10 PASS**, 15.2 giây (`G5_browser_tests.txt`). Test desktop/mobile dùng HTTP mock chỉ trong test. Đã xem ảnh `reports/figures/G5-desktop.png`, `G5-mobile.png`; giao diện không tràn ngang. Vite cần quyền ngoài sandbox để esbuild đọc parent; không phải lỗi source.
+- Thêm `scripts/download_dataset.py` chỉ tải khi có --allow-download; pin revision từ HF trước download. Agent chưa tải toàn bộ dataset. Người dùng chạy cell DOWNLOAD_DATASET=True mới thực hiện download ở Kaggle.
+- `scripts/kaggle_data.py` dựng môi trường CPU riêng chỉ cho data, startup/pip check/tests, QA, đóng gói ZIP cả khi FAIL; REVIEW_REQUIRED không bị hiểu nhầm là nghiệm thu/train PASS. Không đóng gói raw images/Parquet/checkpoint; không chạy lại CLIP.
+- `notebooks/01_data_qa.ipynb` tái sử dụng cell GitHub đã kiểm thử, cell sau chỉ gọi runner. Cú pháp cell được compile local; notebook chưa chạy trên Kaggle. Hướng dẫn `docs/KAGGLE_DATA_QA.md`.
+- Runner unit tests 3 PASS; `Kaggle_data_runner_tests.txt`. Test venv thật local lần đầu gặp ownership Git (đổi user do escalation); lần sau bootstrap/install/pip check đạt nhưng pytest temp chung bị từ chối quyền. Sửa dùng --basetemp riêng dưới venv và tắt pytest cache; không xóa/ghi đè run cũ. Đang kiểm chứng lại bản sửa, chưa coi Linux/Kaggle đã PASS.
+- G4/G5 toàn mốc còn thiếu artifact nghiệm thu, full-stack E2E/model thật, concurrency/performance sâu và review/UAT. Hướng dẫn web `docs/WEB_LOCAL.md`; biên bản `reports/results/G4_G5_validation.md`.
+- Kiểm chứng runner sau sửa: venv sạch thứ ba chạy **thành công**, exit 0; 18 data tests PASS, pip check/startup sạch, QA fixture trả REVIEW_REQUIRED do subset. ZIP CRC PASS, không chứa Parquet. Evidence lưu cả hai lần lỗi và lần sửa trong `reports/results/Kaggle_data_local_validation.json`; không ghi đè bằng chứng cũ. Không coi lần local này là ENV-06 Kaggle PASS.
 
 ## Mẫu ghi cho nhóm công việc tiếp theo
 

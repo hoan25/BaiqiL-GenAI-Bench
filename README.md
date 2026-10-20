@@ -1,7 +1,11 @@
 # PromptAlign AI
 
 Hệ thống đánh giá prompt–image theo `PROJECT_PLAN.md` và `TEST_PLAN.md`.
-Đã có code và kiểm chứng local cho dữ liệu, CLIP extraction và huấn luyện Ridge/MLP. Tiếp theo predictor/FastAPI; chưa có mô hình được nghiệm thu trên GenAI-Bench hoặc ứng dụng web.
+Đã có pipeline dữ liệu/CLIP/Ridge/MLP, backend FastAPI và giao diện React chạy local. API/UI đã có kiểm thử; chưa có mô hình được nghiệm thu trên GenAI-Bench. Bước cần dữ liệu thật tiếp theo là QA 12 shard trên Kaggle.
+
+- [Chạy web local](docs/WEB_LOCAL.md): backend + frontend; mặc định chưa có model sẽ báo rõ, không trả điểm giả.
+- [Chạy QA dữ liệu trên Kaggle và gửi kết quả](docs/KAGGLE_DATA_QA.md): notebook ngắn gọi script trong repo; không cần GPU, không chạy lại CLIP.
+- [Xem giao diện desktop](reports/figures/G5-desktop.png) · [mobile](reports/figures/G5-mobile.png).
 
 ## Tiếp tục công việc
 

@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "scope": "real_encoder_synthetic_head_and_image_not_benchmark",
+  "single": {
+    "request_id": "209744d8f55945629e6f24997764191f",
+    "type": "score",
+    "data": {
+      "items": [
+        {
+          "score": 2.0,
+          "cosine": 0.28897902369499207,
+          "index": 0,
+          "rank": 1
+        }
+      ]
+    },
+    "model_version": "mean-2558109266f2",
+    "elapsed_ms": 401.78,
+    "warnings": [
+      "Mô hình thử nghiệm; chưa đánh giá trên GenAI-Bench."
+    ]
+  },
+  "compare": {
+    "request_id": "9532281a71cb4dc5b93ffd42fcd07d80",
+    "type": "ranking",
+    "data": {
+      "items": [
+        {
+          "score": 2.0,
+          "cosine": 0.28897902369499207,
+          "index": 0,
+          "rank": 1
+        },
+        {
+          "score": 2.0,
+          "cosine": 0.28897902369499207,
+          "index": 1,
+          "rank": 1
+        }
+      ]
+    },
+    "model_version": "mean-2558109266f2",
+    "elapsed_ms": 380.0,
+    "warnings": [
+      "Mô hình thử nghiệm; chưa đánh giá trên GenAI-Bench."
+    ]
+  }
+}

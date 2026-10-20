@@ -21,3 +21,5 @@ reports/results/*install.log
 *.bin
 reports/results/kaggle/
 *.npz
+frontend/test-results/
+frontend/playwright-report/

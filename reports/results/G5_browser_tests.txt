@@ -1,0 +1,10 @@
+Date: 2026-10-20 Asia/Saigon
+Command: node node_modules/playwright/cli.js test --workers=2 --reporter=list
+Environment: PLAYWRIGHT_BROWSERS_PATH points to project .cache/playwright
+Initial sandbox run: FAIL before tests; esbuild could not read parent directory.
+Retry outside sandbox with same code: PASS
+10 passed (15.2s)
+Projects: desktop Chromium and mobile Chromium (iPhone 13 viewport)
+Per project: one-image score, comparison order, metrics N/A, invalid file/API 503, viewport layout.
+Scope: mocked HTTP responses only, not production model acceptance.
+Screenshots: reports/figures/G5-desktop.png; reports/figures/G5-mobile.png
