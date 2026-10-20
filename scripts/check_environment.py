@@ -5,10 +5,14 @@ from __future__ import annotations
 import argparse
 import importlib
 import json
+import os
 import platform
 import subprocess
 import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from scripts.clean_python import python_command
 
 
 def check_module(name: str, attributes: tuple[str, ...] = ()) -> dict:
@@ -25,7 +29,7 @@ def check_module(name: str, attributes: tuple[str, ...] = ()) -> dict:
 def collect_environment() -> dict:
     """Check local imports only; this does not certify model inference or Kaggle."""
     pip_check = subprocess.run(
-        [sys.executable, "-m", "pip", "check"],
+        (python_command() if os.environ.get("PROMPTALIGN_CLEAN_PYTHON") == "1" else [sys.executable]) + ["-m", "pip", "check"],
         capture_output=True, text=True, check=False,
     )
     checks = {

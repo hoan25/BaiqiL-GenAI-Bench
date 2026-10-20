@@ -9,6 +9,9 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from scripts.clean_python import python_command, pip_source
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -28,7 +31,7 @@ def main() -> int:
         process_env.pop(key, None)
 
     def execute(name: str, command: list[str]) -> None:
-        command = [command[0], "-X", "utf8", *command[1:]]
+        command = python_command(command[0]) + command[1:]
         print(f"Running {name}; log: {run / (name + '.log')}", flush=True)
         with (run / f"{name}.log").open("w", encoding="utf-8") as log:
             subprocess.run(command, cwd=root, env=process_env, stdout=log, stderr=subprocess.STDOUT, check=True)
@@ -42,7 +45,7 @@ def main() -> int:
         (run / "provenance.json").write_text(json.dumps({"commit": commit, "device_requested": args.device, "started_utc": stamp, "bootstrap_only": args.bootstrap_only}, indent=2), encoding="utf-8")
         if not python.exists():
             execute("create_venv", [sys.executable, "-I", "-m", "venv", "--without-pip", str(env_dir)])
-        execute("bootstrap_pip", [sys.executable, "-I", "-m", "pip", "--python", str(python), "install", "pip==26.2.1", "--disable-pip-version-check"])
+        execute("bootstrap_pip", [str(python), "--pip-source", pip_source(), "install", "pip==26.2.1", "--disable-pip-version-check"])
         execute("startup", [str(python), "-I", "-c", "import sys; print(sys.version); print(sys.prefix); assert sys.prefix != sys.base_prefix"])
         execute("pip_check", [str(python), "-I", "-m", "pip", "check"])
         if args.bootstrap_only:

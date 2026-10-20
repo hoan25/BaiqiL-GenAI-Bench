@@ -1,0 +1,121 @@
+{
+  "original_kaggle_failure": {
+    "filename": "data-qa-20261020T060426867085Z.zip",
+    "sha256": "d9d375419559a96c060e99bfc3a29f65f5598191620c2be635661352f9726788",
+    "members": [
+      "result.json",
+      "bootstrap_pip.log",
+      "create_venv.log"
+    ],
+    "result": {
+      "status": "FAIL",
+      "scope": "data_qa_only_no_training",
+      "started_utc": "20261020T060426867085Z",
+      "commands": [
+        {
+          "name": "create_venv",
+          "returncode": 0
+        },
+        {
+          "name": "bootstrap_pip",
+          "returncode": 0
+        }
+      ],
+      "git_commit": "76276cd32977db185ec874920924239521a92fcd",
+      "error": "RuntimeError: bootstrap_pip failed; see log"
+    },
+    "bootstrap_pip_log": "Error in sitecustomize; set PYTHONVERBOSE for traceback:\nModuleNotFoundError: No module named 'wrapt'\nCollecting pip==26.2.1\n  Downloading pip-26.2.1-py3-none-any.whl.metadata (4.6 kB)\nDownloading pip-26.2.1-py3-none-any.whl (1.8 MB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 29.6 MB/s eta 0:00:00\nInstalling collected packages: pip\nSuccessfully installed pip-26.2.1\n"
+  },
+  "diagnosis": "pip install exited 0 and installed pip 26.2.1, but startup sitecustomize raised missing wrapt. Dependency installation and data QA had not started. The ZIP does not identify the hook file path.",
+  "fix": "Explicit -I -S launcher initializes venv site paths without sitecustomize/usercustomize. Bootstrap loads only parent pip package inside target interpreter; no pip --python re-exec.",
+  "regression_tests": {
+    "status": "PASS",
+    "count": 21,
+    "seconds": 6.43,
+    "command": ".venv/Scripts/python.exe -X utf8 -m pytest tests/unit/test_clean_python.py tests/unit/test_kaggle_data.py tests/unit/test_kaggle_export.py tests/unit/test_environment.py tests/integration/test_parquet_pipeline.py -q -p no:cacheprovider --basetemp .cache/pytest-bootstrap-fix"
+  },
+  "local_runs": {
+    "data_qa_fixture": {
+      "path": ".cache/data-bootstrap-fix/data-qa-20261020T164710807775Z",
+      "zip_crc": "PASS",
+      "result": {
+        "status": "REVIEW_REQUIRED",
+        "scope": "data_qa_only_no_training",
+        "started_utc": "20261020T164710807775Z",
+        "commands": [
+          {
+            "name": "create_venv",
+            "returncode": 0
+          },
+          {
+            "name": "bootstrap_pip",
+            "returncode": 0
+          },
+          {
+            "name": "startup",
+            "returncode": 0
+          },
+          {
+            "name": "dependencies",
+            "returncode": 0
+          },
+          {
+            "name": "pip_check",
+            "returncode": 0
+          },
+          {
+            "name": "dependency_imports",
+            "returncode": 0
+          },
+          {
+            "name": "versions",
+            "returncode": 0
+          },
+          {
+            "name": "data_tests",
+            "returncode": 0
+          },
+          {
+            "name": "prepare_data",
+            "returncode": 2
+          }
+        ],
+        "git_commit": "52248a1c8e4675c53301c061f83ef4c950cf0fa7",
+        "qa_status": "REVIEW_REQUIRED"
+      },
+      "logs": {
+        "create_venv.log": "",
+        "data_tests.log": "..................                                                       [100%]\n18 passed in 2.09s\n",
+        "dependency_imports.log": "Data QA imports PASS\n",
+        "pip_check.log": "No broken requirements found.\n",
+        "prepare_data.log": "REVIEW_REQUIRED: 18 valid pairs; output: .cache\\data-bootstrap-fix\\data-qa-20261020T164710807775Z\\qa\n",
+        "startup.log": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]\n",
+        "versions.log": "certifi==2026.10.19\ncharset-normalizer==3.5.2\ncolorama==0.4.6\nfilelock==4.2.4\nfsspec==2026.9.0\nhuggingface-hub==0.36.0\nidna==3.20\niniconfig==2.3.1\npackaging==26.3\npillow==12.0.0\npluggy==1.7.0\npyarrow==21.0.0\nPygments==2.21.0\npytest==8.4.2\nPyYAML==6.0.3\nrequests==2.34.2\ntqdm==4.70.1\ntyping_extensions==4.16.0\nurllib3==2.8.0\n"
+      }
+    },
+    "g0_bootstrap_only": {
+      "path": ".cache/g0-bootstrap-fix/g0-20261020T164745206619Z",
+      "zip_crc": "PASS",
+      "result": {
+        "status": "PASS",
+        "scope": "Fresh venv bootstrap only; does not rerun or certify GPU inference"
+      },
+      "logs": {
+        "create_venv.log": "",
+        "pip_check.log": "No broken requirements found.\n",
+        "startup.log": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]\nD:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\.cache\\g0-bootstrap-fix\\.promptalign-bootstrap-20261020T164745206619Z\n"
+      }
+    }
+  },
+  "provenance_note": "Runs executed against uncommitted fix based on 52248a1; source hashes below identify code, rather than claiming that base commit already contains the fix.",
+  "source_sha256": {
+    "scripts/clean_python.py": "71d7ea9a0572afe24b06b5af60c071d8497898ff286d729c95be7f4bf228e9e1",
+    "scripts/kaggle_data.py": "69fc0c88a012d51b6546be0c272cac0a5926d4d1a46f2a6c6a5b3cf8234ef29b",
+    "scripts/kaggle_g0.py": "2dfd4c39f22c3e329b334b5a99e8555cf18713914c5b31746611b3055a08e134",
+    "scripts/check_environment.py": "093fcd8d5b6a0ee0cf1e5b7d2d6c02a4226f065526cee9c4481b97c967de23fa",
+    "scripts/run_g0_checks.py": "59049027db7d482f99f39d11d675e21aca34e9982ffeb36bef4d44fc99540da4",
+    "requirements-kaggle-data.in": "76fc26db295284c73f891852274b18754e28f9f238e501ab1fa58c84c223f022"
+  },
+  "kaggle_fix_acceptance": "NOT RUN: user must rerun notebook fetching updated main",
+  "full_data_qa": "NOT RUN: no full dataset downloaded in this local verification"
+}

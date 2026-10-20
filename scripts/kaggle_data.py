@@ -10,6 +10,9 @@ import shutil
 import subprocess
 import sys
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from scripts.clean_python import python_command, pip_source
+
 
 def diagnostic_tail(log, limit=6000):
     """Keep notebook errors bounded and remove common credential representations."""
@@ -34,7 +37,7 @@ def run_qa(workdir, data_root=None, download=False):
     report = {"status": "FAIL", "scope": "data_qa_only_no_training", "started_utc": stamp, "commands": []}
 
     def execute(name, command, accepted=(0,)):
-        command = [str(command[0]), "-X", "utf8", *map(str, command[1:])]
+        command = python_command(command[0]) + list(map(str, command[1:]))
         print(f"{name}: {run / (name + '.log')}", flush=True)
         with (run / f"{name}.log").open("w", encoding="utf-8") as stream:
             result = subprocess.run(command, cwd=root, env=environment, stdout=stream, stderr=subprocess.STDOUT)
@@ -52,10 +55,11 @@ def run_qa(workdir, data_root=None, download=False):
     try:
         report["git_commit"] = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
         execute("create_venv", [sys.executable, "-I", "-m", "venv", "--without-pip", env_dir])
-        execute("bootstrap_pip", [sys.executable, "-I", "-m", "pip", "--python", python, "install", "pip==26.2.1"])
+        execute("bootstrap_pip", [python, "--pip-source", pip_source(), "install", "pip==26.2.1"])
         execute("startup", [python, "-I", "-c", "import sys; print(sys.version); assert sys.prefix != sys.base_prefix"])
-        execute("dependencies", [python, "-m", "pip", "install", "-r", "requirements-data.in", "huggingface-hub==0.36.0", "pytest==8.4.2", "--progress-bar", "off"])
+        execute("dependencies", [python, "-m", "pip", "install", "-r", "requirements-kaggle-data.in", "--progress-bar", "off"])
         execute("pip_check", [python, "-m", "pip", "check"])
+        execute("dependency_imports", [python, "-c", "import pyarrow.parquet; from PIL import Image; from huggingface_hub import snapshot_download; import pytest; print('Data QA imports PASS')"])
         execute("versions", [python, "-m", "pip", "freeze"])
         execute("data_tests", [python, "-m", "pytest", "tests/unit/test_data.py", "tests/integration/test_parquet_pipeline.py", "-q", "-p", "no:cacheprovider", "--basetemp", env_dir / "test-temp"])
         if download:

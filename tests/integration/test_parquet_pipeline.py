@@ -12,6 +12,7 @@ import pytest
 from src.data.ingest import iter_rows
 from src.data.qa import prepare_data
 from src.data.validate import MODELS
+from scripts.clean_python import python_command
 
 
 def write_shard(path, prompts, corrupt=False):
@@ -71,7 +72,7 @@ def test_missing_column_failure_has_report(tmp_path):
 def test_cli_and_review_exit_code(tmp_path):
     write_shard(tmp_path / "a.parquet", ["sun", "ocean", "forest"])
     root = Path(__file__).resolve().parents[2]
-    result = subprocess.run([sys.executable, "-X", "utf8", str(root / "scripts/prepare_data.py"),
+    result = subprocess.run(python_command() + [str(root / "scripts/prepare_data.py"),
         "--input", str(tmp_path), "--output", str(tmp_path / "cli")],
         capture_output=True, text=True, encoding="utf-8")
     assert result.returncode == 2, result.stderr

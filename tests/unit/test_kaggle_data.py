@@ -49,7 +49,7 @@ def test_qa_review_exit_is_not_training_success(tmp_path, monkeypatch):
 def test_pip_failure_prints_actual_diagnostic_and_archives(tmp_path, monkeypatch, capsys):
     monkeypatch.setattr(subprocess, "check_output", lambda *a, **k: "fixture-commit")
     def execute(command, **kwargs):
-        if "--python" in command:
+        if "--pip-source" in command:
             kwargs["stdout"].write("ERROR: fixture pip bootstrap failure\n")
             return subprocess.CompletedProcess(command, 1)
         return subprocess.CompletedProcess(command, 0)

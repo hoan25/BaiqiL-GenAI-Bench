@@ -7,6 +7,9 @@ from pathlib import Path
 import subprocess
 import sys
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from scripts.clean_python import python_command
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -17,7 +20,7 @@ def main() -> int:
     args = parser.parse_args()
     root, model, output = args.root.resolve(), args.model.resolve(), args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
-    python = [sys.executable, "-X", "utf8"]
+    python = python_command() if os.environ.get("PROMPTALIGN_CLEAN_PYTHON") == "1" else [sys.executable, "-X", "utf8"]
     commands = {
         "environment": python + ["scripts/check_environment.py", "--output", str(output / "environment.json")],
         "pytest": python + ["-m", "pytest", "tests/unit", "-q", "-p", "no:cacheprovider"],

@@ -1,0 +1,4 @@
+# Standalone CPU QA environment; no torch, CUDA, API or frontend required.
+-r requirements-data.in
+huggingface-hub==0.36.0
+pytest==8.4.2

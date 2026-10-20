@@ -44,7 +44,9 @@ def test_bootstrap_only_avoids_ensurepip_and_ml(tmp_path, monkeypatch):
     monkeypatch.setattr(subprocess, "run", run)
     assert kaggle_g0.main() == 0
     assert "--without-pip" in commands[0]
-    assert "--python" in commands[1]
+    assert "--pip-source" in commands[1]
+    assert "--python" not in commands[1]
+    assert all("-S" in c and "-I" in c for c in commands)
     assert not any("torch" in str(c) or "download_clip.py" in str(c) for c in commands)
     with zipfile.ZipFile(next(tmp_path.glob("g0-*.zip"))) as archive:
         assert "bootstrap only" in json.loads(archive.read("result.json"))["scope"]
