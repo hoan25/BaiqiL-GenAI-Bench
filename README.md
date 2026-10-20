@@ -1,7 +1,7 @@
 # PromptAlign AI
 
 Hệ thống đánh giá prompt–image theo `PROJECT_PLAN.md` và `TEST_PLAN.md`.
-Đã có kiểm chứng G1/G2-local: pipeline dữ liệu, metrics, mean baseline và frozen CLIP extraction. Tiếp theo G3-local huấn luyện head; chưa có mô hình chấm điểm được nghiệm thu hoặc ứng dụng web.
+Đã có code và kiểm chứng local cho dữ liệu, CLIP extraction và huấn luyện Ridge/MLP. Tiếp theo predictor/FastAPI; chưa có mô hình được nghiệm thu trên GenAI-Bench hoặc ứng dụng web.
 
 ## Tiếp tục công việc
 
@@ -71,3 +71,5 @@ Chọn đường dẫn output chưa tồn tại. CLI tạo ảnh tổng hợp tr
 Đã có adapter Parquet và CLI `scripts/prepare_data.py`, hướng dẫn tại [pipeline dữ liệu](docs/DATA_PIPELINE.md). Toàn suite hiện có **34 test PASS**, bao gồm integration với file Parquet tổng hợp. QA trên 12 shard thật và khóa split vẫn chưa chạy; fixture không thay thế nghiệm thu GenAI-Bench.
 
 G2 bổ sung **13 test PASS** cho metrics/extraction và kiểm chứng CLIP thật trên CPU với dữ liệu tổng hợp. Xem [hướng dẫn embeddings/baseline](docs/EMBEDDINGS.md). Các kết quả G0/G1 được giữ nguyên, không coi fixture là benchmark GenAI-Bench.
+
+G3 thêm Ridge/MLP, early stopping và checkpoint có scaler; xem [hướng dẫn huấn luyện local](docs/TRAINING.md). CLI kiểm checksum đầu vào và reload checkpoint; chỉ chạy chế độ development trước khi dữ liệu thật được nghiệm thu.

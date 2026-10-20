@@ -3,8 +3,8 @@
 ## Checkpoint hiện tại
 
 - Ngày cập nhật: **2026-10-20**, múi giờ Asia/Saigon.
-- Mốc phát triển hiện tại: **G2-local đã có kiểm chứng code; tiếp theo G3-local** theo lộ trình local-first. G0 toàn mốc vẫn chờ ENV-06 Kaggle và review; G1 vẫn chờ QA dữ liệu thật.
-- Nhiệm vụ tiếp theo: **G3-local — Ridge/MLP, fit chỉ train, validation/early stopping, save/load và test overfit fixture**. G2 mới dùng fixture, chưa có metric GenAI-Bench. Trước thực nghiệm thật cần bổ sung provenance Git/config/tokenizer đầy đủ và kiểm chứng GPU extraction.
+- Mốc phát triển hiện tại: **G3-local — Ridge/MLP và checkpoint đã có kiểm chứng**, chưa nghiệm thu thực nghiệm. G0 toàn mốc vẫn chờ ENV-06 Kaggle và review; G1 vẫn chờ QA dữ liệu thật.
+- Nhiệm vụ tiếp theo: **G4-local — predictor nối CLIP/head và FastAPI theo contract, kiểm thử bằng fixture/mock rõ phạm vi**. Không phục vụ checkpoint tổng hợp như model thật. Trước thực nghiệm vẫn cần full-data QA, provenance encoder/tokenizer và kiểm chứng GPU extraction.
 - **ENV-01/02/04/05 PASS local**. `.venv-repro` CPython 3.13.5 Windows x64 tái tạo đúng 31 package; torch 2.8.0+cpu, transformers 4.57.6, huggingface-hub 0.36.0, pytest 8.4.2; import CLIP và pip check đạt. **10 pytest PASS**, CPU smoke và auto fallback PASS.
 - Luồng mới: VS Code → GitHub `hoan25/BaiqiL-GenAI-Bench` → Kaggle → artifact về máy. Notebook clone GitHub và xuất `g0-<thời_gian>.zip`; không dùng bundle upload trong luồng chính.
 - Người dùng đã gửi ZIP và notebook Kaggle chạy commit `f48f135`: 13 test PASS, CPU/CUDA PASS, đủ checksum. Bản sửa bootstrap có 16 test local PASS và phép thử venv thật PASS. ENV-06 được hoãn đến tích hợp GPU; hiện không yêu cầu người dùng chạy 00b.
@@ -25,7 +25,7 @@
 | G0 | LOCAL READY; nghiệm thu toàn mốc còn chờ | Giữ CPU/CUDA PASS; ENV-06 và review chuyển sang tích hợp GPU |
 | G1 | LOCAL CHECKS PASS; full-data NOT RUN | Adapter/QA/CLI có integration test; toàn suite 34 PASS; còn kiểm chứng nguồn thật, khóa split và review |
 | G2 | LOCAL CHECKS PASS; full-data NOT RUN | 13 test mới PASS; CLIP encoder CPU/batch/frozen PASS; CLI 18 cặp tổng hợp PASS; thiếu review và thực nghiệm thật |
-| G3 | NOT RUN | Chưa có training/checkpoint |
+| G3 | LOCAL CHECKS PASS; full-data NOT RUN | 10 test PASS; Ridge/MLP, early stopping, scaler train-only và save/load đã chạy; checkpoint fixture không dùng làm model sản phẩm |
 | G4 | NOT RUN | Chưa có backend |
 | G5 | NOT RUN | Chưa có frontend |
 | G6 | NOT RUN | Optional; chỉ sau MVP |
@@ -185,6 +185,16 @@ Log cài: `reports/results/G0_torch_install.log`, `G0_dependencies_install.log` 
 - Tạo fixture Parquet 3 prompt/18 cặp trong `.cache/g2-pipeline-fixture`, QA CHECKS_PASS ở scope fixture. Chạy extraction CPU batch 4 từ manifest vào `reports/results/G2_fixture_extraction`: PASS, 18x512, 6.95 giây. M0 MAE=0 do toàn nhãn tổng hợp bằng 2; không dùng làm chất lượng mô hình. File NPZ giữ local và được ignore.
 - Hướng dẫn `docs/EMBEDDINGS.md`; biên bản `reports/results/G2_validation.md`. **G2-local checks PASS**, full-data/GPU/review còn chờ. Thiếu provenance Git/config/tokenizer cho thực nghiệm chính thức được ghi rõ.
 - Tiếp theo G3-local: scaler/Ridge/MLP, fit chỉ train, early stopping theo val, save/load và overfit fixture. Không chạm test holdout.
+
+## 2026-10-20 — G3-local Ridge/MLP và checkpoint
+
+- Đã đọc kế hoạch/test/nhật ký; tiếp tục từ `73b354a`. Khi người dùng nhắc tiếp tục, có ba file training chưa track/chưa kiểm thử; đã đối chiếu và hoàn thiện, không viết lại G0–G2.
+- Thêm `src/models/regression_head.py`, `src/training/train_regression.py`, `scripts/train_regression.py`: nối features text/image, scaler chỉ train, Ridge L2/intercept không penalty, MLP ReLU/sigmoid đầu ra 1–5; Adam full-batch CPU, seed, chọn best epoch theo val MAE, early stopping. Mean/Ridge clamp [1,5]; chọn mean/Ridge/MLP theo cùng val, không ép MLP thắng.
+- Checkpoint chứa config/scaler/weights, load CPU `weights_only=True`, không ghi đè. CLI xác minh checksum manifest/embedding từ G2, lưu config/Git/versions/history/checksum/reload delta; chỉ cho chạy `--development`.
+- `tests/unit/test_regression.py`: **9 PASS**, 9.63 giây. Overfit 32 mẫu tổng hợp đạt ngưỡng test; Ridge so lời giải tham chiếu; scaler không fit val, không đọc test target/features; seed/best-epoch/reload/range/invalid config đạt.
+- CLI dùng lại embeddings G2, không chạy lại CLIP: `python scripts/train_regression.py --manifest .cache/g2-pipeline-fixture/qa/manifest.jsonl --extraction reports/results/G2_fixture_extraction --output reports/results/G3_fixture_training --epochs 30 --patience 5 --development`: **PASS**, exit 0. Cả ba reload delta = 0; mean được chọn trên fixture toàn nhãn 2, không phải metric GenAI-Bench.
+- Thêm CLI integration kiểm checksum sai → FAIL, train/reload thành công và output không bị ghi đè. Unit + integration **10 PASS, 0 FAIL, 0 SKIP**, 22.41 giây, exit 0; log `reports/results/G3_local_tests.txt`. Không đổi dependency hoặc chạy lại các test G0–G2 đã đạt.
+- Hướng dẫn `docs/TRAINING.md`, biên bản `reports/results/G3_validation.md`. Chưa full-data train, review/multi-seed trên dataset; không đánh dấu toàn mốc DONE. Tiếp theo predictor/HTTP contract G4-local; checkpoint thật và gate Kaggle vẫn chờ.
 
 ## Mẫu ghi cho nhóm công việc tiếp theo
 

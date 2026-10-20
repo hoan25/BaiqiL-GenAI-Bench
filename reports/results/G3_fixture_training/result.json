@@ -1,0 +1,166 @@
+{
+  "status": "PASS",
+  "scope": "development_only_not_dataset_benchmark",
+  "config": {
+    "seed": 42,
+    "epochs": 30,
+    "patience": 5,
+    "hidden": 64,
+    "alpha": 1.0,
+    "learning_rate": 0.001
+  },
+  "python": "3.13.5",
+  "torch": "2.8.0+cpu",
+  "numpy": "2.5.4",
+  "git_commit": "73b354a36242641acfdffaa3baee5eb4948cf9f8",
+  "git_status": "?? scripts/train_regression.py\n?? src/models/regression_head.py\n?? src/training/train_regression.py\n?? tests/unit/test_regression.py",
+  "manifest_sha256": "709e832e0b38b6b4ccb7cc2e14e871fd1c332cb9a914a7403c2a10b2417b8c69",
+  "embeddings_sha256": "edd3bbf2cf81c7fce34146eb92b1d5024d29f8e4cd8e6e0af394063f07daa051",
+  "encoder_state_sha256": "12f1a938acc3449fcf1a9acfe20a35e200eced3fe9e7b755362374b9fc103aa8",
+  "selected": "mean",
+  "selection_metric": "validation_mae",
+  "metrics": {
+    "mean": {
+      "count": 6,
+      "mae": 0.0,
+      "rmse": 0.0,
+      "spearman": null,
+      "pairwise": {
+        "accuracy": null,
+        "eligible_pairs": 0,
+        "correct_pairs": 0,
+        "excluded_label_ties": 15,
+        "prediction_ties": 0,
+        "min_label_gap": 0.5,
+        "prediction_tie_credit": 0
+      }
+    },
+    "ridge": {
+      "count": 6,
+      "mae": 0.0,
+      "rmse": 0.0,
+      "spearman": null,
+      "pairwise": {
+        "accuracy": null,
+        "eligible_pairs": 0,
+        "correct_pairs": 0,
+        "excluded_label_ties": 15,
+        "prediction_ties": 0,
+        "min_label_gap": 0.5,
+        "prediction_tie_credit": 0
+      }
+    },
+    "mlp": {
+      "count": 6,
+      "mae": 1.0,
+      "rmse": 1.0,
+      "spearman": null,
+      "pairwise": {
+        "accuracy": null,
+        "eligible_pairs": 0,
+        "correct_pairs": 0,
+        "excluded_label_ties": 15,
+        "prediction_ties": 0,
+        "min_label_gap": 0.5,
+        "prediction_tie_credit": 0
+      }
+    }
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_mse_before_step": 0.8101426959037781,
+      "val_mae": 3.0
+    },
+    {
+      "epoch": 2,
+      "train_mse_before_step": 0.22656457126140594,
+      "val_mae": 3.0
+    },
+    {
+      "epoch": 3,
+      "train_mse_before_step": 0.056500088423490524,
+      "val_mae": 1.0
+    },
+    {
+      "epoch": 4,
+      "train_mse_before_step": 0.026715852320194244,
+      "val_mae": 1.0
+    },
+    {
+      "epoch": 5,
+      "train_mse_before_step": 0.04341697320342064,
+      "val_mae": 1.0
+    },
+    {
+      "epoch": 6,
+      "train_mse_before_step": 0.05932597443461418,
+      "val_mae": 1.0
+    },
+    {
+      "epoch": 7,
+      "train_mse_before_step": 0.07318220287561417,
+      "val_mae": 1.0
+    },
+    {
+      "epoch": 8,
+      "train_mse_before_step": 0.06521458923816681,
+      "val_mae": 1.0
+    }
+  ],
+  "best_epoch": 3,
+  "epochs_run": 8,
+  "train_count": 6,
+  "val_count": 6,
+  "baselines": {
+    "split": "val",
+    "train_count": 6,
+    "val_count": 6,
+    "M0": {
+      "train_mean": 2.0,
+      "count": 6,
+      "mae": 0.0,
+      "rmse": 0.0,
+      "spearman": null,
+      "pairwise": {
+        "accuracy": null,
+        "eligible_pairs": 0,
+        "correct_pairs": 0,
+        "excluded_label_ties": 15,
+        "prediction_ties": 0,
+        "min_label_gap": 0.5,
+        "prediction_tie_credit": 0
+      }
+    },
+    "M1": {
+      "spearman": null,
+      "pairwise": {
+        "accuracy": null,
+        "eligible_pairs": 0,
+        "correct_pairs": 0,
+        "excluded_label_ties": 15,
+        "prediction_ties": 0,
+        "min_label_gap": 0.5,
+        "prediction_tie_credit": 0
+      },
+      "score_type": "raw_cosine_not_1_to_5"
+    }
+  },
+  "checkpoints": {
+    "mean": {
+      "file": "mean.pt",
+      "sha256": "2558109266f2243fdda3dcbcebd3d3921e72fea576130b08990b58e2eb255e62",
+      "reload_max_delta": 0.0
+    },
+    "ridge": {
+      "file": "ridge.pt",
+      "sha256": "b3e511fddbc640d7f38a99b8ffa268ceb513ea20a049c63594987fdd65856a6e",
+      "reload_max_delta": 0.0
+    },
+    "mlp": {
+      "file": "mlp.pt",
+      "sha256": "db25450481423850de548e05e78485e815ad5728dedc644ae6d7e456ed17ff94",
+      "reload_max_delta": 0.0
+    }
+  }
+}
