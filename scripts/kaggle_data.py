@@ -5,9 +5,18 @@ from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
+
+
+def diagnostic_tail(log, limit=6000):
+    """Keep notebook errors bounded and remove common credential representations."""
+    log = re.sub(r"(https?://)[^\s/@]+:[^\s/@]+@", r"\1[REDACTED]@", log)
+    log = re.sub(r"(?i)(authorization\s*[:=]\s*)([^\r\n]+)", r"\1[REDACTED]", log)
+    log = re.sub(r"(?i)([?&](?:token|access_token|key)=)[^&\s]+", r"\1[REDACTED]", log)
+    return log[-limit:]
 
 
 def run_qa(workdir, data_root=None, download=False):
@@ -32,7 +41,13 @@ def run_qa(workdir, data_root=None, download=False):
         report["commands"].append({"name": name, "returncode": result.returncode})
         log = (run / f"{name}.log").read_text(encoding="utf-8")
         if result.returncode not in accepted or "Error in sitecustomize" in log or "Error in usercustomize" in log:
-            raise RuntimeError(f"{name} failed; see log")
+            report["failed_stage"] = name
+            report["failed_returncode"] = result.returncode
+            report["diagnostic_tail"] = diagnostic_tail(log)
+            print(f"FAILED STAGE: {name}; exit code: {result.returncode}\n"
+                  f"--- diagnostic log tail ---\n{report['diagnostic_tail']}\n"
+                  f"--- full log: {run / (name + '.log')} ---", flush=True)
+            raise RuntimeError(f"{name} failed; see diagnostic output and archived log")
 
     try:
         report["git_commit"] = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
@@ -51,6 +66,7 @@ def run_qa(workdir, data_root=None, download=False):
         report["status"] = "REVIEW_REQUIRED"
     except Exception as exc:
         report["error"] = f"{type(exc).__name__}: {exc}"
+        print(report["error"], flush=True)
     finally:
         (run / "result.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
         archive = shutil.make_archive(str(run), "zip", root_dir=run)

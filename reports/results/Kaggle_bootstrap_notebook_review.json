@@ -1,0 +1,15 @@
+{
+  "input_name": "genai-bench-data-preparation.ipynb",
+  "sha256": "48f42ac6a9824377b6a25318018122dba8b03a0ebee98e0dff34edd80012738a",
+  "observed_commit": "76276cd32977db185ec874920924239521a92fcd",
+  "execution_counts": [
+    1,
+    2
+  ],
+  "failed_stage": "bootstrap_pip",
+  "runner_exit_code": 1,
+  "archive_name": "data-qa-20261020T060426867085Z.zip",
+  "root_cause": "UNKNOWN: bootstrap_pip.log is not included in notebook outputs; archive not yet provided",
+  "dataset_download_started": false,
+  "input_notebook_executed_by_agent": false
+}

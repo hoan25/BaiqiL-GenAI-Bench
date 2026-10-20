@@ -11,6 +11,8 @@ Code dữ liệu, embeddings, training head và web đã được phát triển/
 
 ZIP gồm logs, versions, dataset revision (nếu tải bằng script), source checksum, candidate manifest và báo cáo QA/near-duplicate. Không kèm ảnh/Parquet/checkpoint. **REVIEW_REQUIRED là trạng thái dự kiến**, không đồng nghĩa lỗi thực thi: cần xem dữ liệu bị loại, count và prompt gần trùng trước khi khóa split. Nếu FAIL, gửi nguyên ZIP để xác định lỗi; không sửa nhiều cell thử ngẫu nhiên.
 
+Chỉ cần import notebook, bật Internet và Run All; không upload cả repository hoặc cài thư viện thủ công. Cell đầu luôn lấy code mới từ `main`. Khi đã import đúng notebook này, có thể chạy lại Run All để lấy bản sửa script mà không import lại. Bản runner mới in stage/returncode và phần cuối log lỗi ngay trong output; ZIP vẫn là bằng chứng đầy đủ. Notebook lỗi cũ chỉ ghi FAIL ở bootstrap_pip thì cần ZIP để biết nguyên nhân, không thể kết luận chỉ từ tên bước.
+
 Sau khi kiểm tra ZIP, sẽ xử lý/giải trình vấn đề dữ liệu rồi khóa split và nối cùng source scripts cho extraction/training GPU. Chưa khẳng định runner đã PASS trên Kaggle; kiểm chứng local và thực tế Kaggle là hai bằng chứng khác nhau.
 
 Runner đã được kiểm chứng end-to-end bằng venv sạch Windows trên fixture nhỏ: 18 test dữ liệu PASS, startup/pip check đạt, xuất ZIP CRC hợp lệ. Bằng chứng: `reports/results/Kaggle_data_local_validation.json`. Môi trường Linux/Kaggle và dữ liệu đầy đủ cần kết quả từ phiên của bạn.

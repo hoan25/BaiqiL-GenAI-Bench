@@ -4,7 +4,7 @@
 
 - Ngày cập nhật: **2026-10-20**, múi giờ Asia/Saigon.
 - Mốc phát triển hiện tại: **G4/G5-local checks PASS**, sau G3-local PASS. Các mốc toàn phần vẫn chưa nghiệm thu khi chưa có dữ liệu/checkpoint thật và review.
-- Nhiệm vụ cần người dùng tiếp theo: **chạy notebooks/01_data_qa.ipynb trên Kaggle CPU, gửi data-qa-*.zip và notebook output** theo docs/KAGGLE_DATA_QA.md. Kiểm bootstrap sạch và QA đủ 12 shard trước khóa split/huấn luyện. Runner đã chạy thành công trong venv sạch Windows trên fixture; Kaggle/full-data vẫn NOT RUN.
+- Nhiệm vụ cần người dùng tiếp theo: **gửi data-qa-20261020T060426867085Z.zip hoặc nội dung bootstrap_pip.log** từ lần Kaggle lỗi. Notebook người dùng gửi xác nhận đúng commit 76276cd nhưng dừng bootstrap_pip; output không có lỗi gốc. Đã sửa runner hiện log lỗi trực tiếp (6 tests PASS), chưa tuyên bố đã sửa nguyên nhân bootstrap. Chưa tải dataset/chạy full-data QA.
 - **ENV-01/02/04/05 PASS local**. `.venv-repro` CPython 3.13.5 Windows x64 tái tạo đúng 31 package; torch 2.8.0+cpu, transformers 4.57.6, huggingface-hub 0.36.0, pytest 8.4.2; import CLIP và pip check đạt. **10 pytest PASS**, CPU smoke và auto fallback PASS.
 - Luồng mới: VS Code → GitHub `hoan25/BaiqiL-GenAI-Bench` → Kaggle → artifact về máy. Notebook clone GitHub và xuất `g0-<thời_gian>.zip`; không dùng bundle upload trong luồng chính.
 - Người dùng đã gửi ZIP và notebook Kaggle chạy commit `f48f135`: 13 test PASS, CPU/CUDA PASS, đủ checksum. Bản sửa bootstrap có 16 test local PASS và phép thử venv thật PASS. ENV-06 được hoãn đến tích hợp GPU; hiện không yêu cầu người dùng chạy 00b.
@@ -216,6 +216,15 @@ Log cài: `reports/results/G0_torch_install.log`, `G0_dependencies_install.log` 
 - Runner unit tests 3 PASS; `Kaggle_data_runner_tests.txt`. Test venv thật local lần đầu gặp ownership Git (đổi user do escalation); lần sau bootstrap/install/pip check đạt nhưng pytest temp chung bị từ chối quyền. Sửa dùng --basetemp riêng dưới venv và tắt pytest cache; không xóa/ghi đè run cũ. Đang kiểm chứng lại bản sửa, chưa coi Linux/Kaggle đã PASS.
 - G4/G5 toàn mốc còn thiếu artifact nghiệm thu, full-stack E2E/model thật, concurrency/performance sâu và review/UAT. Hướng dẫn web `docs/WEB_LOCAL.md`; biên bản `reports/results/G4_G5_validation.md`.
 - Kiểm chứng runner sau sửa: venv sạch thứ ba chạy **thành công**, exit 0; 18 data tests PASS, pip check/startup sạch, QA fixture trả REVIEW_REQUIRED do subset. ZIP CRC PASS, không chứa Parquet. Evidence lưu cả hai lần lỗi và lần sửa trong `reports/results/Kaggle_data_local_validation.json`; không ghi đè bằng chứng cũ. Không coi lần local này là ENV-06 Kaggle PASS.
+
+## 2026-10-20 — Kiểm tra notebook Kaggle lỗi bootstrap_pip
+
+- Đọc lại kế hoạch/test/nhật ký, repo sạch tại `76276cd`. Đọc JSON notebook người dùng ở `C:/Users/20146/Downloads/genai-bench-data-preparation.ipynb`; không thực thi code đính kèm, không sửa file gốc.
+- Notebook chạy hai code cell, clone/fetch đúng `76276cd32977db185ec874920924239521a92fcd`. Runner in create_venv rồi bootstrap_pip, FAIL, exit 1; ZIP `data-qa-20261020T060426867085Z.zip`. Chưa đến dependencies/data download/QA.
+- Output notebook không có chi tiết bootstrap_pip.log. Kiểm thư mục Downloads và reports/results/kaggle không thấy ZIP lần này. **Nguyên nhân gốc UNKNOWN**, không suy đoán là pip version/Internet/sitecustomize khi chưa có log.
+- Sửa lỗi quan sát: `scripts/kaggle_data.py` in stage, returncode, tail log (giới hạn 6000 ký tự, che credential phổ biến) ngay ra notebook; lưu các trường tương ứng trong result.json. ZIP vẫn giữ log đầy đủ, không che lỗi startup exit 0.
+- Regression tests: **6 PASS**, 0.64 giây, exit 0; `reports/results/Kaggle_data_diagnostic_tests.txt`. Có ca bootstrap pip fail, startup error exit 0 và redaction/giới hạn log. Chỉ chạy test runner liên quan.
+- Evidence hash/nhận xét notebook: `reports/results/Kaggle_bootstrap_notebook_review.json`. Chưa đánh dấu Kaggle bootstrap PASS. Cần người dùng gửi ZIP đã tạo (không cần chạy lại để lấy lỗi cũ), hoặc chạy Run All để code main mới hiện lỗi trực tiếp.
 
 ## Mẫu ghi cho nhóm công việc tiếp theo
 
