@@ -249,6 +249,26 @@ Log cài: `reports/results/G0_torch_install.log`, `G0_dependencies_install.log` 
 - 404 được xác nhận từ HTML output: FileLink tạo href đường dẫn filesystem `/kaggle/working/...`. Sửa `notebooks/01_data_qa.ipynb` bỏ link đó, in tên/kích thước ZIP và tải qua Output / Files; cập nhật docs/KAGGLE_DATA_QA.md. Hai code cell compile **PASS**; không chạy lại pipeline đã đạt chỉ vì đổi hiển thị. UI Kaggle bản sửa NOT RUN.
 - **Tiếp theo:** review quyết định loại mẫu/near-duplicate, khóa manifest chính thức rồi tích hợp runner GPU extraction/training. Không cần người dùng chạy lại QA hiện có. Full G0/G1 còn review; chưa có kết quả training dữ liệu thật. Commit/push chỉ source/docs/biên bản, không ZIP/notebook output/manifest raw.
 
+## 2026-10-21 — Checkpoint tích hợp extraction/training Kaggle
+
+- Người dùng yêu cầu tiếp tục đến khi cần họ/quota. Repo base `a6e33e0`, chỉ có các ZIP/notebook người dùng chưa track; giữ nguyên. Đọc lại kế hoạch/test/nhật ký, tiếp tục từ review/split và tích hợp ML thật.
+- Thêm `configs/genai_bench_review.json` chốt checksum ZIP/manifest/shards/revision và ba quyết định dữ liệu từ biên bản. `src/data/acceptance.py` đọc đúng archive đã review, cần tên reviewer rõ ràng mới tạo lock; kiểm manifest/spec/shards không đổi, không extract đường dẫn ZIP tùy ý. Chưa tạo approval chính thức thay người review.
+- CLI extraction/training thêm chế độ `--data-lock` tách với `--development`; extraction kiểm checksum shard và lưu hash các file model/tokenizer, Git; training kiểm lock trùng provenance extraction. Dataset downloader hỗ trợ revision đã chốt.
+- `scripts/kaggle_train.py` dựng venv sạch theo launcher đã kiểm chứng; kiểm import/GPU/tests, tái dùng cache dataset hoặc opt-in download revision cố định, CLIP frozen, 3 seed head CPU; seed 42 là run chính cố định, 43/44 báo ổn định, không chọn seed theo kết quả đẹp. ZIP chứa logs/manifest/embeddings/head/checksums, không chứa dataset hoặc CLIP weights; lỗi cũng xuất ZIP.
+- Thêm `requirements-train.txt` và `notebooks/02_train.ipynb` chỉ gọi script. Notebook mặc định chưa xác nhận review; cần người review đọc biên bản, điền tên và bật xác nhận trước khi chạy. Clone cell tái sử dụng logic đã kiểm chứng; không dùng FileLink filesystem.
+- 16 test acceptance/runner/training CLI/extraction **PASS, 13.68 giây**, exit 0. `read_bundle` kiểm ZIP thật khớp spec **PASS**, không tạo approval. Notebook code compile **PASS**. `pip install --dry-run --no-index -r requirements-train.txt` **PASS** với môi trường local hiện có, chưa phải môi trường GPU mới.
+- Đang kiểm tra extraction CLI vừa sửa bằng CLIP cache và fixture mới dưới `.cache/handoff-fixture-extraction`, chưa nghiệm thu kết quả ở checkpoint này. Tiếp theo bổ sung kiểm gate CLI, ghi bằng chứng/hướng dẫn, commit/push rồi bàn giao user chạy GPU. Chưa chạy experiment dữ liệu thật, chưa đánh dấu G1/G2/G3 DONE.
+
+## 2026-10-21 — Hoàn tất handoff training local, chờ reviewer và GPU
+
+- Extraction CLI cập nhật chạy CLIP thật trên fixture: **PASS**, 18×512, frozen fingerprint không đổi, 9.71 giây; `.cache/handoff-fixture-extraction/result.json`. Training nối kết quả này qua clean launcher: **PASS**, 5 epoch fixture, cả ba head reload max delta 0; `.cache/handoff-fixture-training/result.json`. Metric tổng hợp không phải chất lượng GenAI-Bench.
+- Gate CLI chính thức với lock chưa duyệt: **2 PASS, 11.44 giây**. Bổ sung nhận QA ZIP hoặc thư mục giải nén, kiểm từng member theo hash gốc; tránh phụ thuộc việc upload Kaggle còn giữ đuôi ZIP hay không. Bộ acceptance/runner/CLI gate sau bổ sung: **13 PASS, 12.06 giây**, `Kaggle_training_gate_tests.txt`.
+- Spec lock hash dùng JSON canonical để Git LF/CRLF giữa Windows/Linux không làm mất khả năng xác minh cùng nội dung; dataset/manifest vẫn dùng byte hash nguyên bản. Test acceptance sau chỉnh portability: **8 PASS, 0.27 giây**, `Kaggle_lock_portability_tests.txt`; thay nội dung spec vẫn bị từ chối.
+- `reports/results/Kaggle_training_handoff_validation.json` lưu kết quả thật, lệnh/chỉ số test, source hashes và giới hạn. Đọc ZIP QA thật qua gate mới **PASS**, chưa tạo lock mang tên người review. Notebook code compile PASS; `git diff --check` PASS. Không tải dataset/model mới hoặc cài GPU local.
+- Cập nhật trạng thái đầu PROJECT_PLAN.md/TEST_PLAN.md và hướng dẫn `docs/KAGGLE_TRAINING.md`; `notebooks/02_train.ipynb` dành cho GPU. Các source/bằng chứng chuẩn bị commit/push về origin đã cho phép; không stage artifact người dùng, NPZ hoặc checkpoint.
+- **Cần người dùng tiếp theo:** review ba quyết định cụ thể ở `G1_kaggle_full_qa_review.md`; nếu đồng ý điền REVIEWER và ACCEPT_DATA_REVIEW=True trong notebook mới, bật Internet/GPU, cung cấp QA ZIP/thư mục và Run All. Tải `training-*.zip` về để kiểm checkpoint/metrics và tích hợp web. Cần xác nhận này vì PROJECT_PLAN.md yêu cầu review trước khóa split/thực nghiệm; không tự nhận agent đã được người khác review.
+- **NOT RUN:** runner mới trên Kaggle GPU, full-data extraction/training, acceptance checkpoint thật/release/holdout. G0/G1 toàn mốc không tự chuyển DONE; QA thành công đã giữ nguyên, không yêu cầu chạy lại.
+
 ## Mẫu ghi cho nhóm công việc tiếp theo
 
 - Ngày / giai đoạn / nhiệm vụ:

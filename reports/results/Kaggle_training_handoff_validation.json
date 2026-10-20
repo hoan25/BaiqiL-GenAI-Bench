@@ -1,0 +1,270 @@
+{
+  "date": "2026-10-21",
+  "scope": "local_handoff_validation_not_full_data_experiment",
+  "base_commit": "a6e33e0e4a7a757d9836695176e5cf69c8c92c10",
+  "provenance_note": "Checks ran with uncommitted handoff changes; source hashes identify tested files.",
+  "tests": [
+    {
+      "selection": "acceptance + runner + training CLI + embeddings integration",
+      "passed": 16,
+      "seconds": 13.68,
+      "exit_code": 0
+    },
+    {
+      "selection": "official CLI gate",
+      "passed": 2,
+      "seconds": 11.44,
+      "exit_code": 0
+    },
+    {
+      "selection": "final acceptance (including unpacked input) + runner + official CLI gate",
+      "passed": 13,
+      "seconds": 12.06,
+      "exit_code": 0,
+      "log": "reports/results/Kaggle_training_gate_tests.txt"
+    },
+    {
+      "selection": "acceptance after canonical spec hash portability fix",
+      "passed": 8,
+      "seconds": 0.27,
+      "exit_code": 0,
+      "log": "reports/results/Kaggle_lock_portability_tests.txt"
+    }
+  ],
+  "notebook": {
+    "code_compile": "PASS",
+    "kaggle_execution": "NOT RUN"
+  },
+  "dependency_resolution": {
+    "command": ".venv/Scripts/python.exe -X utf8 -m pip install --dry-run --no-index -r requirements-train.txt",
+    "status": "PASS: all requirements already installed in local CPU environment",
+    "fresh_gpu_environment": "NOT RUN"
+  },
+  "real_qa_archive_spec_check": "PASS; no named reviewer or official approval fabricated",
+  "fixture_extraction": {
+    "status": "PASS",
+    "scope": "development_only_not_full_data_acceptance",
+    "device": "cpu",
+    "batch_size": 4,
+    "torch": "2.8.0+cpu",
+    "transformers": "4.57.6",
+    "git_commit": "a6e33e0e4a7a757d9836695176e5cf69c8c92c10",
+    "model_files_sha256": {
+      "config.json": "b575ef3c36f2a057fa19e221650105052d61cc9c1a972ec15019c6261ec98770",
+      "merges.txt": "f526393189112391ce6f9795d4695f704121ce452c3aad1f5335cc41337eba85",
+      "preprocessor_config.json": "910e70b3956ac9879ebc90b22fb3bc8a75b6a0677814500101a4c072bd7857bd",
+      "pytorch_model.bin": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f",
+      "special_tokens_map.json": "f8c0d6c39aee3f8431078ef6646567b0aba7f2246e9c54b8b99d55c22b707cbf",
+      "tokenizer.json": "b556ac8c99757ffb677208af34bc8c6721572114111a6e0aaf5fa69ff0b8d842",
+      "tokenizer_config.json": "34b7336e4bee12e0a9730eaf5189f582ef3c3eea5027f65730e5717256755aad",
+      "vocab.json": "5047b556ce86ccaf6aa22b3ffccfc52d391ea4accdab9c2f2407da5b742d4363"
+    },
+    "manifest_sha256": "709e832e0b38b6b4ccb7cc2e14e871fd1c332cb9a914a7403c2a10b2417b8c69",
+    "count": 18,
+    "dimension": 512,
+    "model_state_sha256": "12f1a938acc3449fcf1a9acfe20a35e200eced3fe9e7b755362374b9fc103aa8",
+    "frozen_state_unchanged": true,
+    "validation": {
+      "split": "val",
+      "train_count": 6,
+      "val_count": 6,
+      "M0": {
+        "train_mean": 2.0,
+        "count": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "spearman": null,
+        "pairwise": {
+          "accuracy": null,
+          "eligible_pairs": 0,
+          "correct_pairs": 0,
+          "excluded_label_ties": 15,
+          "prediction_ties": 0,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        }
+      },
+      "M1": {
+        "spearman": null,
+        "pairwise": {
+          "accuracy": null,
+          "eligible_pairs": 0,
+          "correct_pairs": 0,
+          "excluded_label_ties": 15,
+          "prediction_ties": 0,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        },
+        "score_type": "raw_cosine_not_1_to_5"
+      }
+    },
+    "embeddings_sha256": "edd3bbf2cf81c7fce34146eb92b1d5024d29f8e4cd8e6e0af394063f07daa051",
+    "elapsed_seconds": 9.71111400006339
+  },
+  "fixture_training": {
+    "status": "PASS",
+    "scope": "development_only_not_dataset_benchmark",
+    "config": {
+      "seed": 42,
+      "epochs": 5,
+      "patience": 2,
+      "hidden": 64,
+      "alpha": 1.0,
+      "learning_rate": 0.001
+    },
+    "python": "3.13.5",
+    "torch": "2.8.0+cpu",
+    "numpy": "2.5.4",
+    "git_commit": "a6e33e0e4a7a757d9836695176e5cf69c8c92c10",
+    "git_status": "M docs/PROGRESS.md\n M scripts/download_dataset.py\n M scripts/extract_embeddings.py\n M scripts/train_regression.py\n?? configs/\n?? notebooks/02_train.ipynb\n?? reports/results/G0_notebook_local/g0-20261019T175231Z.zip\n?? reports/results/G0_notebook_local/genai-bench-data-preparation.ipynb\n?? reports/results/G3_fixture_training/data-qa-20261020T165712283760Z.zip\n?? \"reports/results/G3_fixture_training/genai-bench-data-preparation (1).ipynb\"\n?? requirements-train.txt\n?? scripts/kaggle_train.py\n?? src/data/acceptance.py\n?? tests/integration/test_experiment_gate.py\n?? tests/unit/test_acceptance.py\n?? tests/unit/test_kaggle_train.py",
+    "manifest_sha256": "709e832e0b38b6b4ccb7cc2e14e871fd1c332cb9a914a7403c2a10b2417b8c69",
+    "embeddings_sha256": "edd3bbf2cf81c7fce34146eb92b1d5024d29f8e4cd8e6e0af394063f07daa051",
+    "encoder_state_sha256": "12f1a938acc3449fcf1a9acfe20a35e200eced3fe9e7b755362374b9fc103aa8",
+    "selected": "mean",
+    "selection_metric": "validation_mae",
+    "metrics": {
+      "mean": {
+        "count": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "spearman": null,
+        "pairwise": {
+          "accuracy": null,
+          "eligible_pairs": 0,
+          "correct_pairs": 0,
+          "excluded_label_ties": 15,
+          "prediction_ties": 0,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        }
+      },
+      "ridge": {
+        "count": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "spearman": null,
+        "pairwise": {
+          "accuracy": null,
+          "eligible_pairs": 0,
+          "correct_pairs": 0,
+          "excluded_label_ties": 15,
+          "prediction_ties": 0,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        }
+      },
+      "mlp": {
+        "count": 6,
+        "mae": 1.0,
+        "rmse": 1.0,
+        "spearman": null,
+        "pairwise": {
+          "accuracy": null,
+          "eligible_pairs": 0,
+          "correct_pairs": 0,
+          "excluded_label_ties": 15,
+          "prediction_ties": 0,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        }
+      }
+    },
+    "history": [
+      {
+        "epoch": 1,
+        "train_mse_before_step": 0.8101426959037781,
+        "val_mae": 3.0
+      },
+      {
+        "epoch": 2,
+        "train_mse_before_step": 0.22656457126140594,
+        "val_mae": 3.0
+      },
+      {
+        "epoch": 3,
+        "train_mse_before_step": 0.056500088423490524,
+        "val_mae": 1.0
+      },
+      {
+        "epoch": 4,
+        "train_mse_before_step": 0.026715852320194244,
+        "val_mae": 1.0
+      },
+      {
+        "epoch": 5,
+        "train_mse_before_step": 0.04341697320342064,
+        "val_mae": 1.0
+      }
+    ],
+    "best_epoch": 3,
+    "epochs_run": 5,
+    "train_count": 6,
+    "val_count": 6,
+    "baselines": {
+      "split": "val",
+      "train_count": 6,
+      "val_count": 6,
+      "M0": {
+        "train_mean": 2.0,
+        "count": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "spearman": null,
+        "pairwise": {
+          "accuracy": null,
+          "eligible_pairs": 0,
+          "correct_pairs": 0,
+          "excluded_label_ties": 15,
+          "prediction_ties": 0,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        }
+      },
+      "M1": {
+        "spearman": null,
+        "pairwise": {
+          "accuracy": null,
+          "eligible_pairs": 0,
+          "correct_pairs": 0,
+          "excluded_label_ties": 15,
+          "prediction_ties": 0,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        },
+        "score_type": "raw_cosine_not_1_to_5"
+      }
+    },
+    "checkpoints": {
+      "mean": {
+        "file": "mean.pt",
+        "sha256": "2558109266f2243fdda3dcbcebd3d3921e72fea576130b08990b58e2eb255e62",
+        "reload_max_delta": 0.0
+      },
+      "ridge": {
+        "file": "ridge.pt",
+        "sha256": "b3e511fddbc640d7f38a99b8ffa268ceb513ea20a049c63594987fdd65856a6e",
+        "reload_max_delta": 0.0
+      },
+      "mlp": {
+        "file": "mlp.pt",
+        "sha256": "db25450481423850de548e05e78485e815ad5728dedc644ae6d7e456ed17ff94",
+        "reload_max_delta": 0.0
+      }
+    }
+  },
+  "source_sha256": {
+    "src/data/acceptance.py": "aded48960f1f3f05cd7d88b023dc9378424e2e860d976f1aa20431c50a45ba7e",
+    "scripts/kaggle_train.py": "7be1b0acb9fa423ebf75ca1f493f897ab1ad8fc2006fa0318a43bc0f2b03d0f3",
+    "scripts/extract_embeddings.py": "44a76c2e7ae935b4698db1af6f2cf58768e932a2606c43baf2e6ebe1f6980039",
+    "scripts/train_regression.py": "e3d3f744e640201e0970f8ffffc40032bd9657d261b5c3dd7907ca8b914be236",
+    "scripts/download_dataset.py": "2c484e7614c56c7a34356f35ba212f3b66d54589f3587dd1bdce06df3a0208a2",
+    "requirements-train.txt": "0ebf8c625d56571d082b33f30ed33d1fcb24401a9dfa3b8b175a36ef77ff3927",
+    "configs/genai_bench_review.json": "825abbf7e357b9f17fe26fa2cdda6207f7b57bae677bbbf3ed1bfe59fdbee65f",
+    "notebooks/02_train.ipynb": "8e281551230101bd219d1f933b1ada234b50d2890a30fc633aecc8a813515043"
+  },
+  "remaining": [
+    "Named human review of the documented data decisions",
+    "Kaggle GPU execution on full dataset and artifact review",
+    "Actual checkpoint integration and release/holdout acceptance"
+  ]
+}

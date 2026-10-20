@@ -1,0 +1,85 @@
+{
+  "archive_sha256": "ea516029338033f3c3e732337a6c493ff3293325955787e4b8fc5f7bd65042cc",
+  "manifest_sha256": "4ed1e3c7909c81c239beaa2890f4adbcaef7545217e1d309a8b023e084182ca2",
+  "sources": [
+    {
+      "shard": "train-00000-of-00012.parquet",
+      "bytes": 404212507,
+      "sha256": "7dc64a313e493fa0d5bce6888c4fe408297cbd39a930cc99e35653963c88221d"
+    },
+    {
+      "shard": "train-00001-of-00012.parquet",
+      "bytes": 387297994,
+      "sha256": "b1a39973fe30088636b099d0d4f320c21755ed14eb8c06452a4aeb7362921400"
+    },
+    {
+      "shard": "train-00002-of-00012.parquet",
+      "bytes": 389695663,
+      "sha256": "1a15d2c9123ad31519b651c944e97b8de76449ed41659a265352f3f6310f8d7a"
+    },
+    {
+      "shard": "train-00003-of-00012.parquet",
+      "bytes": 407943818,
+      "sha256": "560782dff0ac7ffec4a8af9a5fff9ecaa626842740c676ddc634a94b70008037"
+    },
+    {
+      "shard": "train-00004-of-00012.parquet",
+      "bytes": 409498033,
+      "sha256": "796fcddab21fc53b3dd90e9031464dbcfce6ef36586d810556f85955af151722"
+    },
+    {
+      "shard": "train-00005-of-00012.parquet",
+      "bytes": 407530047,
+      "sha256": "f1a1dcd4d41ab3025737b01b4fc2e52459771449ba5042e0ab50a8f1cd48f992"
+    },
+    {
+      "shard": "train-00006-of-00012.parquet",
+      "bytes": 388802141,
+      "sha256": "06d3b4c5ed0207e2929c6a38de2446f0108c4dba675e2c131ace31ef8c0525f4"
+    },
+    {
+      "shard": "train-00007-of-00012.parquet",
+      "bytes": 397213458,
+      "sha256": "50cf042a7c494630200fcfc376c6ae70c83505282d01d80d0841b2fea63b0980"
+    },
+    {
+      "shard": "train-00008-of-00012.parquet",
+      "bytes": 415969741,
+      "sha256": "aff312018ab4560bbd04cc97aad8cb1d14fc35203c79fede97c544091e0595ab"
+    },
+    {
+      "shard": "train-00009-of-00012.parquet",
+      "bytes": 387829854,
+      "sha256": "9da45c6ed3e315a61ea341a11fbc8a69eac78f532a137c2077112c8165cedf36"
+    },
+    {
+      "shard": "train-00010-of-00012.parquet",
+      "bytes": 377483404,
+      "sha256": "584997aa32a6af8327052698826c60664a1c9cb18ce2c4a590a5bb34b0183df7"
+    },
+    {
+      "shard": "train-00011-of-00012.parquet",
+      "bytes": 386284363,
+      "sha256": "ca97e66cfc126741c666fbf74cb27b99e1eff38be5d0620aabf949498cf575b4"
+    }
+  ],
+  "split_pairs": {
+    "train": 6718,
+    "val": 1440,
+    "test": 1440
+  },
+  "valid_pairs": 9598,
+  "dataset_revision": "94e543b0801feade1419873335191de90b68d164",
+  "decisions": [
+    "Exclude the two invalid-rating pairs listed in G1_kaggle_full_qa_review.md; do not impute ratings.",
+    "Retain distinct puppy head/paw prompts in train.",
+    "Retain punctuation-equivalent desk prompts in their existing train split; do not resplit."
+  ],
+  "review_document": "reports/results/G1_kaggle_full_qa_review.md",
+  "member_sha256": {
+    "qa/manifest.jsonl": "4ed1e3c7909c81c239beaa2890f4adbcaef7545217e1d309a8b023e084182ca2",
+    "qa/qa.json": "d0a5e4af251d0a7da7fd8bbb7be03e4b8d447c5cb2bf5e4745bc6189fb8dbff3",
+    "result.json": "0dab72438a8533428704c92073db80f6cdc48b6427c403ce4d78f9f93a50a8d3",
+    "dataset.json": "6d1be83f17f1c859aca71e2634095ad292773c3a083b1b46bc32c976860121c5"
+  }
+}

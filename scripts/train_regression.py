@@ -1,4 +1,4 @@
-"""Development training CLI; no download or test-holdout evaluation."""
+"""Train heads on development or reviewed data; never evaluate test holdout."""
 
 import argparse
 import json
@@ -15,6 +15,7 @@ import torch
 from src.data.qa import sha256_file
 from src.models.regression_head import save_head, load_head
 from src.training.train_regression import train_from_embeddings
+from src.data.acceptance import validate_lock
 
 
 def main():
@@ -22,7 +23,9 @@ def main():
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--extraction", type=Path, required=True, help="G2 output directory")
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--development", action="store_true", required=True)
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--development", action="store_true")
+    mode.add_argument("--data-lock", type=Path)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--epochs", type=int, default=100)
     parser.add_argument("--patience", type=int, default=15)
@@ -41,6 +44,13 @@ def main():
             process = subprocess.run(command, cwd=root, capture_output=True, text=True)
             result[key] = process.stdout.strip() if process.returncode == 0 else None
         provenance = json.loads((args.extraction / "result.json").read_text(encoding="utf-8"))
+        if args.data_lock:
+            validate_lock(args.data_lock, args.manifest)
+            if (provenance.get("scope") != "reviewed_full_data_validation_only"
+                    or provenance.get("data_lock_sha256") != sha256_file(args.data_lock)):
+                raise ValueError("extraction did not use the approved data lock")
+            result.update(scope="reviewed_full_data_validation_only",
+                          data_lock_sha256=sha256_file(args.data_lock))
         result["manifest_sha256"] = sha256_file(args.manifest)
         result["embeddings_sha256"] = sha256_file(args.extraction / "embeddings.npz")
         if (provenance["status"] != "PASS" or result["manifest_sha256"] != provenance["manifest_sha256"]

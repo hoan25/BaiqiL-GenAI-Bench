@@ -12,10 +12,11 @@ def main():
     parser.add_argument("--allow-download", action="store_true", required=True)
     parser.add_argument("--destination", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--revision", help="Reuse an already reviewed immutable dataset revision")
     args = parser.parse_args()
     if args.output.exists():
         raise FileExistsError(args.output)
-    revision = HfApi().dataset_info("BaiqiL/GenAI-Bench").sha
+    revision = args.revision or HfApi().dataset_info("BaiqiL/GenAI-Bench").sha
     # Revision directory preserves any earlier dataset version.
     destination = args.destination / revision
     snapshot_download("BaiqiL/GenAI-Bench", repo_type="dataset", revision=revision,

@@ -1,0 +1,4 @@
+# Install torch from the matching official CPU/cu126 index first.
+-r requirements-g0.in
+-r requirements-data.in
+numpy==2.5.4

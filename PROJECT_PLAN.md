@@ -19,7 +19,7 @@ Tách **cổng phát triển local** và **cổng nghiệm thu thực nghiệm**
 | 5. Tích hợp Kaggle | Bootstrap sạch, QA tất cả 12 shard, khóa split, extract/train/validation | ENV-06 và DATA full phải đạt trước thực nghiệm chính thức; notebook chỉ gọi script, xuất log/config/checkpoint |
 | 6. G7 | Nhận artifact, tích hợp CPU thật, holdout và demo | Tất cả gate nghiệm thu bắt buộc đạt, review/UAT; G6 chỉ sau MVP |
 
-Nhiệm vụ bắt đầu: G1-local. Chưa tải toàn bộ dataset. Adapter nguồn thật phải kiểm schema thực tế trước khi nghiệm thu; contract chuẩn hóa không tự chứng minh tương thích Parquet.
+Trạng thái cập nhật 2026-10-21: G1–G5-local đã có bằng chứng trong nhật ký; full-data QA Kaggle đã đọc 12 shard/1.600 prompt, giữ 9.598 cặp. Bootstrap Kaggle mới sạch. Quyết định loại 2 cặp nhãn lỗi và giữ 2 cặp prompt gần trùng cùng train cần reviewer xác nhận trước tạo lock. Handoff extraction/training: `docs/KAGGLE_TRAINING.md`, `notebooks/02_train.ipynb`. Chưa có thực nghiệm full-data hoặc nghiệm thu toàn mốc; không chạy lại QA đã đạt nếu source/dataset không đổi.
 
 ## A. Phạm vi và định nghĩa thành công
 

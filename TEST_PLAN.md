@@ -4,11 +4,12 @@
 
 ## Điều chỉnh 2026-10-20: kiểm thử local trước
 
-- G0-local đã có bằng chứng môi trường/CPU; CUDA Kaggle cũng đã được kiểm chứng. ENV-06 bootstrap sạch còn chờ và được kiểm tra lúc tích hợp GPU, không chặn phát triển module local.
+- G0-local đã có bằng chứng môi trường/CPU; CUDA Kaggle cũng đã được kiểm chứng. Run QA `20261020T165712283760Z` đã bootstrap sạch trên Kaggle; môi trường training GPU mới vẫn kiểm tra riêng khi tích hợp, không suy ra PASS từ môi trường QA CPU.
 - G1-local kiểm contract chuẩn hóa bằng ảnh tổng hợp: mapping sáu model, nhãn, ảnh hỏng, nguồn trùng, split tái lập và chống rò rỉ. Chạy `python -m pytest tests/unit/test_data.py -q` và `python scripts/data_smoke.py --output reports/results/G1_fixture_smoke.json` (chọn tên output mới nếu đã tồn tại).
-- G1-local có integration test adapter Parquet và QA report tại `tests/integration/test_parquet_pipeline.py`; log `reports/results/G1_parquet_tests.txt`. DATA-01–12 trên 12 shard vẫn NOT RUN cho đến khi có dữ liệu thật; fixture chỉ kiểm logic, không xác nhận chất lượng hay số lượng dataset thực.
+- G1-local có integration test adapter Parquet và QA report tại `tests/integration/test_parquet_pipeline.py`; log `reports/results/G1_parquet_tests.txt`. Full-data QA ngày 2026-10-21 đã có artifact thật 12 shard/9.598 cặp hợp lệ; xem `reports/results/G1_kaggle_full_qa_review.md` cho bằng chứng và giới hạn. Review quyết định dữ liệu và lock còn chờ, không coi fixture hoặc artifact review là toàn bộ mốc DONE.
 - G2/G3 được kiểm thử bằng fixture sau khi contract dữ liệu local đạt; G4/G5 được phát triển theo contract với mock có nhãn. Không công bố chất lượng mô hình từ fixture.
 - Trước train chính thức: ENV-06 sạch, full-data QA, split khóa và provenance phải đạt. Trước release: toàn bộ exit gate bắt buộc, checkpoint thật, review và UAT vẫn phải đạt.
+- Gate tích hợp mới: `tests/unit/test_acceptance.py` kiểm reviewer/checksum/archive giải nén/split lock; `test_kaggle_train.py` kiểm dừng trước cài/tải khi thiếu review, ZIP khi lỗi và primary seed cố định; `tests/integration/test_experiment_gate.py` kiểm CLI chính thức từ chối lock chưa được duyệt. Kaggle runner kiểm dependency/GPU/tests rồi mới extract/train; không chạy holdout.
 
 ## 0. Chiến lược test và công cụ
 
