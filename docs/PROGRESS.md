@@ -239,6 +239,16 @@ Log cài: `reports/results/G0_torch_install.log`, `G0_dependencies_install.log` 
 - Bằng chứng tổng hợp/hash ZIP/source/logs: `reports/results/Kaggle_bootstrap_fix_validation.json`. Runs dùng working tree bản sửa trên base 52248a1; report ghi rõ base commit chưa chứa fix, kèm source hashes. `git diff --check` PASS.
 - **Kaggle bản sửa: NOT RUN; full-data QA: NOT RUN.** Nhiệm vụ chưa nghiệm thu đầu tiên: người dùng Run All notebook QA hiện có sau khi source được push, gửi ZIP mới; kiểm startup sạch và QA 12 shard, xử lý near-duplicate/rejections trước khóa split/extraction/train chính thức. Agent chưa tải dataset đầy đủ. Source/docs/evidence chuẩn bị commit/push về đúng origin được người dùng cho phép.
 
+## 2026-10-21 — Nhận full-data QA Kaggle thành công và sửa hiển thị tải ZIP
+
+- Đọc kế hoạch/test/nhật ký và AGENTS.md; repo source tại `7b621d1`. Có các ZIP/notebook người dùng mới lưu trong G0_notebook_local và G3_fixture_training; giữ nguyên, không stage chúng hoặc checkpoint fixture cũ.
+- Đọc `reports/results/G3_fixture_training/data-qa-20261020T165712283760Z.zip` và notebook kèm output bằng JSON/zipfile, không chạy code đính kèm. CRC PASS. Kaggle dùng đúng 7b621d1, working tree sạch; Python 3.13.15; bootstrap/dependencies/import/pip check đều PASS, không còn lỗi customization hook. **18 data tests PASS, 0.66 giây**.
+- Đọc đủ **12 shard / 1.600 prompt** revision `94e543b0801feade1419873335191de90b68d164`. Giữ **9.598 cặp**, loại 2 do rating không hợp lệ. Hai ứng viên prompt gần trùng đều ở train; normalized leakage 0. REVIEW_REQUIRED là chờ review dữ liệu, không phải lỗi thực thi.
+- Kiểm độc lập qua `.venv/Scripts/python.exe -X utf8 .cache/review_received_qa.py`: exit 0; CRC/hash manifest/ID/mapping/ratings/mean/std/counts và split đảo thứ tự seed 42 **PASS**. 0 nhóm ảnh trùng checksum. Train/val/test = 6.718/1.440/1.440 cặp. Không đọc lại raw dataset, chạy CLIP/training hoặc tính holdout metrics.
+- Biên bản `reports/results/G1_kaggle_full_qa_review.md` và JSON cùng tên lưu provenance/logs/kết quả audit. Đề xuất giữ loại hai nhãn lỗi; giữ prompt head/paw khác nghĩa và hai prompt chỉ khác dấu phẩy trong cùng train; giữ manifest hash `4ed1e3c7909c81c239beaa2890f4adbcaef7545217e1d309a8b023e084182ca2` làm ứng viên khóa. Không tự nhận đã có review chéo.
+- 404 được xác nhận từ HTML output: FileLink tạo href đường dẫn filesystem `/kaggle/working/...`. Sửa `notebooks/01_data_qa.ipynb` bỏ link đó, in tên/kích thước ZIP và tải qua Output / Files; cập nhật docs/KAGGLE_DATA_QA.md. Hai code cell compile **PASS**; không chạy lại pipeline đã đạt chỉ vì đổi hiển thị. UI Kaggle bản sửa NOT RUN.
+- **Tiếp theo:** review quyết định loại mẫu/near-duplicate, khóa manifest chính thức rồi tích hợp runner GPU extraction/training. Không cần người dùng chạy lại QA hiện có. Full G0/G1 còn review; chưa có kết quả training dữ liệu thật. Commit/push chỉ source/docs/biên bản, không ZIP/notebook output/manifest raw.
+
 ## Mẫu ghi cho nhóm công việc tiếp theo
 
 - Ngày / giai đoạn / nhiệm vụ:

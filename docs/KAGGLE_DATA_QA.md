@@ -7,7 +7,7 @@ Code dữ liệu, embeddings, training head và web đã được phát triển/
 3. Cell đầu lấy source từ GitHub. Cell sau gọi `scripts/kaggle_data.py`; không sửa logic Python trong notebook.
 4. Mặc định `DOWNLOAD_DATASET = True`: khi bạn chạy cell, script tải khoảng **4,76 GB** GenAI-Bench vào Kaggle, chốt revision và tái sử dụng cache theo revision. Nếu đã có **đủ 12 shard** trong Kaggle Input, đặt False và sửa `DATA_ROOT` đúng thư mục chứa các file đó.
 5. **Run All**. Không cần cài thư viện thủ công hoặc chạy 00b trước. Script tạo venv riêng, kiểm startup/pip/tests, QA dữ liệu và luôn đóng gói báo cáo kể cả lỗi. Không tải CLIP, không train model.
-6. Tải `data-qa-*.zip` từ `/kaggle/working` cùng notebook có output, lưu vào `reports/results/kaggle/` trên máy rồi báo đã lưu.
+6. Tải `data-qa-*.zip` bằng mục **Output / Files** của Kaggle từ `/kaggle/working` cùng notebook có output, lưu vào `reports/results/kaggle/` trên máy rồi báo đã lưu. Đường dẫn `/kaggle/working/...` là đường dẫn file, không phải URL trình duyệt. Nếu notebook cũ hiện link 404, tải trực tiếp từ Output; không cần chạy lại.
 
 ZIP gồm logs, versions, dataset revision (nếu tải bằng script), source checksum, candidate manifest và báo cáo QA/near-duplicate. Không kèm ảnh/Parquet/checkpoint. **REVIEW_REQUIRED là trạng thái dự kiến**, không đồng nghĩa lỗi thực thi: cần xem dữ liệu bị loại, count và prompt gần trùng trước khi khóa split. Nếu FAIL, gửi nguyên ZIP để xác định lỗi; không sửa nhiều cell thử ngẫu nhiên.
 
@@ -32,3 +32,7 @@ QA và G0 hiện dùng chung `scripts/clean_python.py`: chạy Python với `-I 
 Kiểm chứng bản sửa local: 21 regression test PASS (có tái hiện hook lỗi trong venv thật); G0 bootstrap-only PASS; QA trên venv mới PASS các bước cài/import/tests và xuất REVIEW_REQUIRED đúng cho fixture thiếu dữ liệu. Bằng chứng: `reports/results/Kaggle_bootstrap_fix_validation.json`. Chưa nghiệm thu bản sửa trên Kaggle.
 
 **Bước tiếp theo:** mở notebook hiện có, bật Internet và Run All từ cell đầu để lấy code mới trên `main`. Không cần upload lại notebook hoặc tự thêm cell cài pip/wrapt. Gửi ZIP mới để kiểm tra kết quả trên Kaggle và full-data QA.
+
+### Kết quả nhận ngày 2026-10-21
+
+Đã nhận ZIP run `20261020T165712283760Z`: bootstrap/import/pip check sạch trên Kaggle; 18 test PASS; đọc đủ 12 shard và 1.600 prompt. Giữ 9.598 cặp, loại 2 cặp nhãn lỗi; 2 cặp prompt gần trùng cùng train. Kiểm độc lập manifest/checksum/split PASS. Xem `reports/results/G1_kaggle_full_qa_review.md` để review trước khóa split; không cần chạy lại QA hiện có. Hướng dẫn Run All ở phần trước áp dụng khi chưa có kết quả hoặc cần chạy một phiên mới.
