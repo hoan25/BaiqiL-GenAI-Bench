@@ -293,6 +293,13 @@ Log cài: `reports/results/G0_torch_install.log`, `G0_dependencies_install.log` 
 - Source/docs/evidence hoàn tất để commit/push đúng origin; không stage ZIP/notebook người dùng, raw manifest/embeddings/checkpoint. Bảng tiến độ đầu trang đã sửa để phiên tiếp theo không quay lại bootstrap/training.
 - **Cần nhóm tiếp theo:** chạy demo theo docs/WEB_LOCAL.md, UAT luồng chấm/so sánh/chat/dashboard và cung cấp ≥20 ảnh mới kèm prompt để phân tích lỗi. Giữ MLP seed 42 theo chính sách đã chốt, chưa đánh giá test holdout hoặc gọi toàn bộ release DONE. Không cần thêm phiên Kaggle lúc này.
 
+## 2026-10-26 — Chuẩn bị bộ 20 ảnh ngoài dataset theo yêu cầu người dùng
+
+- Tạo `data/external20/PLAN.md`, `samples.csv` (20 kế hoạch duy nhất), `ratings.csv` (60 dòng để 3 người chấm độc lập), thư mục images/results và Git ignore ảnh/kết quả. Chưa tạo ảnh, chưa điền điểm hoặc metric.
+- Năm nhóm, mỗi nhóm bốn mẫu; 6 ca mismatch có chủ đích. Tách prompt tạo ảnh với prompt đánh giá; planned_relation không phải ground truth. Hướng dẫn tự tạo/tự chụp, ghi nguồn/giấy phép nếu lấy Internet, chấm trước khi xem dự đoán để tránh thiên lệch.
+- Kiểm CSV bằng csv.DictReader: **PASS**, 20 ID duy nhất, 6 mismatch, 60 score trống. Không chạy lại test/model vì chỉ thêm kế hoạch/template.
+- Cần người dùng thu thập ảnh vào `data/external20/images/`, điền nguồn và nhãn thật nếu có người chấm. Sau đó kiểm checksum/provenance, chạy model đã chốt và phân tích lỗi; không train trên bộ này hoặc coi 20 mẫu là holdout đại diện.
+
 ## Mẫu ghi cho nhóm công việc tiếp theo
 
 - Ngày / giai đoạn / nhiệm vụ:
