@@ -11,10 +11,12 @@ async function api(path, options = {}) {
 
 function Metrics({data}) {
   const fmt = value => value == null ? 'N/A' : Number(value).toFixed(3);
-  return <section className="metrics"><h3>Kết quả validation</h3><p>{data.scope === 'development_only_not_dataset_benchmark' ? 'Dữ liệu thử nghiệm — không phải benchmark GenAI-Bench.' : data.scope}</p>
-    <div className="table-scroll"><table><thead><tr><th>Mô hình</th><th>MAE</th><th>RMSE</th><th>Spearman</th></tr></thead><tbody>
-      {Object.entries(data.models || {}).map(([name, values]) => <tr key={name}><td>{name}</td><td>{fmt(values.mae)}</td><td>{fmt(values.rmse)}</td><td>{fmt(values.spearman)}</td></tr>)}
-    </tbody></table></div><small>Split: {data.split} · Giá trị không xác định hiển thị N/A.</small></section>;
+  const models = {...data.models, ...(data.baselines?.M1 ? {'CLIP cosine (M1)': data.baselines.M1} : {})};
+  const scope = data.scope === 'reviewed_full_data_validation_only' ? 'GenAI-Bench: validation, chưa đánh giá test holdout.' : data.scope === 'development_only_not_dataset_benchmark' ? 'Dữ liệu thử nghiệm — không phải benchmark GenAI-Bench.' : data.scope;
+  return <section className="metrics"><h3>Kết quả validation</h3><p>{scope}</p>
+    <div className="table-scroll"><table><thead><tr><th scope="col">Mô hình</th><th scope="col">MAE</th><th scope="col">RMSE</th><th scope="col">Spearman</th><th scope="col">Pairwise accuracy</th></tr></thead><tbody>
+      {Object.entries(models).map(([name, values]) => <tr key={name}><td>{name}</td><td>{fmt(values.mae)}</td><td>{fmt(values.rmse)}</td><td>{fmt(values.spearman)}</td><td>{fmt(values.pairwise?.accuracy)}</td></tr>)}
+    </tbody></table></div><small>Split: {data.split} · N/A: không xác định hoặc không áp dụng. Cosine M1 không phải điểm 1–5.</small></section>;
 }
 
 function App() {
@@ -69,7 +71,7 @@ function App() {
     <section className="intro"><p className="eyebrow">HIỂU SỰ PHÙ HỢP GIỮA LỜI VÀ ẢNH</p><h1>Từ mô tả đến<br/><em>mức độ phù hợp.</em></h1><p>Đưa vào một prompt và những hình ảnh bạn muốn đánh giá.<br/>Chấm điểm, so sánh và xem kết quả trong cùng một cuộc trò chuyện.</p>
     <div className="suggestions">{['Chấm một ảnh', 'So sánh nhiều ảnh', 'Xem biểu đồ', 'Cách sử dụng'].map((label, i) => <button key={label} disabled={busy} onClick={() => i === 2 ? submit('metrics') : i === 3 ? submit('auto', 'hướng dẫn') : document.getElementById('prompt').focus()}>{label} ↗</button>)}</div></section>
     {health && !health.model_ready && <p className="notice">Chưa có mô hình sẵn sàng. Bạn có thể chuẩn bị ảnh và prompt; hệ thống sẽ không tạo điểm giả.</p>}
-    {health?.model_ready && <p className="notice">Chế độ thử nghiệm local. Checkpoint chưa được nghiệm thu trên GenAI-Bench.</p>}
+    {health?.model_ready && <p className="notice">{health.scope === 'reviewed_full_data_validation_only' ? 'Mô hình đã kiểm tra trên validation GenAI-Bench. Chưa đánh giá test holdout hoặc nghiệm thu release.' : 'Chế độ thử nghiệm local. Checkpoint chưa được nghiệm thu trên GenAI-Bench.'}</p>}
     <section className="conversation" aria-live="polite">{messages.map((message, i) => <article key={i} className={`message ${message.role}`}>
       <span className="speaker">{message.role === 'user' ? 'BẠN' : 'PROMPTALIGN'}</span>
       {message.text && <p>{message.text}</p>}

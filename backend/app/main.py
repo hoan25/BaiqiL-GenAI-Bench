@@ -33,7 +33,7 @@ def create_app(predictor=None, store=None):
         return {"request_id": request.state.request_id, "type": kind, "data": data,
                 "model_version": current.version if current else None,
                 "elapsed_ms": round((time.perf_counter() - request.state.started) * 1000, 2),
-                "warnings": ["Mô hình thử nghiệm; chưa đánh giá trên GenAI-Bench."] if current else []}
+                "warnings": getattr(current, "warnings", ["Mô hình thử nghiệm."]) if current else []}
 
     @app.middleware("http")
     async def request_context(request, call_next):

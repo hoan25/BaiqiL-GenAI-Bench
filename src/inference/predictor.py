@@ -13,10 +13,23 @@ class Predictor:
         report = json.loads((training_path / "result.json").read_text(encoding="utf-8"))
         if report["status"] != "PASS":
             raise ValueError("training run did not pass")
-        # A production release gate will be implemented after full-data acceptance.
-        if not allow_development:
-            raise ValueError("no accepted production artifact yet")
-        self.scope = "development_only_not_dataset_benchmark"
+        if report.get("scope") == "reviewed_full_data_validation_only":
+            receipt = json.loads((training_path / "artifact_review.json").read_text(encoding="utf-8"))
+            if (receipt.get("status") != "VALIDATED_FOR_LOCAL_DEMO"
+                    or receipt.get("training_report_sha256") != sha256_file(training_path / "result.json")):
+                raise ValueError("artifact review is missing or stale")
+            model_root = Path(model_path).resolve()
+            for name, digest in receipt["model_files_sha256"].items():
+                file = (model_root / name).resolve()
+                if not file.is_relative_to(model_root) or sha256_file(file) != digest:
+                    raise ValueError("model/tokenizer differs from reviewed extraction")
+            self.scope = "reviewed_full_data_validation_only"
+            self.warnings = ["Mô hình đã kiểm tra trên validation GenAI-Bench; chưa đánh giá test holdout hoặc nghiệm thu release."]
+        else:
+            if not allow_development:
+                raise ValueError("no accepted production artifact yet")
+            self.scope = "development_only_not_dataset_benchmark"
+            self.warnings = ["Mô hình dùng checkpoint thử nghiệm; không phải benchmark GenAI-Bench."]
         selected = report["selected"]
         checkpoint = report["checkpoints"][selected]
         path = (training_path / checkpoint["file"]).resolve()
@@ -30,7 +43,8 @@ class Predictor:
             raise ValueError("head/encoder dimensions differ")
         self.version = f"{selected}-{checkpoint['sha256'][:12]}"
         self.metrics = {"scope": self.scope, "split": "val", "models": report["metrics"],
-                        "manifest_sha256": report["manifest_sha256"], "selected": selected}
+                        "manifest_sha256": report["manifest_sha256"], "selected": selected,
+                        "baselines": report.get("baselines", {})}
         self.lock = Lock()
 
     def predict(self, prompt, images):

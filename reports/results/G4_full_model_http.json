@@ -1,0 +1,145 @@
+{
+  "status": "PASS",
+  "scope": "reviewed_full_data_validation_only",
+  "test_scope": "real_encoder_head_synthetic_image_http_smoke_not_quality_evaluation",
+  "metrics": {
+    "request_id": "6c9485be05d94d70a480c87727b53087",
+    "type": "metrics",
+    "data": {
+      "scope": "reviewed_full_data_validation_only",
+      "split": "val",
+      "models": {
+        "mean": {
+          "count": 1440,
+          "mae": 0.9378546448217497,
+          "rmse": 1.0736531337396205,
+          "spearman": null,
+          "pairwise": {
+            "accuracy": 0.0,
+            "eligible_pairs": 1940,
+            "correct_pairs": 0,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 1940,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "ridge": {
+          "count": 1440,
+          "mae": 0.867709598524703,
+          "rmse": 1.083012353346799,
+          "spearman": 0.40408110263886754,
+          "pairwise": {
+            "accuracy": 0.6221649484536083,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1207,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 29,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "mlp": {
+          "count": 1440,
+          "mae": 0.7737772873706288,
+          "rmse": 0.9501541957864179,
+          "spearman": 0.4806188571300707,
+          "pairwise": {
+            "accuracy": 0.661340206185567,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1283,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 0,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        }
+      },
+      "manifest_sha256": "4ed1e3c7909c81c239beaa2890f4adbcaef7545217e1d309a8b023e084182ca2",
+      "selected": "mlp",
+      "baselines": {
+        "split": "val",
+        "train_count": 6718,
+        "val_count": 1440,
+        "M0": {
+          "train_mean": 3.3885084846680558,
+          "count": 1440,
+          "mae": 0.9378546304565952,
+          "rmse": 1.073653138166897,
+          "spearman": null,
+          "pairwise": {
+            "accuracy": 0.0,
+            "eligible_pairs": 1940,
+            "correct_pairs": 0,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 1940,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "M1": {
+          "spearman": 0.18434477532967122,
+          "pairwise": {
+            "accuracy": 0.5623711340206186,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1091,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 0,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          },
+          "score_type": "raw_cosine_not_1_to_5"
+        }
+      }
+    },
+    "model_version": "mlp-b8dba09efa0e",
+    "elapsed_ms": 0.69,
+    "warnings": [
+      "Mô hình đã kiểm tra trên validation GenAI-Bench; chưa đánh giá test holdout hoặc nghiệm thu release."
+    ]
+  },
+  "single": {
+    "request_id": "4da8edae5bb14c0ca47098dba47acb3c",
+    "type": "score",
+    "data": {
+      "items": [
+        {
+          "score": 3.2407941818237305,
+          "cosine": 0.28897902369499207,
+          "index": 0,
+          "rank": 1
+        }
+      ]
+    },
+    "model_version": "mlp-b8dba09efa0e",
+    "elapsed_ms": 217.22,
+    "warnings": [
+      "Mô hình đã kiểm tra trên validation GenAI-Bench; chưa đánh giá test holdout hoặc nghiệm thu release."
+    ]
+  },
+  "compare": {
+    "request_id": "06323612dc0c49d0b396eae77ddab716",
+    "type": "ranking",
+    "data": {
+      "items": [
+        {
+          "score": 3.2407944202423096,
+          "cosine": 0.28897902369499207,
+          "index": 0,
+          "rank": 1
+        },
+        {
+          "score": 3.2407944202423096,
+          "cosine": 0.28897902369499207,
+          "index": 1,
+          "rank": 1
+        }
+      ]
+    },
+    "model_version": "mlp-b8dba09efa0e",
+    "elapsed_ms": 299.2,
+    "warnings": [
+      "Mô hình đã kiểm tra trên validation GenAI-Bench; chưa đánh giá test holdout hoặc nghiệm thu release."
+    ]
+  }
+}

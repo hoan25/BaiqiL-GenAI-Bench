@@ -34,7 +34,7 @@ test('comparison keeps order', async ({page}) => {
 });
 test('dashboard displays undefined as NA', async ({page}) => {
   await page.getByRole('button', {name: 'Xem biểu đồ ↗'}).click();
-  await expect(page.getByRole('cell', {name: 'N/A'})).toBeVisible();
+  await expect(page.getByRole('cell', {name: 'N/A'}).first()).toBeVisible();
 });
 test('invalid file and missing model are clear', async ({page}) => {
   await page.getByLabel('Chọn ảnh').setInputFiles({name: 'bad.txt', mimeType: 'text/plain', buffer: Buffer.from('bad')});

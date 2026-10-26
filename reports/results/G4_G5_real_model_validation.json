@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-26",
+  "scope": "local_integration_not_release_or_holdout",
+  "model_version": "mlp-b8dba09efa0e",
+  "python_checks": {"command": ".venv/Scripts/python.exe -X utf8 -m pytest tests/unit/test_artifact_review.py tests/integration/test_api.py -q -p no:cacheprovider --basetemp .cache/pytest-real-artifact-20261026", "passed": 17, "seconds": 34.81, "exit_code": 0, "warnings": "1 AnyIO/Starlette deprecation"},
+  "frontend_build": {"command": "node node_modules/vite/bin/vite.js build", "status": "PASS", "seconds": 1.19, "exit_code": 0},
+  "real_browser": {"command": "node node_modules/playwright/cli.js test --config playwright.real.config.js", "passed": 1, "seconds": 17.9, "exit_code": 0, "api_mock": false, "flows": ["upload", "score", "compare", "validation dashboard"], "screenshot": "reports/figures/G5-real-model-20261026.png"},
+  "earlier_failures": ["Sandbox denied esbuild parent-directory access; elevated build passed", "E2E expected 2 comparison images but retained prior upload; corrected test removal step", "Table headers exposed as cells; added scope=col and E2E passed"],
+  "prior_evidence_retained": ["reports/results/G3_full_training_review.json", "reports/results/G4_full_model_http.json"],
+  "limits": ["Synthetic test image only; no quality claim on novel photographs", "Test holdout not evaluated", "Cross-review and human UAT still pending"]
+}

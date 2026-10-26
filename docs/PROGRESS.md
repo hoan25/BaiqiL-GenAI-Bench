@@ -2,13 +2,13 @@
 
 ## Checkpoint hiện tại
 
-- Ngày cập nhật: **2026-10-20**, múi giờ Asia/Saigon.
-- Mốc phát triển hiện tại: **G4/G5-local checks PASS**, sau G3-local PASS. Các mốc toàn phần vẫn chưa nghiệm thu khi chưa có dữ liệu/checkpoint thật và review.
-- Nhiệm vụ cần người dùng tiếp theo: **gửi data-qa-20261020T060426867085Z.zip hoặc nội dung bootstrap_pip.log** từ lần Kaggle lỗi. Notebook người dùng gửi xác nhận đúng commit 76276cd nhưng dừng bootstrap_pip; output không có lỗi gốc. Đã sửa runner hiện log lỗi trực tiếp (6 tests PASS), chưa tuyên bố đã sửa nguyên nhân bootstrap. Chưa tải dataset/chạy full-data QA.
+- Ngày cập nhật: **2026-10-26**, múi giờ Asia/Saigon.
+- Đã nhận và kiểm training Kaggle thật: **9.598 cặp, 3 seed PASS**, CPU replay 9 head PASS; MLP seed 42 được chọn, validation MAE 0,773777. Dữ liệu và quyết định loại/giữ đã được người dùng xác nhận; xem reports/DATA_DECISIONS.md.
+- G4/G5 đã tích hợp checkpoint thật: smoke HTTP, 17 test liên quan và browser E2E PASS; benchmark CPU batch 1/6 và concurrency 5 PASS. Không cần chạy lại QA/training Kaggle. Tiếp theo cần nhóm UAT và ≥20 ảnh mới; peak RAM/holdout/release chưa nghiệm thu.
 - **ENV-01/02/04/05 PASS local**. `.venv-repro` CPython 3.13.5 Windows x64 tái tạo đúng 31 package; torch 2.8.0+cpu, transformers 4.57.6, huggingface-hub 0.36.0, pytest 8.4.2; import CLIP và pip check đạt. **10 pytest PASS**, CPU smoke và auto fallback PASS.
 - Luồng mới: VS Code → GitHub `hoan25/BaiqiL-GenAI-Bench` → Kaggle → artifact về máy. Notebook clone GitHub và xuất `g0-<thời_gian>.zip`; không dùng bundle upload trong luồng chính.
 - Người dùng đã gửi ZIP và notebook Kaggle chạy commit `f48f135`: 13 test PASS, CPU/CUDA PASS, đủ checksum. Bản sửa bootstrap có 16 test local PASS và phép thử venv thật PASS. ENV-06 được hoãn đến tích hợp GPU; hiện không yêu cầu người dùng chạy 00b.
-- Chưa có mô hình huấn luyện/API/UI được nghiệm thu. Không dùng fixture để công bố chất lượng thực nghiệm. Các mục nhật ký cũ bên dưới giữ nguyên để truy vết; checkpoint này thay thế chỉ dẫn tiếp tục cũ.
+- Checkpoint thật local: `.cache/reviewed-training-20261020T174855207187Z/training-seed42`. Model/hash/tokenizer và receipt được kiểm khi load. Các mục nhật ký cũ bên dưới giữ nguyên để truy vết; checkpoint này thay thế chỉ dẫn tiếp tục cũ.
 
 ## Quy tắc khôi phục sau hết quota / phiên mới
 
@@ -22,12 +22,12 @@
 
 | Mốc | Trạng thái | Bằng chứng / phần còn thiếu |
 |---|---|---|
-| G0 | LOCAL READY; nghiệm thu toàn mốc còn chờ | Giữ CPU/CUDA PASS; ENV-06 và review chuyển sang tích hợp GPU |
-| G1 | LOCAL CHECKS PASS; full-data NOT RUN | Adapter/QA/CLI có integration test; toàn suite 34 PASS; còn kiểm chứng nguồn thật, khóa split và review |
-| G2 | LOCAL CHECKS PASS; full-data NOT RUN | 13 test mới PASS; CLIP encoder CPU/batch/frozen PASS; CLI 18 cặp tổng hợp PASS; thiếu review và thực nghiệm thật |
-| G3 | LOCAL CHECKS PASS; full-data NOT RUN | 10 test PASS; Ridge/MLP, early stopping, scaler train-only và save/load đã chạy; checkpoint fixture không dùng làm model sản phẩm |
-| G4 | LOCAL CHECKS PASS; full acceptance pending | API tests và HTTP CLIP thật + head fixture PASS; chưa có checkpoint thực nghiệm/review |
-| G5 | LOCAL CHECKS PASS; full acceptance pending | React build và 10 E2E mock desktop/mobile PASS; chưa full-stack E2E với checkpoint thật/UAT |
+| G0 | LOCAL/KAGGLE execution PASS; review toàn mốc còn chờ | Bootstrap sạch, GPU T4, pipeline training 30 test PASS |
+| G1 | FULL-DATA checks PASS; quyết định dữ liệu đã xác nhận | 12 shard/1.600 prompt, 9.598 cặp; lock reviewer hoan; giải trình trong DATA_DECISIONS.md |
+| G2 | FULL-DATA extraction PASS | 9.598×512 vectors, frozen fingerprint; baseline validation có số liệu thật |
+| G3 | FULL-DATA training/CPU replay PASS | 3 seed, 9 head, scaler train-only; chọn MLP seed 42; holdout chưa đánh giá |
+| G4 | REAL MODEL HTTP PASS; full acceptance pending | Chấm/so sánh/metrics qua CLIP + MLP thật; còn concurrency/performance/UAT |
+| G5 | REAL MODEL E2E PASS; full acceptance pending | Browser upload/score/compare/dashboard với checkpoint thật PASS; còn UAT và ảnh ngoài dataset |
 | G6 | NOT RUN | Optional; chỉ sau MVP |
 | G7 | NOT RUN | Chưa đủ điều kiện release |
 
@@ -268,6 +268,30 @@ Log cài: `reports/results/G0_torch_install.log`, `G0_dependencies_install.log` 
 - Cập nhật trạng thái đầu PROJECT_PLAN.md/TEST_PLAN.md và hướng dẫn `docs/KAGGLE_TRAINING.md`; `notebooks/02_train.ipynb` dành cho GPU. Các source/bằng chứng chuẩn bị commit/push về origin đã cho phép; không stage artifact người dùng, NPZ hoặc checkpoint.
 - **Cần người dùng tiếp theo:** review ba quyết định cụ thể ở `G1_kaggle_full_qa_review.md`; nếu đồng ý điền REVIEWER và ACCEPT_DATA_REVIEW=True trong notebook mới, bật Internet/GPU, cung cấp QA ZIP/thư mục và Run All. Tải `training-*.zip` về để kiểm checkpoint/metrics và tích hợp web. Cần xác nhận này vì PROJECT_PLAN.md yêu cầu review trước khóa split/thực nghiệm; không tự nhận agent đã được người khác review.
 - **NOT RUN:** runner mới trên Kaggle GPU, full-data extraction/training, acceptance checkpoint thật/release/holdout. G0/G1 toàn mốc không tự chuyển DONE; QA thành công đã giữ nguyên, không yêu cầu chạy lại.
+
+## 2026-10-26 — Khôi phục phần review training và tích hợp model thật
+
+- Repo base `2b48cca`; phiên trước để lại source review_training/predictor/API/UI và hai bằng chứng chưa commit. Đã đối chiếu file thực, đọc kế hoạch/test/nhật ký. Người dùng đã đồng ý quyết định dữ liệu; không hỏi lại và không chạy lại QA/training.
+- `reports/DATA_DECISIONS.md` ghi rõ lý do loại 2 nhãn sai, giữ head/paw khác nghĩa và dấu phẩy cùng train; có hạn chế tăng trọng số nội dung trùng, không tự sửa nhãn, không tuyên bố loại hết tương đồng ngữ nghĩa.
+- ZIP training thật PASS trên Tesla T4, 30 pipeline tests PASS; source `2b48cca`. `G3_full_training_review.json` chứng minh CPU replay 9 head, hash/scaler/metrics/early stopping PASS. MLP seed 42 MAE 0,773777; 3-seed MAE mean±population std 0,771642±0,002564. Không chọn lại seed theo điểm; holdout NOT EVALUATED.
+- Artifact local tại `.cache/reviewed-training-20261020T174855207187Z`. `G4_full_model_http.json` phiên trước đã PASS qua chấm/so sánh/metrics thật; không chạy lại smoke giống hệt khi source không đổi.
+- Hoàn thiện receipt cho loader, cảnh báo đúng scope validation, dashboard thêm M1 cosine và pairwise. `pytest tests/unit/test_artifact_review.py tests/integration/test_api.py -q -p no:cacheprovider --basetemp .cache/pytest-real-artifact-20261026`: **17 PASS, 34.81 giây**, 1 deprecation warning AnyIO/Starlette.
+- Build frontend trong sandbox FAIL do esbuild không được đọc thư mục cha; chạy ngoài sandbox **PASS**, 1.45 giây; không thay môi trường. Thêm `frontend/playwright.real.config.js` và `tests-real/model.spec.js`, dùng backend/CLIP/head thật, offline HF, không mock API.
+- E2E lần đầu FAIL do test quên xóa ảnh cũ trước khi chọn 2 ảnh mới (UI cộng dồn đúng, nhận 4 kết quả lịch sử thay vì 3). Đã sửa test thao tác xóa, đang chạy lại tại checkpoint này; chưa ghi PASS trước kết quả.
+- Đã cập nhật checkpoint đầu trang, kế hoạch và hướng dẫn docs/WEB_LOCAL.md. Tiếp theo: chốt E2E thật, commit/push source/docs/evidence; còn hiệu năng/concurrency, ảnh mới ngoài dataset, UAT và holdout sau chốt release.
+
+## 2026-10-26 — E2E thật PASS, tiếp tục kiểm hiệu năng local
+
+- E2E lần hai phát hiện header bảng được accessibility tree nhận là cell; bổ sung `scope=col`. E2E lần ba **1 PASS, 17.9 giây** (test 1.9 giây); build cuối **PASS, 1.19 giây**. Không mock API; server tự dừng sau test.
+- Bằng chứng `reports/results/G4_G5_real_model_validation.json`; screenshot `reports/figures/G5-real-model-20261026.png` đã xem, hiển thị điểm model thật, các metrics M0/M1/Ridge/MLP và cảnh báo chưa test holdout. Synthetic ảnh đỏ chỉ là kiểm luồng, không đánh giá chất lượng ngoài dataset.
+- Cập nhật `docs/WEB_LOCAL.md` lệnh chạy model thật không cần development override. Thêm benchmark HTTP in-process với model CPU thật: batch 1/6 mỗi loại 20 request sau warmup, 5 request đồng thời; đang chạy, chưa ghi PASS trước kết quả. Peak RAM chưa đo.
+- Tiếp theo cần UAT và tối thiểu 20 ảnh mới ngoài dataset do nhóm lựa chọn; không đánh giá holdout trước chốt model/release. Chưa tự chuyển toàn bộ mốc thành DONE.
+
+## 2026-10-26 — Checkpoint bàn giao demo local
+
+- `scripts/benchmark_local_api.py` chạy **PASS**, exit 0; bằng chứng `reports/results/G7_cpu_benchmark_20261026.json`. 20 request sau 1 warmup cho từng batch; p95 batch 1 = khoảng 242,5 ms, batch 6 = khoảng 967,9 ms. 5 request đồng thời: score delta <1e-5 (chi tiết trong JSON). Đây là ảnh tổng hợp 224×224, HTTP in-process, CPU local với OMP/MKL 4 threads; không coi là network SLA hoặc chất lượng ảnh thật. Peak RAM NOT MEASURED.
+- Source/docs/evidence hoàn tất để commit/push đúng origin; không stage ZIP/notebook người dùng, raw manifest/embeddings/checkpoint. Bảng tiến độ đầu trang đã sửa để phiên tiếp theo không quay lại bootstrap/training.
+- **Cần nhóm tiếp theo:** chạy demo theo docs/WEB_LOCAL.md, UAT luồng chấm/so sánh/chat/dashboard và cung cấp ≥20 ảnh mới kèm prompt để phân tích lỗi. Giữ MLP seed 42 theo chính sách đã chốt, chưa đánh giá test holdout hoặc gọi toàn bộ release DONE. Không cần thêm phiên Kaggle lúc này.
 
 ## Mẫu ghi cho nhóm công việc tiếp theo
 

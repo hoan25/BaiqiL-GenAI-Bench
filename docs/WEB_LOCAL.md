@@ -18,7 +18,23 @@ npm.cmd run dev
 
 Mở `http://127.0.0.1:5173`. Vite chuyển `/api` về backend cổng 8000. Health báo chưa có model; chấm điểm/metrics trả 503 có hướng dẫn. Giao diện không tự sinh điểm. Không cần Kaggle đang chạy để mở web.
 
-## Smoke với checkpoint tổng hợp (chỉ development)
+## Chạy checkpoint thật đã kiểm tra
+
+Artifact hiện có trên máy này, không cần Kaggle đang mở. Tại thư mục gốc:
+
+```powershell
+$env:PROMPTALIGN_CLIP = '.cache/models/clip-vit-base-patch32/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268'
+$env:PROMPTALIGN_TRAINING = '.cache/reviewed-training-20261020T174855207187Z/training-seed42'
+$env:PROMPTALIGN_ALLOW_DEVELOPMENT = '0'
+$env:HF_HUB_OFFLINE = '1'
+.\.venv\Scripts\python.exe -X utf8 -m uvicorn backend.app.main:configured_app --factory --host 127.0.0.1 --port 8000
+```
+
+Terminal thứ hai chạy `cd frontend` rồi `npm.cmd run dev`; mở http://127.0.0.1:5173. Dashboard hiển thị số liệu validation thật, gồm M1 cosine và pairwise accuracy. N/A của MAE/RMSE cosine không phải lỗi. Chưa đánh giá test holdout/release.
+
+Máy mới cần nhận ZIP training và CLIP đúng revision, rồi chạy `scripts/review_training.py --archive <ZIP> --output <thư_mục_mới> --report <JSON_mới>` trước khi trỏ PROMPTALIGN_TRAINING vào `training-seed42`. Receipt được tạo sau khi kiểm checkpoint và tính lại validation trên CPU; không tự viết receipt bỏ qua kiểm tra.
+
+## Checkpoint tổng hợp (chỉ development)
 
 Trước khi mở backend, có thể đặt:
 
@@ -40,7 +56,7 @@ Model loader kiểm checksum head, fingerprint CLIP, kích thước feature; ch�
 
 Ảnh được kiểm bytes, định dạng JPG/PNG/WebP, 10 MB và 20 triệu pixel; EXIF orientation được áp dụng, filename không dùng làm đường dẫn. Body giới hạn 61 MB kể cả chunked. Dữ liệu phiên giữ trong RAM, tối đa 12 ảnh/phiên, tổng bytes nén 128 MB, 50 phiên; TTL 30 phút, dọn khi có truy cập. Restart xóa phiên. Chỉ chạy một worker local; chưa thiết kế cho public multiuser deployment.
 
-So sánh giữ thứ tự ảnh, dùng dense rank, điểm bằng nhau cùng hạng. Lỗi có request ID và thông báo an toàn, không trả traceback. Metrics đọc từ report checkpoint và ghi scope development; `null` hiển thị N/A.
+So sánh giữ thứ tự ảnh, dùng dense rank, điểm bằng nhau cùng hạng. Lỗi có request ID và thông báo an toàn, không trả traceback. Metrics đọc từ report checkpoint, ghi đúng phạm vi fixture hoặc validation thật; `null` hiển thị N/A. Smoke CLI với checkpoint fixture cần thêm `--allow-development`.
 
 ## Kiểm thử
 
@@ -53,6 +69,8 @@ npm.cmd run test:e2e
 npm.cmd run build
 ```
 
-E2E dùng API mock có nhãn `test_fixture` trong test, không bật mock trong app thật. Kiểm chấm một ảnh, nhiều ảnh, dashboard N/A, lỗi file/503 và layout desktop/mobile. API integration dùng predictor giả; smoke HTTP riêng dùng encoder thật + checkpoint tổng hợp. Toàn mốc G4/G5 còn chờ tích hợp artifact đã nghiệm thu, E2E với backend/model thật và review/UAT.
+Suite mặc định dùng API mock có nhãn `test_fixture`, không bật mock trong app thật. Suite `node node_modules/playwright/cli.js test --config playwright.real.config.js` chạy backend và CLIP/MLP thật từ artifact local, không mock API; đã PASS ngày 2026-10-26. Config real hiện dành cho Windows và đường dẫn artifact ghi trên. UAT và review toàn mốc vẫn còn chờ.
+
+Benchmark local: `reports/results/G7_cpu_benchmark_20261026.json`, 20 request sau warmup mỗi batch, ảnh đỏ tổng hợp 224×224; p95 khoảng 243 ms (1 ảnh), 968 ms (6 ảnh), 5 request đồng thời ổn định. Đây là HTTP in-process, không gồm độ trễ mạng và không thay cho đánh giá ảnh thật; peak RAM chưa đo.
 
 Tham chiếu triển khai: [FastAPI upload files](https://fastapi.tiangolo.com/tutorial/request-files/), [FastAPI testing](https://fastapi.tiangolo.com/tutorial/testing/).
