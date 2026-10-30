@@ -1,0 +1,280 @@
+{
+  "protocol": {
+    "weights": [
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333
+    ],
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "fractions": [
+      0.1,
+      0.25,
+      0.5
+    ],
+    "scope": "post_holdout_development",
+    "gate": {
+      "validation_mae_max_each_seed": 0.80377728737,
+      "external20_seen_mae_max_each_seed": 1.165216147104,
+      "all_three_known_ordering_checks": true
+    },
+    "note": "Individual seed gate remains separate; ensemble is a new candidate, no independent test"
+  },
+  "diagnostics_sha256": "25b5666c55cdf1d2f4f6aa4a7cb0ede9e39c9549a503c7314cff11de76b79fce",
+  "results": {
+    "0.1": {
+      "validation": {
+        "count": 1440,
+        "mae": 0.7608443961651236,
+        "rmse": 0.9426388173305807,
+        "spearman": 0.5090157260972379,
+        "pairwise": {
+          "accuracy": 0.6592783505154639,
+          "eligible_pairs": 1940,
+          "correct_pairs": 1279,
+          "excluded_label_ties": 1660,
+          "prediction_ties": 0,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        }
+      },
+      "external20_seen": {
+        "count": 20,
+        "mae": 1.1753992100556692,
+        "rmse": 1.3167235852961827,
+        "spearman": 0.4125229094859101
+      },
+      "diagnostic_scores": [
+        4.35023848215739,
+        2.292975743611654,
+        1.2822626034418743,
+        3.0514190991719565,
+        1.2344555457433064,
+        1.5760820706685383,
+        1.189359426498413,
+        1.1494630177815754
+      ],
+      "external20_scores": [
+        4.35023848215739,
+        4.566355228424072,
+        4.491088072458903,
+        4.136488914489746,
+        3.914923826853434,
+        3.9603989124298096,
+        2.739776293436686,
+        4.072777032852173,
+        3.024005651473999,
+        3.941051801045736,
+        3.3230604330698648,
+        3.6799965699513755,
+        4.113006830215454,
+        3.00583545366923,
+        3.993459383646647,
+        2.763210932413737,
+        4.780946413675944,
+        4.1658322016398115,
+        4.0324318408966064,
+        1.5760822693506877
+      ],
+      "ordering_checks": [
+        true,
+        true,
+        true
+      ],
+      "provisional_development_gate": false,
+      "checkpoints": [
+        {
+          "path": ".cache/synthetic-negatives-20261029/negative0.1-seed42/mlp.pt",
+          "sha256": "47ac4d897d157c9cbd641213a7f9752d6892a4da7cb0032ad0c7ea129581d3af",
+          "batch_single_delta": 4.76837158203125e-07
+        },
+        {
+          "path": ".cache/synthetic-negatives-20261029/negative0.1-seed43/mlp.pt",
+          "sha256": "64ab387a7820302e5fb3ddff72bbffab474fe26402680638a55f77ff0a8f62f1",
+          "batch_single_delta": 2.384185791015625e-07
+        },
+        {
+          "path": ".cache/synthetic-negatives-20261029/negative0.1-seed44/mlp.pt",
+          "sha256": "72e26b902941805e5290472f376545215bf881176a4a9f443838f3b780ce0bd1",
+          "batch_single_delta": 4.76837158203125e-07
+        }
+      ],
+      "member_external20_mae": [
+        1.1932103594144186,
+        1.1574282666047415,
+        1.1755590041478476
+      ]
+    },
+    "0.25": {
+      "validation": {
+        "count": 1440,
+        "mae": 0.7580458408980459,
+        "rmse": 0.9424541938121223,
+        "spearman": 0.5106090393202074,
+        "pairwise": {
+          "accuracy": 0.6634020618556701,
+          "eligible_pairs": 1940,
+          "correct_pairs": 1287,
+          "excluded_label_ties": 1660,
+          "prediction_ties": 0,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        }
+      },
+      "external20_seen": {
+        "count": 20,
+        "mae": 1.1458331406116486,
+        "rmse": 1.298907709036222,
+        "spearman": 0.3205414499383761
+      },
+      "diagnostic_scores": [
+        4.344304243723552,
+        1.8018967310587566,
+        1.1377122799555461,
+        3.076129992802938,
+        1.0844254891077678,
+        1.322497049967448,
+        1.0873723824818928,
+        1.0437978506088257
+      ],
+      "external20_scores": [
+        4.344304243723552,
+        4.568402449289958,
+        4.512371857961019,
+        4.203966776529948,
+        3.8971826235453286,
+        4.046846230824788,
+        2.9512368043263755,
+        4.1273109912872314,
+        2.949881394704183,
+        4.002712885538737,
+        3.3056770960489907,
+        3.42171573638916,
+        4.185988267262776,
+        2.98067307472229,
+        3.907567580540975,
+        2.7962025801340737,
+        4.7813700040181475,
+        4.2563856442769366,
+        3.991222620010376,
+        1.3224971691767375
+      ],
+      "ordering_checks": [
+        true,
+        true,
+        true
+      ],
+      "provisional_development_gate": true,
+      "checkpoints": [
+        {
+          "path": ".cache/synthetic-negatives-20261029/negative0.25-seed42/mlp.pt",
+          "sha256": "ad83b173316ab3ebb3bd9be326fc891f5edb1d278df1489e2f837cfa30079ff4",
+          "batch_single_delta": 2.384185791015625e-07
+        },
+        {
+          "path": ".cache/synthetic-negatives-20261029/negative0.25-seed43/mlp.pt",
+          "sha256": "52b7db3bef4b893853bc78f09dd86c1a49952498eda29867fd06900b54fffc2c",
+          "batch_single_delta": 4.76837158203125e-07
+        },
+        {
+          "path": ".cache/synthetic-negatives-20261029/negative0.25-seed44/mlp.pt",
+          "sha256": "19d4daff58e6cf467f74aa74018e12cfcc1df929705d76cbdf883519fdfb9167",
+          "batch_single_delta": 2.384185791015625e-07
+        }
+      ],
+      "member_external20_mae": [
+        1.1241734166940054,
+        1.1263399382432302,
+        1.1869860668977101
+      ]
+    },
+    "0.5": {
+      "validation": {
+        "count": 1440,
+        "mae": 0.7551063998153916,
+        "rmse": 0.9389643612478124,
+        "spearman": 0.5092189987803701,
+        "pairwise": {
+          "accuracy": 0.6706185567010309,
+          "eligible_pairs": 1940,
+          "correct_pairs": 1301,
+          "excluded_label_ties": 1660,
+          "prediction_ties": 0,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        }
+      },
+      "external20_seen": {
+        "count": 20,
+        "mae": 1.2312664171059926,
+        "rmse": 1.364454743238084,
+        "spearman": 0.1988286095269927
+      },
+      "diagnostic_scores": [
+        4.260763963063558,
+        2.261706988016764,
+        1.0893598397572835,
+        4.0612912972768145,
+        1.0634467204411824,
+        1.612417737642924,
+        1.0420628388722737,
+        1.0301876068115234
+      ],
+      "external20_scores": [
+        4.260763963063558,
+        4.578146139780681,
+        4.414522488911946,
+        4.1064453125,
+        3.8553318977355957,
+        3.86498228708903,
+        3.0148189862569175,
+        4.511691570281982,
+        2.852681557337443,
+        4.17087189356486,
+        3.2843946615854898,
+        3.822199503580729,
+        4.24259885152181,
+        3.256178538004557,
+        3.9269193013509116,
+        3.148054758707682,
+        4.7511420249938965,
+        4.097893079121907,
+        3.745966831843058,
+        1.612417737642924
+      ],
+      "ordering_checks": [
+        true,
+        true,
+        true
+      ],
+      "provisional_development_gate": false,
+      "checkpoints": [
+        {
+          "path": ".cache/synthetic-negatives-20261029/negative0.5-seed42/mlp.pt",
+          "sha256": "0a39316548de39021d0cad68b6e7b9aaf17324c6f48d7858a3b0d59d620b462e",
+          "batch_single_delta": 4.76837158203125e-07
+        },
+        {
+          "path": ".cache/synthetic-negatives-20261029/negative0.5-seed43/mlp.pt",
+          "sha256": "f0763b34b5e8961d761cb6f2058c910ddccdd47fb3cebcf2682dae118f593cb3",
+          "batch_single_delta": 4.76837158203125e-07
+        },
+        {
+          "path": ".cache/synthetic-negatives-20261029/negative0.5-seed44/mlp.pt",
+          "sha256": "aeeab5ed6b3996b19176dbd8d4fa71432df9f18bfcfbd72b49c0cb104df6e83e",
+          "batch_single_delta": 2.384185791015625e-07
+        }
+      ],
+      "member_external20_mae": [
+        1.2168486316998801,
+        1.2407172699769338,
+        1.2362333496411642
+      ]
+    }
+  },
+  "holdout": "NOT EVALUATED",
+  "release": "NOT ACCEPTED"
+}

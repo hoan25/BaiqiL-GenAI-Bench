@@ -1,0 +1,245 @@
+{
+  "review_date": "2026-10-21",
+  "source_archive": "reports/results/G3_fixture_training/data-qa-20261020T165712283760Z.zip",
+  "archive_sha256": "ea516029338033f3c3e732337a6c493ff3293325955787e4b8fc5f7bd65042cc",
+  "archive_crc": "PASS",
+  "execution": {
+    "status": "REVIEW_REQUIRED",
+    "scope": "data_qa_only_no_training",
+    "started_utc": "20261020T165712283760Z",
+    "commands": [
+      {
+        "name": "create_venv",
+        "returncode": 0
+      },
+      {
+        "name": "bootstrap_pip",
+        "returncode": 0
+      },
+      {
+        "name": "startup",
+        "returncode": 0
+      },
+      {
+        "name": "dependencies",
+        "returncode": 0
+      },
+      {
+        "name": "pip_check",
+        "returncode": 0
+      },
+      {
+        "name": "dependency_imports",
+        "returncode": 0
+      },
+      {
+        "name": "versions",
+        "returncode": 0
+      },
+      {
+        "name": "data_tests",
+        "returncode": 0
+      },
+      {
+        "name": "download_dataset",
+        "returncode": 0
+      },
+      {
+        "name": "prepare_data",
+        "returncode": 2
+      }
+    ],
+    "git_commit": "7b621d131c90e0d0055398096955f188ff8bbd95",
+    "qa_status": "REVIEW_REQUIRED"
+  },
+  "dataset": {
+    "dataset": "BaiqiL/GenAI-Bench",
+    "revision": "94e543b0801feade1419873335191de90b68d164",
+    "data_root": "/kaggle/working/.cache/genai-bench/94e543b0801feade1419873335191de90b68d164/data"
+  },
+  "qa": {
+    "status": "REVIEW_REQUIRED",
+    "scope": "local_files_qa_not_full_acceptance",
+    "seed": 42,
+    "ratios": [
+      0.7,
+      0.15,
+      0.15
+    ],
+    "expected_shards": 12,
+    "expected_rows": 1600,
+    "provenance": {
+      "git_commit": "7b621d131c90e0d0055398096955f188ff8bbd95",
+      "working_tree_dirty": false,
+      "python": "3.13.15",
+      "pyarrow": "21.0.0",
+      "pillow": "12.0.0"
+    },
+    "sources": [
+      {
+        "shard": "train-00000-of-00012.parquet",
+        "bytes": 404212507,
+        "sha256": "7dc64a313e493fa0d5bce6888c4fe408297cbd39a930cc99e35653963c88221d"
+      },
+      {
+        "shard": "train-00001-of-00012.parquet",
+        "bytes": 387297994,
+        "sha256": "b1a39973fe30088636b099d0d4f320c21755ed14eb8c06452a4aeb7362921400"
+      },
+      {
+        "shard": "train-00002-of-00012.parquet",
+        "bytes": 389695663,
+        "sha256": "1a15d2c9123ad31519b651c944e97b8de76449ed41659a265352f3f6310f8d7a"
+      },
+      {
+        "shard": "train-00003-of-00012.parquet",
+        "bytes": 407943818,
+        "sha256": "560782dff0ac7ffec4a8af9a5fff9ecaa626842740c676ddc634a94b70008037"
+      },
+      {
+        "shard": "train-00004-of-00012.parquet",
+        "bytes": 409498033,
+        "sha256": "796fcddab21fc53b3dd90e9031464dbcfce6ef36586d810556f85955af151722"
+      },
+      {
+        "shard": "train-00005-of-00012.parquet",
+        "bytes": 407530047,
+        "sha256": "f1a1dcd4d41ab3025737b01b4fc2e52459771449ba5042e0ab50a8f1cd48f992"
+      },
+      {
+        "shard": "train-00006-of-00012.parquet",
+        "bytes": 388802141,
+        "sha256": "06d3b4c5ed0207e2929c6a38de2446f0108c4dba675e2c131ace31ef8c0525f4"
+      },
+      {
+        "shard": "train-00007-of-00012.parquet",
+        "bytes": 397213458,
+        "sha256": "50cf042a7c494630200fcfc376c6ae70c83505282d01d80d0841b2fea63b0980"
+      },
+      {
+        "shard": "train-00008-of-00012.parquet",
+        "bytes": 415969741,
+        "sha256": "aff312018ab4560bbd04cc97aad8cb1d14fc35203c79fede97c544091e0595ab"
+      },
+      {
+        "shard": "train-00009-of-00012.parquet",
+        "bytes": 387829854,
+        "sha256": "9da45c6ed3e315a61ea341a11fbc8a69eac78f532a137c2077112c8165cedf36"
+      },
+      {
+        "shard": "train-00010-of-00012.parquet",
+        "bytes": 377483404,
+        "sha256": "584997aa32a6af8327052698826c60664a1c9cb18ce2c4a590a5bb34b0183df7"
+      },
+      {
+        "shard": "train-00011-of-00012.parquet",
+        "bytes": 386284363,
+        "sha256": "ca97e66cfc126741c666fbf74cb27b99e1eff38be5d0620aabf949498cf575b4"
+      }
+    ],
+    "source_rows": 1600,
+    "expected_pairs": 9600,
+    "valid_pairs": 9598,
+    "rejected_pairs": 2,
+    "rejections": [
+      {
+        "shard": "train-00001-of-00012.parquet",
+        "row": 97,
+        "image_model": "DALLE_3",
+        "reason": "ratings must be integers in [1, 5]"
+      },
+      {
+        "shard": "train-00001-of-00012.parquet",
+        "row": 118,
+        "image_model": "DeepFloyd_I_XL_v1",
+        "reason": "ratings must be integers in [1, 5]"
+      }
+    ],
+    "exact_duplicates": [],
+    "normalized_duplicates": [],
+    "normalized_leakage": [],
+    "near_method": "difflib.SequenceMatcher(autojunk=False)",
+    "near_threshold": 0.95,
+    "near_candidates": [
+      {
+        "left": "a young lady wearing a t-shirt puts her hand on a puppy's head.",
+        "right": "a young lady wearing a t-shirt puts her hand on a puppy's paw.",
+        "similarity": 0.96,
+        "cross_split": false
+      },
+      {
+        "left": "on a busy desk, a lamp sheds light on a cluttered area filled with papers while the other half remains organized.",
+        "right": "on a busy desk, a lamp sheds light on a cluttered area filled with papers, while the other half remains organized.",
+        "similarity": 0.9955947136563876,
+        "cross_split": false
+      }
+    ],
+    "near_limitations": "Lexical heuristic only; requires human review, not semantic deduplication.",
+    "split_pairs": {
+      "train": 6718,
+      "val": 1440,
+      "test": 1440
+    },
+    "split_groups": {
+      "test": 240,
+      "train": 1120,
+      "val": 240
+    },
+    "model_pairs": {
+      "DALLE_3": 1599,
+      "DeepFloyd_I_XL_v1": 1599,
+      "Midjourney_6": 1600,
+      "SDXL_2_1": 1600,
+      "SDXL_Base": 1600,
+      "SDXL_Turbo": 1600
+    },
+    "issues": [
+      "rejected_pairs_require_review",
+      "near_duplicates_require_review"
+    ],
+    "manifest_sha256": "4ed1e3c7909c81c239beaa2890f4adbcaef7545217e1d309a8b023e084182ca2"
+  },
+  "logs": {
+    "dependency_imports.log": "Data QA imports PASS\n",
+    "create_venv.log": "",
+    "pip_check.log": "No broken requirements found.\n",
+    "versions.log": "certifi==2026.10.19\ncharset-normalizer==3.5.2\nfilelock==4.2.4\nfsspec==2026.9.0\nhf-xet==1.7.0\nhuggingface-hub==0.36.0\nidna==3.20\niniconfig==2.3.1\npackaging==26.3\npillow==12.0.0\npluggy==1.7.0\npyarrow==21.0.0\nPygments==2.21.0\npytest==8.4.2\nPyYAML==6.0.3\nrequests==2.34.2\ntqdm==4.70.1\ntyping_extensions==4.16.0\nurllib3==2.8.0\n",
+    "bootstrap_pip.log": "Collecting pip==26.2.1\n  Downloading pip-26.2.1-py3-none-any.whl.metadata (4.6 kB)\nDownloading pip-26.2.1-py3-none-any.whl (1.8 MB)\n   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 7.5 MB/s eta 0:00:00\nInstalling collected packages: pip\nSuccessfully installed pip-26.2.1\n",
+    "download_dataset.log": "\rFetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]\rFetching 12 files:  17%|█▋        | 2/12 [00:03<00:17,  1.76s/it]\rFetching 12 files:  33%|███▎      | 4/12 [00:05<00:11,  1.39s/it]\rFetching 12 files:  50%|█████     | 6/12 [00:07<00:07,  1.28s/it]\rFetching 12 files:  67%|██████▋   | 8/12 [00:10<00:05,  1.29s/it]\rFetching 12 files:  83%|████████▎ | 10/12 [00:13<00:02,  1.36s/it]\rFetching 12 files: 100%|██████████| 12/12 [00:16<00:00,  1.34s/it]\rFetching 12 files: 100%|██████████| 12/12 [00:16<00:00,  1.34s/it]\n",
+    "dependencies.log": "Collecting pyarrow==21.0.0 (from -r /kaggle/working/promptalign-ai/requirements-data.in (line 2))\n  Downloading pyarrow-21.0.0-cp313-cp313-manylinux_2_28_x86_64.whl.metadata (3.3 kB)\nCollecting Pillow==12.0.0 (from -r /kaggle/working/promptalign-ai/requirements-data.in (line 3))\n  Downloading pillow-12.0.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.8 kB)\nCollecting huggingface-hub==0.36.0 (from -r requirements-kaggle-data.in (line 3))\n  Downloading huggingface_hub-0.36.0-py3-none-any.whl.metadata (14 kB)\nCollecting pytest==8.4.2 (from -r requirements-kaggle-data.in (line 4))\n  Downloading pytest-8.4.2-py3-none-any.whl.metadata (7.7 kB)\nCollecting filelock (from huggingface-hub==0.36.0->-r requirements-kaggle-data.in (line 3))\n  Downloading filelock-4.2.4-py3-none-any.whl.metadata (2.0 kB)\nCollecting fsspec>=2023.5.0 (from huggingface-hub==0.36.0->-r requirements-kaggle-data.in (line 3))\n  Downloading fsspec-2026.9.0-py3-none-any.whl.metadata (10 kB)\nCollecting packaging>=20.9 (from huggingface-hub==0.36.0->-r requirements-kaggle-data.in (line 3))\n  Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)\nCollecting pyyaml>=5.1 (from huggingface-hub==0.36.0->-r requirements-kaggle-data.in (line 3))\n  Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)\nCollecting requests (from huggingface-hub==0.36.0->-r requirements-kaggle-data.in (line 3))\n  Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)\nCollecting tqdm>=4.42.1 (from huggingface-hub==0.36.0->-r requirements-kaggle-data.in (line 3))\n  Downloading tqdm-4.70.1-py3-none-any.whl.metadata (57 kB)\nCollecting typing-extensions>=3.7.4.3 (from huggingface-hub==0.36.0->-r requirements-kaggle-data.in (line 3))\n  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)\nCollecting hf-xet<2.0.0,>=1.1.3 (from huggingface-hub==0.36.0->-r requirements-kaggle-data.in (line 3))\n  Downloading hf_xet-1.7.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (4.9 kB)\nCollecting iniconfig>=1 (from pytest==8.4.2->-r requirements-kaggle-data.in (line 4))\n  Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)\nCollecting pluggy<2,>=1.5 (from pytest==8.4.2->-r requirements-kaggle-data.in (line 4))\n  Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)\nCollecting pygments>=2.7.2 (from pytest==8.4.2->-r requirements-kaggle-data.in (line 4))\n  Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)\nCollecting charset_normalizer<4,>=2 (from requests->huggingface-hub==0.36.0->-r requirements-kaggle-data.in (line 3))\n  Downloading charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (46 kB)\nCollecting idna<4,>=2.5 (from requests->huggingface-hub==0.36.0->-r requirements-kaggle-data.in (line 3))\n  Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)\nCollecting urllib3<3,>=1.26 (from requests->huggingface-hub==0.36.0->-r requirements-kaggle-data.in (line 3))\n  Downloading urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)\nCollecting certifi>=2023.5.7 (from requests->huggingface-hub==0.36.0->-r requirements-kaggle-data.in (line 3))\n  Downloading certifi-2026.10.19-py3-none-any.whl.metadata (2.5 kB)\nDownloading pyarrow-21.0.0-cp313-cp313-manylinux_2_28_x86_64.whl (42.8 MB)\nDownloading pillow-12.0.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (7.0 MB)\nDownloading huggingface_hub-0.36.0-py3-none-any.whl (566 kB)\nDownloading pytest-8.4.2-py3-none-any.whl (365 kB)\nDownloading hf_xet-1.7.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.2 MB)\nDownloading pluggy-1.7.0-py3-none-any.whl (27 kB)\nDownloading fsspec-2026.9.0-py3-none-any.whl (221 kB)\nDownloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)\nDownloading packaging-26.3-py3-none-any.whl (129 kB)\nDownloading pygments-2.21.0-py3-none-any.whl (1.3 MB)\nDownloading pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (801 kB)\nDownloading tqdm-4.70.1-py3-none-any.whl (80 kB)\nDownloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)\nDownloading filelock-4.2.4-py3-none-any.whl (162 kB)\nDownloading requests-2.34.2-py3-none-any.whl (73 kB)\nDownloading charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (254 kB)\nDownloading idna-3.20-py3-none-any.whl (69 kB)\nDownloading urllib3-2.8.0-py3-none-any.whl (135 kB)\nDownloading certifi-2026.10.19-py3-none-any.whl (136 kB)\nInstalling collected packages: urllib3, typing-extensions, tqdm, pyyaml, pygments, pyarrow, pluggy, Pillow, packaging, iniconfig, idna, hf-xet, fsspec, filelock, charset_normalizer, certifi, requests, pytest, huggingface-hub\nSuccessfully installed Pillow-12.0.0 certifi-2026.10.19 charset_normalizer-3.5.2 filelock-4.2.4 fsspec-2026.9.0 hf-xet-1.7.0 huggingface-hub-0.36.0 idna-3.20 iniconfig-2.3.1 packaging-26.3 pluggy-1.7.0 pyarrow-21.0.0 pygments-2.21.0 pytest-8.4.2 pyyaml-6.0.3 requests-2.34.2 tqdm-4.70.1 typing-extensions-4.16.0 urllib3-2.8.0\n",
+    "prepare_data.log": "REVIEW_REQUIRED: 9598 valid pairs; output: /kaggle/working/data-qa-20261020T165712283760Z/qa\n",
+    "data_tests.log": "..................                                                       [100%]\n18 passed in 0.66s\n",
+    "startup.log": "3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0]\n"
+  },
+  "independent_manifest_checks": "PASS: hash, unique pair IDs, source mapping, ratings/mean/std, normalized groups, split counts, no normalized leakage, deterministic split on reversed input, exclusions reconcile",
+  "near_candidate_review": [
+    {
+      "left": "a young lady wearing a t-shirt puts her hand on a puppy's head.",
+      "right": "a young lady wearing a t-shirt puts her hand on a puppy's paw.",
+      "similarity": 0.96,
+      "cross_split": false,
+      "splits": [
+        "train"
+      ],
+      "recommendation": "Retain distinct head/paw concepts"
+    },
+    {
+      "left": "on a busy desk, a lamp sheds light on a cluttered area filled with papers while the other half remains organized.",
+      "right": "on a busy desk, a lamp sheds light on a cluttered area filled with papers, while the other half remains organized.",
+      "similarity": 0.9955947136563876,
+      "cross_split": false,
+      "splits": [
+        "train"
+      ],
+      "recommendation": "Punctuation-equivalent prompts; already in one split, retain source records and keep split fixed"
+    }
+  ],
+  "image_hash_duplicates": [],
+  "image_hash_cross_split_groups": 0,
+  "limitations": [
+    "Raw Parquet/images not included: source file and image bytes cannot be independently rehashed locally.",
+    "Rejected raw ratings are absent from report; retain conservative exclusions, do not invent or repair values.",
+    "No model training, validation metrics or holdout evaluation performed.",
+    "Technical artifact review only; cross-review and official split approval remain pending."
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "status": "PASS_STRUCTURE",
+  "errors": [],
+  "prompt_count": 20,
+  "rating_count": 60,
+  "unique_prompt_count": 20,
+  "score_distribution": {
+    "5": 54,
+    "4": 6
+  },
+  "all_raters_same_score_images": 20,
+  "files": {
+    "prompts.csv": "5ee0ddc6e588a5bc468357bf7cd5bdbf4ac8817dc1869ac24bfca88c6cb9cda7",
+    "ratings_simulated_3_students.csv": "b910c4c9320c43056b30d4b56734e8ccb8d053586738e5c67812d878bafc11b1"
+  },
+  "images": [
+    {
+      "image_id": "01.png",
+      "sha256": "34dd6ac96dde506c229260b9c540093cf9de16b889a4a8a4782c307cbe366444",
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 1156498,
+      "exact_duplicate_of_external20": false
+    },
+    {
+      "image_id": "02.png",
+      "sha256": "fd9475d7471c20413b08187ba055bb717f39627eccbc6689b79ef1cee31a957f",
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 3830271,
+      "exact_duplicate_of_external20": false
+    },
+    {
+      "image_id": "03.png",
+      "sha256": "45c1ed0d1d040002e343dcce3bfb82d3d79f1678ba3b7c3e59ab453e97e6a1c6",
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 3167997,
+      "exact_duplicate_of_external20": false
+    },
+    {
+      "image_id": "04.png",
+      "sha256": "305207e4912ef9e35a8ff1581296856ed4a8c4ceeba63e730f994518af1a47ca",
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 3384336,
+      "exact_duplicate_of_external20": false
+    },
+    {
+      "image_id": "05.png",
+      "sha256": "51a537c5aaf9dcf2517cd0fbcda1379ba8592a51507e7fb1eab82af843e69d41",
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 3461603,
+      "exact_duplicate_of_external20": false
+    },
+    {
+      "image_id": "06.png",
+      "sha256": "bdb45ac70ca49e59f3f209bee4ad703fbbe07d6919c5c9fe424c28b9bdd43805",
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 1390687,
+      "exact_duplicate_of_external20": false
+    },
+    {
+      "image_id": "07.png",
+      "sha256": "4d0ffd71b7e04df5d95564bf0bd8cc2b0668b902ff4295f4b6e1b73d91b56b63",
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 2140766,
+      "exact_duplicate_of_external20": false
+    },
+    {
+      "image_id": "08.png",
+      "sha256": "13ae70604821b278af925c9a7ffdd3f7eef5085d66195d4b7abb6b7bb99dd24f",
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 1417400,
+      "exact_duplicate_of_external20": false
+    },
+    {
+      "image_id": "09.png",
+      "sha256": "bca97c350c752633fb935bd3e7f957b9028bb250908bbfc60fe376b1d9807b35",
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 1459375,
+      "exact_duplicate_of_external20": false
+    },
+    {
+      "image_id": "10.png",
+      "sha256": "27220a2eb223406ce318086ceb83a6369870da8804692864c1ae3242c4426ecd",
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 2008413,
+      "exact_duplicate_of_external20": false
+    },
+    {
+      "image_id": "11.png",
+      "sha256": "5cc24cb3e899d826fce553400b85f5666047fc88906e00d33d9d73a23e372af4",
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 3859987,
+      "exact_duplicate_of_external20": false
+    },
+    {
+      "image_id": "12.png",
+      "sha256": "645a1caf4cfe981d366537ff2394cf692e0b286e8d75ee55a8ae9c14e84572bb",
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 4294726,
+      "exact_duplicate_of_external20": false
+    },
+    {
+      "image_id": "13.png",
+      "sha256": "94a84e0a562fc94c1ea5506948589c59095d93025d3b77ffa86e80889c03552c",
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 666697,
+      "exact_duplicate_of_external20": false
+    },
+    {
+      "image_id": "14.png",
+      "sha256": "0b3c839f299511120ac458fcf990e43a996369daacbff65cd30a81c9af7d80db",
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 1580692,
+      "exact_duplicate_of_external20": false
+    },
+    {
+      "image_id": "15.png",
+      "sha256": "a39a07419617a0b88b0aa88d6f7eb810db739a04411988250d679ad894de8f1b",
+      "width": 1280,
+      "height": 1920,
+      "format": "PNG",
+      "bytes": 3033364,
+      "exact_duplicate_of_external20": false
+    },
+    {
+      "image_id": "16.png",
+      "sha256": "68646d27fdd6020c18cd94e2c8ecc4312bb8cebe1a5d51607ee0ce239d7aa3f4",
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 2283171,
+      "exact_duplicate_of_external20": false
+    },
+    {
+      "image_id": "17.png",
+      "sha256": "3796090d1a27c63fe9eb463f96bce3207ee168fb23a7a35c8ffc8162c7e5d44d",
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 2629175,
+      "exact_duplicate_of_external20": false
+    },
+    {
+      "image_id": "18.png",
+      "sha256": "92b108836dfb795b8b6e655ece327d7e4a2c7c3bf9071bc72c554d0797ef4c0b",
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 2140577,
+      "exact_duplicate_of_external20": false
+    },
+    {
+      "image_id": "19.png",
+      "sha256": "0a1164872967570bbb6a1dda12a3d9b1ede35f5a39dd7a2b6cc2da4a9c7ff328",
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 3750798,
+      "exact_duplicate_of_external20": false
+    },
+    {
+      "image_id": "20.png",
+      "sha256": "9464d9461bb8150d05a3c166a44384a8d7ac911524c86bf612ea7f74329c40be",
+      "width": 1600,
+      "height": 1600,
+      "format": "PNG",
+      "bytes": 2195862,
+      "exact_duplicate_of_external20": false
+    }
+  ],
+  "rating_provenance": "PENDING_USER_CONFIRMATION",
+  "inference": "NOT RUN",
+  "acceptance": "BLOCKED_PENDING_RATING_PROVENANCE",
+  "limitations": [
+    "Byte hashes do not rule out visually similar or transformed duplicates",
+    "20 unique prompts with one image each cannot measure within-prompt ranking",
+    "Scores only 4/5 cannot establish rejection of strongly mismatched pairs",
+    "Matching rater scores do not prove either authenticity or fabrication"
+  ]
+}

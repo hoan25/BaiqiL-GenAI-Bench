@@ -1,0 +1,5 @@
+# CPython 3.13 / Windows x64 CPU demo, including artifact review dependencies.
+# Install using the PyTorch CPU index as described in docs/WEB_LOCAL.md.
+-r requirements-g0-win-cpu.lock.txt
+-r requirements-api.txt
+-r requirements-data.in

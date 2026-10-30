@@ -1,0 +1,66 @@
+{
+  "snapshot_date": "2026-10-27",
+  "scope": "existing_evidence_no_new_training_or_holdout",
+  "files": [
+    {
+      "source": "reports/DATA_DECISIONS.md",
+      "packaged": "evidence/DATA_DECISIONS.md",
+      "sha256": "4d98022017e1e42f1ad3d343f9fb199d3342c3fd8ecbe04ede07fbe8b2118b17"
+    },
+    {
+      "source": "reports/results/G1_kaggle_full_qa_review.json",
+      "packaged": "evidence/G1_kaggle_full_qa_review.json",
+      "sha256": "747af137b2b11fec28c10925035c7f8f30ebbebef5c024ea6b520d116a4368e5"
+    },
+    {
+      "source": "reports/results/G3_full_training_review.json",
+      "packaged": "evidence/G3_full_training_review.json",
+      "sha256": "beb19e1a4f8a9929066680fa3df9f49546cdb3962bc11542d33e04c21a016d44"
+    },
+    {
+      "source": "reports/results/G3_full_training_review.md",
+      "packaged": "evidence/G3_full_training_review.md",
+      "sha256": "f5fde873e0ccea2cd0bad83a455a8890266ccc81024bbce7b2d6afd5452ce4a7"
+    },
+    {
+      "source": "reports/results/G4_G5_real_model_validation.json",
+      "packaged": "evidence/G4_G5_real_model_validation.json",
+      "sha256": "e6568d78a79cc0a7f079b7be54d6b8c110b3ee44d899831a85c3d16a16244337"
+    },
+    {
+      "source": "reports/results/G4_full_model_http.json",
+      "packaged": "evidence/G4_full_model_http.json",
+      "sha256": "1d6c87e5472339608e52b92fc7f6bbe3b0151dc108f00fbd60764e43125eef2e"
+    },
+    {
+      "source": "reports/results/G7_cpu_benchmark_20261026.json",
+      "packaged": "evidence/G7_cpu_benchmark_20261026.json",
+      "sha256": "51f6bd1a4356bd52d1c1f1061b582b116fe3d198a808690de6940fcd9509629d"
+    },
+    {
+      "source": "reports/results/G7_external20_intake_20261027.json",
+      "packaged": "evidence/G7_external20_intake_20261027.json",
+      "sha256": "f18d6f329cbb43aa5d915b779cd0d64f27ecff7f44094bdbdf90042a99f0b944"
+    },
+    {
+      "source": "reports/results/G4_python_tests.txt",
+      "packaged": "evidence/G4_python_tests.txt",
+      "sha256": "ea2f198e3f3f7205548032d3c475dad42eff45278b16384b12e2b6040e3aea92"
+    },
+    {
+      "source": "reports/results/G5_browser_tests.txt",
+      "packaged": "evidence/G5_browser_tests.txt",
+      "sha256": "9d39c693ae53bcb6321434a83b274f5d663d8103864f0cd54776f66c15c45b5e"
+    },
+    {
+      "source": "reports/figures/G5-real-model-20261026.png",
+      "packaged": "figures/G5-real-model-20261026.png",
+      "sha256": "26e849decc3d3c13eddfa0cf0465ac8e9e445997f7a631abeccc77c820c8fb92"
+    },
+    {
+      "source": ".cache/reviewed-training-20261020T174855207187Z/training-seed42/result.json",
+      "packaged": "evidence/training_seed42.json",
+      "sha256": "f1e5058ed13176207e0a1c1fb8aba814b8528f41e27d67c1d78d051dba2b1d8d"
+    }
+  ]
+}

@@ -1,0 +1,232 @@
+{
+  "date": "2026-10-27",
+  "status": "IMAGE_FILE_CHECKS_PASS",
+  "images": [
+    {
+      "sample_id": "01",
+      "image_path": "images/images/01.png",
+      "sha256": "a048f30054cbafd48f160a7a23edb7896d33e5fd657c502ed67796621b5ac8d4",
+      "bytes": 1620600,
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "sample_id": "02",
+      "image_path": "images/images/02.png",
+      "sha256": "ad307cdccb0e58ad64a230ede9cd3b2ec01480f056f554dd1023feb04a09190d",
+      "bytes": 2589613,
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "sample_id": "03",
+      "image_path": "images/images/03.png",
+      "sha256": "2ed6fffbb195bb3b814a3a1278a74e7765e77eb2045592055e81ece139db6707",
+      "bytes": 4450779,
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "sample_id": "04",
+      "image_path": "images/images/04.png",
+      "sha256": "1baf1f92471c514965c31bcacdfb177fee36eb0f4ce8f64fed16fe9f9b12af6c",
+      "bytes": 2527333,
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "sample_id": "05",
+      "image_path": "images/images/05.png",
+      "sha256": "17ef1c75f764b01d2960dbbfcf19bdab4264410ed9dacb209bb9f32b5ebbd284",
+      "bytes": 1787795,
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "sample_id": "06",
+      "image_path": "images/images/06.png",
+      "sha256": "17194f6e454444d0ce3271aa898fe7be909aca7905fbd0120adb8f52abec833a",
+      "bytes": 1826876,
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "sample_id": "07",
+      "image_path": "images/images/07.png",
+      "sha256": "e614e5fc4ce6b8d6bcd1c32cc31b3709f5849738baec830d27af5c4575495a73",
+      "bytes": 2525261,
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "sample_id": "08",
+      "image_path": "images/images/08.png",
+      "sha256": "5e8cadf6d4638cb19c2a62d5e9b1ba62dd108611c0e42439b742040ce8270ede",
+      "bytes": 2519993,
+      "width": 1600,
+      "height": 1600,
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "sample_id": "09",
+      "image_path": "images/images/09.png",
+      "sha256": "4161cd68ca45803155e0754ada1d28c65e88fc7222be295549a36f0e1e9621ae",
+      "bytes": 1195351,
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "sample_id": "10",
+      "image_path": "images/images/10.png",
+      "sha256": "0aba1874ee86dcb3fc3174fb2b53d168766cec7f7d34d06afa0e105f753c8206",
+      "bytes": 2993144,
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "sample_id": "11",
+      "image_path": "images/images/11.png",
+      "sha256": "2ac77ecc11cdd37f8174c3407d690fc4347a866fa22251ae0eda5854cb2fd426",
+      "bytes": 1863345,
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "sample_id": "12",
+      "image_path": "images/images/12.png",
+      "sha256": "b09b0df89ce92b2d8d514be09ca2aae603379d0b507d9533e60d42f623f14ba0",
+      "bytes": 2971419,
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "sample_id": "13",
+      "image_path": "images/images/13.png",
+      "sha256": "d2993e93c19e894c54ebbe9978349d02b841e041ee2152108263d8689ae3857d",
+      "bytes": 1982544,
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "sample_id": "14",
+      "image_path": "images/images/14.png",
+      "sha256": "806640aab44fcd92b775a81650df26145b25aaab5744d79e0419c9239ac7c5d4",
+      "bytes": 2400784,
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "sample_id": "15",
+      "image_path": "images/images/15.png",
+      "sha256": "d06c50e754dad9b36ba107ab9e8e74846e86a9dd38f9f9908ca13b163ba9310b",
+      "bytes": 1377640,
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "sample_id": "16",
+      "image_path": "images/images/16.png",
+      "sha256": "981b98900c8c87ce828e11af0321620307bd332f0e7b680bfe6c9e7fdd90a8e6",
+      "bytes": 3013489,
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "sample_id": "17",
+      "image_path": "images/images/17.png",
+      "sha256": "cc3e08c4a49783ff829edd84c8322888a2b8580631924a6f192129c43b6d5993",
+      "bytes": 3363867,
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "sample_id": "18",
+      "image_path": "images/images/18.png",
+      "sha256": "4377796f9a745ada71456bc2708718424419f1d3bfe7073057c446cadfec9063",
+      "bytes": 3280040,
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "sample_id": "19",
+      "image_path": "images/images/19.png",
+      "sha256": "0faadc290555fb9443a79c613b75836b1101c74c94cefc672a2416ba02bf14f9",
+      "bytes": 2722730,
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "sample_id": "20",
+      "image_path": "images/images/20.png",
+      "sha256": "00af8605a034bf62a277d9489cdabf4cb5caffe670bad94559feff559c17f59d",
+      "bytes": 3902068,
+      "width": 1920,
+      "height": 1280,
+      "format": "PNG",
+      "mode": "RGB"
+    }
+  ],
+  "scope": "Decode, size and byte-duplicate checks only; no semantic or dataset novelty verification",
+  "ratings_filled": 0,
+  "missing_source_ids": [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20"
+  ],
+  "inference": "NOT RUN: preserve independent human rating before model predictions",
+  "holdout": "NOT RUN"
+}

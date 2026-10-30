@@ -1,0 +1,109 @@
+{
+  "operator": "Codex browser automation, user authorized",
+  "human_acceptance": "PENDING",
+  "steps": [
+    {
+      "name": "01-home",
+      "status": "PASS",
+      "screenshot": "01-home.png"
+    },
+    {
+      "name": "02-single-apple",
+      "status": "PASS",
+      "screenshot": "02-single-apple.png"
+    },
+    {
+      "name": "03-compare-same-prompt",
+      "status": "PASS",
+      "screenshot": "03-compare-same-prompt.png"
+    },
+    {
+      "name": "04-follow-up",
+      "status": "PASS",
+      "screenshot": "04-follow-up.png"
+    },
+    {
+      "name": "05-validation-metrics",
+      "status": "PASS",
+      "screenshot": "05-validation-metrics.png"
+    },
+    {
+      "name": "06-empty-prompt",
+      "status": "PASS",
+      "screenshot": "06-empty-prompt.png"
+    },
+    {
+      "name": "07-invalid-file-type",
+      "status": "PASS",
+      "screenshot": "07-invalid-file-type.png"
+    },
+    {
+      "name": "08-too-many-images",
+      "status": "PASS",
+      "screenshot": "08-too-many-images.png"
+    },
+    {
+      "name": "09-known-model-error-car-vs-bicycle",
+      "status": "PASS",
+      "screenshot": "09-known-model-error-car-vs-bicycle.png"
+    }
+  ],
+  "responses": [
+    {
+      "type": "score",
+      "model_version": "mlp-b8dba09efa0e",
+      "items": [
+        {
+          "score": 4.072925567626953,
+          "cosine": 0.33589789271354675,
+          "index": 0,
+          "rank": 1
+        }
+      ]
+    },
+    {
+      "type": "ranking",
+      "model_version": "mlp-b8dba09efa0e",
+      "items": [
+        {
+          "score": 4.072925567626953,
+          "cosine": 0.33589792251586914,
+          "index": 0,
+          "rank": 2
+        },
+        {
+          "score": 4.633790969848633,
+          "cosine": 0.1674545407295227,
+          "index": 1,
+          "rank": 1
+        }
+      ]
+    },
+    {
+      "type": "score",
+      "model_version": "mlp-b8dba09efa0e",
+      "items": [
+        {
+          "score": 4.633790969848633,
+          "cosine": 0.1674545407295227,
+          "index": 1,
+          "rank": 1
+        }
+      ]
+    },
+    {
+      "type": "score",
+      "model_version": "mlp-b8dba09efa0e",
+      "items": [
+        {
+          "score": 4.662652015686035,
+          "cosine": 0.1759115308523178,
+          "index": 0,
+          "rank": 1
+        }
+      ]
+    }
+  ],
+  "model_version": "mlp-b8dba09efa0e",
+  "status": "PASS"
+}

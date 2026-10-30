@@ -1,0 +1,365 @@
+{
+  "status": "PASS_EXECUTION_NOT_RELEASE",
+  "protocol": {
+    "scope": "post_holdout_development_train_val_only",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "features": [
+      "cosine",
+      "interaction"
+    ],
+    "alpha": 1.0,
+    "hidden": 64,
+    "epochs": 100,
+    "patience": 15,
+    "learning_rate": 0.001,
+    "manifest_sha256": "4ed1e3c7909c81c239beaa2890f4adbcaef7545217e1d309a8b023e084182ca2",
+    "embeddings_sha256": "f97e19e6b34d0058290bf572f66e4780feaba3e6f2c0ac29d6ca3bd35b132b8f",
+    "test": "NOT EVALUATED",
+    "primary_seed": 42,
+    "promotion": "No automatic deployment; independent new set required"
+  },
+  "aggregate": {
+    "cosine-ridge": {
+      "mae_mean": 0.9247551797164811,
+      "mae_std_population": 0.0,
+      "mae_each": [
+        0.9247551797164811,
+        0.9247551797164811,
+        0.9247551797164811
+      ]
+    },
+    "cosine-mlp": {
+      "mae_mean": 0.9235691970697156,
+      "mae_std_population": 0.001431331141832879,
+      "mae_each": [
+        0.9233633564578162,
+        0.9254160455531544,
+        0.9219281891981761
+      ]
+    },
+    "interaction-ridge": {
+      "mae_mean": 0.8757244241734345,
+      "mae_std_population": 0.0,
+      "mae_each": [
+        0.8757244241734345,
+        0.8757244241734345,
+        0.8757244241734345
+      ]
+    },
+    "interaction-mlp": {
+      "mae_mean": 0.8367396950445793,
+      "mae_std_population": 0.0015093472594813805,
+      "mae_each": [
+        0.8375847426553568,
+        0.8380147031611866,
+        0.8346196393171946
+      ]
+    }
+  },
+  "runs": {
+    "cosine-seed42": {
+      "metrics": {
+        "mean": {
+          "count": 1440,
+          "mae": 0.9378546448217497,
+          "rmse": 1.0736531337396205,
+          "spearman": null,
+          "pairwise": {
+            "accuracy": 0.0,
+            "eligible_pairs": 1940,
+            "correct_pairs": 0,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 1940,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "ridge": {
+          "count": 1440,
+          "mae": 0.9247551797164811,
+          "rmse": 1.056873314223895,
+          "spearman": 0.18434477532967122,
+          "pairwise": {
+            "accuracy": 0.5623711340206186,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1091,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 0,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "mlp": {
+          "count": 1440,
+          "mae": 0.9233633564578162,
+          "rmse": 1.0574518025370008,
+          "spearman": 0.1898958157674095,
+          "pairwise": {
+            "accuracy": 0.565979381443299,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1098,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 0,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        }
+      },
+      "best_epoch": 49
+    },
+    "cosine-seed43": {
+      "metrics": {
+        "mean": {
+          "count": 1440,
+          "mae": 0.9378546448217497,
+          "rmse": 1.0736531337396205,
+          "spearman": null,
+          "pairwise": {
+            "accuracy": 0.0,
+            "eligible_pairs": 1940,
+            "correct_pairs": 0,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 1940,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "ridge": {
+          "count": 1440,
+          "mae": 0.9247551797164811,
+          "rmse": 1.056873314223895,
+          "spearman": 0.18434477532967122,
+          "pairwise": {
+            "accuracy": 0.5623711340206186,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1091,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 0,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "mlp": {
+          "count": 1440,
+          "mae": 0.9254160455531544,
+          "rmse": 1.0579696437347859,
+          "spearman": 0.18434477532967122,
+          "pairwise": {
+            "accuracy": 0.5623711340206186,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1091,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 0,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        }
+      },
+      "best_epoch": 100
+    },
+    "cosine-seed44": {
+      "metrics": {
+        "mean": {
+          "count": 1440,
+          "mae": 0.9378546448217497,
+          "rmse": 1.0736531337396205,
+          "spearman": null,
+          "pairwise": {
+            "accuracy": 0.0,
+            "eligible_pairs": 1940,
+            "correct_pairs": 0,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 1940,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "ridge": {
+          "count": 1440,
+          "mae": 0.9247551797164811,
+          "rmse": 1.056873314223895,
+          "spearman": 0.18434477532967122,
+          "pairwise": {
+            "accuracy": 0.5623711340206186,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1091,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 0,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "mlp": {
+          "count": 1440,
+          "mae": 0.9219281891981761,
+          "rmse": 1.0550223883142231,
+          "spearman": 0.16706105360206905,
+          "pairwise": {
+            "accuracy": 0.5237113402061856,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1016,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 0,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        }
+      },
+      "best_epoch": 38
+    },
+    "interaction-seed42": {
+      "metrics": {
+        "mean": {
+          "count": 1440,
+          "mae": 0.9378546448217497,
+          "rmse": 1.0736531337396205,
+          "spearman": null,
+          "pairwise": {
+            "accuracy": 0.0,
+            "eligible_pairs": 1940,
+            "correct_pairs": 0,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 1940,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "ridge": {
+          "count": 1440,
+          "mae": 0.8757244241734345,
+          "rmse": 1.0657051585965853,
+          "spearman": 0.33343139087650814,
+          "pairwise": {
+            "accuracy": 0.561340206185567,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1089,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 3,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "mlp": {
+          "count": 1440,
+          "mae": 0.8375847426553568,
+          "rmse": 0.9965321271777748,
+          "spearman": 0.3842652935042138,
+          "pairwise": {
+            "accuracy": 0.5793814432989691,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1124,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 0,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        }
+      },
+      "best_epoch": 14
+    },
+    "interaction-seed43": {
+      "metrics": {
+        "mean": {
+          "count": 1440,
+          "mae": 0.9378546448217497,
+          "rmse": 1.0736531337396205,
+          "spearman": null,
+          "pairwise": {
+            "accuracy": 0.0,
+            "eligible_pairs": 1940,
+            "correct_pairs": 0,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 1940,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "ridge": {
+          "count": 1440,
+          "mae": 0.8757244241734345,
+          "rmse": 1.0657051585965853,
+          "spearman": 0.33343139087650814,
+          "pairwise": {
+            "accuracy": 0.561340206185567,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1089,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 3,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "mlp": {
+          "count": 1440,
+          "mae": 0.8380147031611866,
+          "rmse": 1.0006869653389427,
+          "spearman": 0.3710176902497131,
+          "pairwise": {
+            "accuracy": 0.588659793814433,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1142,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 0,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        }
+      },
+      "best_epoch": 14
+    },
+    "interaction-seed44": {
+      "metrics": {
+        "mean": {
+          "count": 1440,
+          "mae": 0.9378546448217497,
+          "rmse": 1.0736531337396205,
+          "spearman": null,
+          "pairwise": {
+            "accuracy": 0.0,
+            "eligible_pairs": 1940,
+            "correct_pairs": 0,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 1940,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "ridge": {
+          "count": 1440,
+          "mae": 0.8757244241734345,
+          "rmse": 1.0657051585965853,
+          "spearman": 0.33343139087650814,
+          "pairwise": {
+            "accuracy": 0.561340206185567,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1089,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 3,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "mlp": {
+          "count": 1440,
+          "mae": 0.8346196393171946,
+          "rmse": 0.9980635089535683,
+          "spearman": 0.3775548195959761,
+          "pairwise": {
+            "accuracy": 0.5752577319587628,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1116,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 0,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        }
+      },
+      "best_epoch": 19
+    }
+  }
+}

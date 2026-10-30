@@ -1,0 +1,86 @@
+﻿[
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\code\\backend",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\backend"
+    },
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\code\\configs",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\configs"
+    },
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\code\\frontend",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\frontend"
+    },
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\code\\notebooks",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\notebooks"
+    },
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\code\\scripts",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\scripts"
+    },
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\code\\src",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\src"
+    },
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\code\\tests",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\tests"
+    },
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\code\\pyproject.toml",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\pyproject.toml"
+    },
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\code\\requirements-api.txt",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\requirements-api.txt"
+    },
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\code\\requirements-data.in",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\requirements-data.in"
+    },
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\code\\requirements-g0-win-cpu.lock.txt",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\requirements-g0-win-cpu.lock.txt"
+    },
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\code\\requirements-g0.in",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\requirements-g0.in"
+    },
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\code\\requirements-kaggle-data.in",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\requirements-kaggle-data.in"
+    },
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\code\\requirements-train.txt",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\requirements-train.txt"
+    },
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\code\\requirements-web-win-cpu.txt",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\requirements-web-win-cpu.txt"
+    },
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\project_records\\PROJECT_PLAN.md",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\PROJECT_PLAN.md"
+    },
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\project_records\\TEST_PLAN.md",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\TEST_PLAN.md"
+    },
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\project_records\\docs",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\docs"
+    },
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\project_records\\reports",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\reports"
+    },
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\project_records\\result",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\result"
+    },
+    {
+        "destination":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\project_records\\artifacts",
+        "source":  "D:\\các môn chuyên ngành\\Học máy\\học máy nâng cao\\BTL\\artifacts"
+    }
+]

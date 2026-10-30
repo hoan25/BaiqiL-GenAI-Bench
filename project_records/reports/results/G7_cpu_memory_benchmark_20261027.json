@@ -1,0 +1,79 @@
+{
+  "scope": "synthetic_image_real_cpu_model_http_inprocess_not_quality_or_network_SLA",
+  "model_version": "mlp-b8dba09efa0e",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "processor": "Intel64 Family 6 Model 78 Stepping 3, GenuineIntel",
+  "python": "3.13.5",
+  "memory_after_model_load": {
+    "peak_working_set_bytes": 1058209792,
+    "working_set_bytes": 1056075776,
+    "scope": "Whole Python process lifetime; includes imports/model startup and TestClient; excludes browser/other processes"
+  },
+  "runs": {
+    "1": {
+      "requests": 20,
+      "warmups": 1,
+      "milliseconds": [
+        211.2448001280427,
+        215.66180000081658,
+        214.862700086087,
+        237.28440003469586,
+        216.04720037430525,
+        220.50679987296462,
+        213.41669978573918,
+        216.01449977606535,
+        211.35099977254868,
+        216.12179977819324,
+        212.43549976497889,
+        214.46300018578768,
+        210.28849994763732,
+        239.19960018247366,
+        214.83840001747012,
+        213.79549987614155,
+        216.2767997942865,
+        215.63360001891851,
+        237.42960020899773,
+        214.26700009033084
+      ],
+      "p50_ms": 215.24815005250275,
+      "p95_ms": 237.51810020767152
+    },
+    "6": {
+      "requests": 20,
+      "warmups": 1,
+      "milliseconds": [
+        740.0854998268187,
+        743.584600277245,
+        804.4080003164709,
+        779.328300151974,
+        755.5644996464252,
+        798.4557999297976,
+        773.4722997993231,
+        795.9209000691772,
+        781.3337999396026,
+        830.4109000600874,
+        816.1186999641359,
+        767.0722003094852,
+        775.8991997689009,
+        804.5047000050545,
+        793.1507001630962,
+        856.2771999277174,
+        866.5082002989948,
+        754.7938004136086,
+        800.7054002955556,
+        807.5801003724337
+      ],
+      "p50_ms": 794.5358001161367,
+      "p95_ms": 856.7887499462813
+    }
+  },
+  "memory_peak": {
+    "peak_working_set_bytes": 1107554304,
+    "working_set_bytes": 1092886528,
+    "scope": "Whole Python process lifetime; includes imports/model startup and TestClient; excludes browser/other processes"
+  },
+  "status": "PASS",
+  "concurrent_requests": 5,
+  "concurrent_max_score_delta": 0.0,
+  "concurrency_scope": "Shared predictor serialization only; session isolation covered by API tests"
+}

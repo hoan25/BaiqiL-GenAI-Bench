@@ -1,0 +1,189 @@
+{
+  "scope": "diagnostic_expected_order_not_human_ground_truth",
+  "expectation": "Original score exceeds changed-prompt score; user states originals match images",
+  "tie_tolerance": 1e-05,
+  "meaningful_drop": 0.25,
+  "candidate": [
+    {
+      "path": ".cache/synthetic-negatives-20261029/negative0.25-seed42/mlp.pt",
+      "sha256": "ad83b173316ab3ebb3bd9be326fc891f5edb1d278df1489e2f837cfa30079ff4",
+      "batch_single_delta": 2.384185791015625e-07
+    },
+    {
+      "path": ".cache/synthetic-negatives-20261029/negative0.25-seed43/mlp.pt",
+      "sha256": "52b7db3bef4b893853bc78f09dd86c1a49952498eda29867fd06900b54fffc2c",
+      "batch_single_delta": 4.76837158203125e-07
+    },
+    {
+      "path": ".cache/synthetic-negatives-20261029/negative0.25-seed44/mlp.pt",
+      "sha256": "19d4daff58e6cf467f74aa74018e12cfcc1df929705d76cbdf883519fdfb9167",
+      "batch_single_delta": 2.384185791015625e-07
+    }
+  ],
+  "baseline": "reviewed seed42 MLP",
+  "cases": [
+    {
+      "image_path": "images/01.png",
+      "image_sha256": "34dd6ac96dde506c229260b9c540093cf9de16b889a4a8a4782c307cbe366444",
+      "category": "color",
+      "original": "A yellow ceramic teapot on a dark wooden table against a plain gray background. Realistic product photography.",
+      "detail_changed": "A red ceramic teapot on a dark wooden table against a plain gray background. Realistic product photography.",
+      "unrelated": "Exactly five yellow rubber ducks floating in a small bathtub. No other toys. Realistic photography."
+    },
+    {
+      "image_path": "images/02.png",
+      "image_sha256": "fd9475d7471c20413b08187ba055bb717f39627eccbc6689b79ef1cee31a957f",
+      "category": "color",
+      "original": "A green backpack resting on a stone bench in a quiet park. Daylight, realistic photography.",
+      "detail_changed": "A red backpack resting on a stone bench in a quiet park. Daylight, realistic photography.",
+      "unrelated": "A blue mug to the left of a yellow bowl on a white table, as seen by the viewer. Both objects are fully visible. Front view, realistic photography."
+    },
+    {
+      "image_path": "images/03.png",
+      "image_sha256": "45c1ed0d1d040002e343dcce3bfb82d3d79f1678ba3b7c3e59ab453e97e6a1c6",
+      "category": "color",
+      "original": "A purple umbrella lying open on a sandy beach beside the sea. No people. Realistic photography.",
+      "detail_changed": "A yellow umbrella lying open on a sandy beach beside the sea. No people. Realistic photography.",
+      "unrelated": "A green suitcase to the right of a red chair, as seen by the viewer. Both objects stand on a gray floor. Front view, realistic photography."
+    },
+    {
+      "image_path": "images/04.png",
+      "image_sha256": "305207e4912ef9e35a8ff1581296856ed4a8c4ceeba63e730f994518af1a47ca",
+      "category": "color",
+      "original": "A white rabbit sitting inside a wicker basket on a grassy lawn. Realistic photography.",
+      "detail_changed": "A black rabbit sitting inside a wicker basket on a grassy lawn. Realistic photography.",
+      "unrelated": "A small brown dog sleeping underneath a wooden bench. The entire dog and bench are visible. Realistic photography."
+    },
+    {
+      "image_path": "images/05.png",
+      "image_sha256": "51a537c5aaf9dcf2517cd0fbcda1379ba8592a51507e7fb1eab82af843e69d41",
+      "category": "count",
+      "original": "Exactly two oranges on a blue ceramic plate. No other fruit. Overhead photograph.",
+      "detail_changed": "Exactly three oranges on a blue ceramic plate. No other fruit. Overhead photograph.",
+      "unrelated": "A silver spoon inside a clear glass bowl, with a folded white napkin beside the bowl. Overhead photograph."
+    },
+    {
+      "image_path": "images/06.png",
+      "image_sha256": "bdb45ac70ca49e59f3f209bee4ad703fbbe07d6919c5c9fe424c28b9bdd43805",
+      "category": "count",
+      "original": "Exactly three lit candles standing on a black tray. No other candles. Realistic indoor photography.",
+      "detail_changed": "Exactly two lit candles standing on a black tray. No other candles. Realistic indoor photography.",
+      "unrelated": "A yellow cube on top of a blue cube, with both cubes resting on a white table. No other cubes. Realistic studio photograph."
+    },
+    {
+      "image_path": "images/07.png",
+      "image_sha256": "4d0ffd71b7e04df5d95564bf0bd8cc2b0668b902ff4295f4b6e1b73d91b56b63",
+      "category": "count",
+      "original": "Exactly four closed books stacked on a wooden stool. No other books. Realistic photography.",
+      "detail_changed": "Exactly six closed books stacked on a wooden stool. No other books. Realistic photography.",
+      "unrelated": "A white ceramic vase between two black ceramic vases on a wooden shelf. Exactly three vases. Front view, realistic photography."
+    },
+    {
+      "image_path": "images/08.png",
+      "image_sha256": "13ae70604821b278af925c9a7ffdd3f7eef5085d66195d4b7abb6b7bb99dd24f",
+      "category": "count",
+      "original": "Exactly five yellow rubber ducks floating in a small bathtub. No other toys. Realistic photography.",
+      "detail_changed": "Exactly three yellow rubber ducks floating in a small bathtub. No other toys. Realistic photography.",
+      "unrelated": "A woman wearing a yellow raincoat and holding a closed blue umbrella on a wet city sidewalk. Realistic photography."
+    },
+    {
+      "image_path": "images/09.png",
+      "image_sha256": "bca97c350c752633fb935bd3e7f957b9028bb250908bbfc60fe376b1d9807b35",
+      "category": "position",
+      "original": "A blue mug to the left of a yellow bowl on a white table, as seen by the viewer. Both objects are fully visible. Front view, realistic photography.",
+      "detail_changed": "A blue mug to the right of a yellow bowl on a white table, as seen by the viewer. Both objects are fully visible. Front view, realistic photography.",
+      "unrelated": "A man wearing a green apron and pouring water from a transparent jug into a red cup. Realistic kitchen photograph."
+    },
+    {
+      "image_path": "images/10.png",
+      "image_sha256": "27220a2eb223406ce318086ceb83a6369870da8804692864c1ae3242c4426ecd",
+      "category": "position",
+      "original": "A green suitcase to the right of a red chair, as seen by the viewer. Both objects stand on a gray floor. Front view, realistic photography.",
+      "detail_changed": "A green suitcase to the left of a red chair, as seen by the viewer. Both objects stand on a gray floor. Front view, realistic photography.",
+      "unrelated": "A black cat and a white dog sitting beside each other on a beige sofa. The cat wears a red collar, and the dog wears a blue collar. Realistic photography."
+    },
+    {
+      "image_path": "images/11.png",
+      "image_sha256": "5cc24cb3e899d826fce553400b85f5666047fc88906e00d33d9d73a23e372af4",
+      "category": "position",
+      "original": "A small brown dog sleeping underneath a wooden bench. The entire dog and bench are visible. Realistic photography.",
+      "detail_changed": "A small brown dog sleeping on top of a wooden bench. The entire dog and bench are visible. Realistic photography.",
+      "unrelated": "Exactly three ceramic bowls arranged in a row on a wooden table. From left to right as seen by the viewer: a red bowl, a white bowl, and a blue bowl. The middle bowl contains one lemon; the other two bowls are empty. Realistic photography."
+    },
+    {
+      "image_path": "images/12.png",
+      "image_sha256": "645a1caf4cfe981d366537ff2394cf692e0b286e8d75ee55a8ae9c14e84572bb",
+      "category": "position",
+      "original": "A silver spoon inside a clear glass bowl, with a folded white napkin beside the bowl. Overhead photograph.",
+      "detail_changed": "A silver spoon outside a clear glass bowl, with a folded white napkin beside the bowl. Overhead photograph.",
+      "unrelated": "A small bakery storefront with a clearly readable sign displaying exactly the word \"BAKERY\" in uppercase letters above the entrance. Daylight, realistic photography."
+    },
+    {
+      "image_path": "images/13.png",
+      "image_sha256": "94a84e0a562fc94c1ea5506948589c59095d93025d3b77ffa86e80889c03552c",
+      "category": "position",
+      "original": "A yellow cube on top of a blue cube, with both cubes resting on a white table. No other cubes. Realistic studio photograph.",
+      "detail_changed": "A yellow cube underneath a blue cube, with both cubes resting on a white table. No other cubes. Realistic studio photograph.",
+      "unrelated": "A round wall clock showing exactly 3:00. The short hour hand points to 3, and the long minute hand points to 12. The clock has black Arabic numerals on a white face and no second hand. Front view, realistic photography."
+    },
+    {
+      "image_path": "images/14.png",
+      "image_sha256": "0b3c839f299511120ac458fcf990e43a996369daacbff65cd30a81c9af7d80db",
+      "category": "color",
+      "original": "A white ceramic vase between two black ceramic vases on a wooden shelf. Exactly three vases. Front view, realistic photography.",
+      "detail_changed": "A red ceramic vase between two black ceramic vases on a wooden shelf. Exactly three vases. Front view, realistic photography.",
+      "unrelated": "A yellow ceramic teapot on a dark wooden table against a plain gray background. Realistic product photography."
+    },
+    {
+      "image_path": "images/15.png",
+      "image_sha256": "a39a07419617a0b88b0aa88d6f7eb810db739a04411988250d679ad894de8f1b",
+      "category": "state",
+      "original": "A woman wearing a yellow raincoat and holding a closed blue umbrella on a wet city sidewalk. Realistic photography.",
+      "detail_changed": "A woman wearing a yellow raincoat and holding a open blue umbrella on a wet city sidewalk. Realistic photography.",
+      "unrelated": "A green backpack resting on a stone bench in a quiet park. Daylight, realistic photography."
+    },
+    {
+      "image_path": "images/16.png",
+      "image_sha256": "68646d27fdd6020c18cd94e2c8ecc4312bb8cebe1a5d51607ee0ce239d7aa3f4",
+      "category": "color",
+      "original": "A man wearing a green apron and pouring water from a transparent jug into a red cup. Realistic kitchen photograph.",
+      "detail_changed": "A man wearing a green apron and pouring water from a transparent jug into a blue cup. Realistic kitchen photograph.",
+      "unrelated": "A purple umbrella lying open on a sandy beach beside the sea. No people. Realistic photography."
+    },
+    {
+      "image_path": "images/17.png",
+      "image_sha256": "3796090d1a27c63fe9eb463f96bce3207ee168fb23a7a35c8ffc8162c7e5d44d",
+      "category": "color",
+      "original": "A black cat and a white dog sitting beside each other on a beige sofa. The cat wears a red collar, and the dog wears a blue collar. Realistic photography.",
+      "detail_changed": "A black cat and a white dog sitting beside each other on a beige sofa. The cat wears a green collar, and the dog wears a blue collar. Realistic photography.",
+      "unrelated": "A white rabbit sitting inside a wicker basket on a grassy lawn. Realistic photography."
+    },
+    {
+      "image_path": "images/18.png",
+      "image_sha256": "92b108836dfb795b8b6e655ece327d7e4a2c7c3bf9071bc72c554d0797ef4c0b",
+      "category": "object",
+      "original": "Exactly three ceramic bowls arranged in a row on a wooden table. From left to right as seen by the viewer: a red bowl, a white bowl, and a blue bowl. The middle bowl contains one lemon; the other two bowls are empty. Realistic photography.",
+      "detail_changed": "Exactly three ceramic bowls arranged in a row on a wooden table. From left to right as seen by the viewer: a red bowl, a white bowl, and a blue bowl. The middle bowl contains one strawberry; the other two bowls are empty. Realistic photography.",
+      "unrelated": "Exactly two oranges on a blue ceramic plate. No other fruit. Overhead photograph."
+    },
+    {
+      "image_path": "images/19.png",
+      "image_sha256": "0a1164872967570bbb6a1dda12a3d9b1ede35f5a39dd7a2b6cc2da4a9c7ff328",
+      "category": "text",
+      "original": "A small bakery storefront with a clearly readable sign displaying exactly the word \"BAKERY\" in uppercase letters above the entrance. Daylight, realistic photography.",
+      "detail_changed": "A small bakery storefront with a clearly readable sign displaying exactly the word \"PHARMACY\" in uppercase letters above the entrance. Daylight, realistic photography.",
+      "unrelated": "Exactly three lit candles standing on a black tray. No other candles. Realistic indoor photography."
+    },
+    {
+      "image_path": "images/20.png",
+      "image_sha256": "9464d9461bb8150d05a3c166a44384a8d7ac911524c86bf612ea7f74329c40be",
+      "category": "color",
+      "original": "A round wall clock showing exactly 3:00. The short hour hand points to 3, and the long minute hand points to 12. The clock has black Arabic numerals on a white face and no second hand. Front view, realistic photography.",
+      "detail_changed": "A round wall clock showing exactly 3:00. The short hour hand points to 3, and the long minute hand points to 12. The clock has black Arabic numerals on a green face and no second hand. Front view, realistic photography.",
+      "unrelated": "Exactly four closed books stacked on a wooden stool. No other books. Realistic photography."
+    }
+  ],
+  "training": "NOT RUN",
+  "human_or_simulated_ratings": "NOT USED",
+  "holdout": "NOT EVALUATED"
+}

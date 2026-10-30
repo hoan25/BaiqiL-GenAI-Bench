@@ -1,0 +1,70 @@
+{
+  "status": "PASS_EXECUTION_NOT_MODEL_QUALITY",
+  "scope": "post_demo_diagnostic_seen_external_images_no_fit_no_holdout",
+  "model_version": "mlp-b8dba09efa0e",
+  "image_sha256": {
+    "01.png": "a048f30054cbafd48f160a7a23edb7896d33e5fd657c502ed67796621b5ac8d4",
+    "20.png": "00af8605a034bf62a277d9489cdabf4cb5caffe670bad94559feff559c17f59d"
+  },
+  "training_report_sha256": "f1e5058ed13176207e0a1c1fb8aba814b8528f41e27d67c1d78d051dba2b1d8d",
+  "public_vs_direct_max_delta": 0.0,
+  "rows": [
+    {
+      "image": "01.png",
+      "prompt": "A red apple on a white plate.",
+      "score": 4.072925567626953,
+      "cosine": 0.33589792251586914
+    },
+    {
+      "image": "20.png",
+      "prompt": "A red apple on a white plate.",
+      "score": 4.633790969848633,
+      "cosine": 0.1674545407295227
+    },
+    {
+      "image": "01.png",
+      "prompt": "A red car parked in front of a white house.",
+      "score": 3.8576881885528564,
+      "cosine": 0.14267292618751526
+    },
+    {
+      "image": "20.png",
+      "prompt": "A red car parked in front of a white house.",
+      "score": 4.700002670288086,
+      "cosine": 0.23696038126945496
+    },
+    {
+      "image": "01.png",
+      "prompt": "A red bicycle parked in front of a white house.",
+      "score": 3.7369492053985596,
+      "cosine": 0.1416441947221756
+    },
+    {
+      "image": "20.png",
+      "prompt": "A red bicycle parked in front of a white house.",
+      "score": 4.662652015686035,
+      "cosine": 0.1759115755558014
+    },
+    {
+      "image": "01.png",
+      "prompt": "An astronaut walking on the moon.",
+      "score": 3.912130117416382,
+      "cosine": 0.10183219611644745
+    },
+    {
+      "image": "20.png",
+      "prompt": "An astronaut walking on the moon.",
+      "score": 4.713710308074951,
+      "cosine": 0.055482570081949234
+    }
+  ],
+  "score_range_across_prompts": {
+    "01.png": 0.33597636222839355,
+    "20.png": 0.07991933822631836
+  },
+  "limitations": [
+    "Two selected images and four prompts only",
+    "No new human ground truth or quality accuracy metric",
+    "Does not establish the training-level cause"
+  ]
+}

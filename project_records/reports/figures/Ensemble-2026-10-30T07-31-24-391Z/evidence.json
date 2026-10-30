@@ -1,0 +1,52 @@
+{
+  "scope": "user_authorized_ensemble_trial",
+  "steps": [
+    "01-home",
+    "02-apple",
+    "03-compare",
+    "04-follow-up",
+    "05-car-bicycle",
+    "06-metrics",
+    "07-two-oranges",
+    "08-known-counting-error",
+    "09-empty-prompt"
+  ],
+  "human_acceptance": "PENDING",
+  "model_version": "ensemble25-d5cf6e89a7ea",
+  "02-apple": {
+    "score": 4.344305038452148,
+    "model_version": "ensemble25-d5cf6e89a7ea"
+  },
+  "comparison": [
+    {
+      "score": 4.34430456161499,
+      "cosine": 0.33589792251586914,
+      "index": 0,
+      "rank": 1
+    },
+    {
+      "score": 1.8018971681594849,
+      "cosine": 0.1674545407295227,
+      "index": 1,
+      "rank": 2
+    }
+  ],
+  "05-car-bicycle": {
+    "score": 1.3224968910217285,
+    "model_version": "ensemble25-d5cf6e89a7ea"
+  },
+  "07-two-oranges": {
+    "score": 3.629119873046875,
+    "model_version": "ensemble25-d5cf6e89a7ea"
+  },
+  "08-known-counting-error": {
+    "score": 3.819321393966675,
+    "model_version": "ensemble25-d5cf6e89a7ea"
+  },
+  "known_counting_limitation": {
+    "correct": 3.629119873046875,
+    "wrong": 3.819321393966675,
+    "still_present": true
+  },
+  "status": "PASS_RUNTIME_WITH_KNOWN_MODEL_LIMITATIONS"
+}

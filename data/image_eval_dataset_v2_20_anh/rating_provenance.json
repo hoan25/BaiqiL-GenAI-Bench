@@ -1,0 +1,10 @@
+{
+  "confirmed_date": "2026-10-30",
+  "confirmation": "User confirmed ratings are AI/simulated",
+  "source_file": "ratings_simulated_3_students.csv",
+  "label_source": "AI_simulated",
+  "named_raters_are_not_verified_human_ratings": true,
+  "human_template": "ratings_human_blank.csv",
+  "independent_evaluation": "BLOCKED pending actual human ratings",
+  "model_predictions": "NOT RUN"
+}

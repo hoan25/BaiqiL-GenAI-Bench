@@ -1,0 +1,35 @@
+{
+  "health": {
+    "request_id": "1016ccefbe6b4efab81499738395a3ca",
+    "type": "health",
+    "data": {
+      "model_ready": true,
+      "scope": "reviewed_full_data_validation_only"
+    },
+    "model_version": "mlp-b8dba09efa0e",
+    "elapsed_ms": 1.09,
+    "warnings": [
+      "Mô hình đã kiểm tra trên validation GenAI-Bench; bảng metrics ở đây thuộc validation, chưa nghiệm thu release."
+    ]
+  },
+  "smoke": {
+    "request_id": "fd11249dc58049b987fa2f95a65828d9",
+    "type": "score",
+    "data": {
+      "items": [
+        {
+          "score": 4.662652015686035,
+          "cosine": 0.1759115308523178,
+          "index": 0,
+          "rank": 1
+        }
+      ]
+    },
+    "model_version": "mlp-b8dba09efa0e",
+    "elapsed_ms": 605.67,
+    "warnings": [
+      "Mô hình đã kiểm tra trên validation GenAI-Bench; bảng metrics ở đây thuộc validation, chưa nghiệm thu release."
+    ]
+  },
+  "reason": "User requested baseline rollback"
+}

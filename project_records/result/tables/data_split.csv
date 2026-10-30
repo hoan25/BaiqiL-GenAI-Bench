@@ -1,0 +1,4 @@
+﻿split,prompt_groups,pairs
+train,1120,6718
+val,240,1440
+test,240,1440

@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-27",
+  "scope": "Frozen evaluation candidate, not release approval",
+  "selected": "mlp",
+  "seed": 42,
+  "selection_basis": "Validation MAE, primary seed fixed before training; unchanged after external20",
+  "test_count": 1440,
+  "test_prompt_groups": 240,
+  "min_label_gap": 0.5,
+  "prediction_tie_credit": 0,
+  "metrics": [
+    "mae",
+    "rmse",
+    "spearman",
+    "same_prompt_pairwise_accuracy"
+  ],
+  "comparators": [
+    "mean",
+    "ridge",
+    "clip_cosine"
+  ],
+  "policy": "No retraining, recalibration, seed selection, threshold changes or model replacement based on test; all comparators reported",
+  "external20_seen_before_test": true,
+  "files_sha256": {
+    "data/lock.json": "09330e8be9587ce65cb4092a20ec14bce4defe9c8fc4851a1010ca83d4e9b4bf",
+    "data/manifest.jsonl": "4ed1e3c7909c81c239beaa2890f4adbcaef7545217e1d309a8b023e084182ca2",
+    "extraction/embeddings.npz": "f97e19e6b34d0058290bf572f66e4780feaba3e6f2c0ac29d6ca3bd35b132b8f",
+    "extraction/result.json": "0b428a6e316863a4cbf6fdc5db04ec15e4bec20b8a8fb12706f7847ca4566117",
+    "training-seed42/result.json": "f1e5058ed13176207e0a1c1fb8aba814b8528f41e27d67c1d78d051dba2b1d8d",
+    "training-seed42/mean.pt": "ddd2f807a83dbaa703b69a3eacd922c4da21e915eeaf31f55c7912106b6f43d3",
+    "training-seed42/ridge.pt": "4abd181ded309eaba6c5d2be3b68e25a70ff425c348dce526d4f687579ae7f2b",
+    "training-seed42/mlp.pt": "b8dba09efa0ef038ff69393ffe5bcdc7e96f742f13f7131ead3f14cb228d18dc"
+  },
+  "evaluator_sha256": "a7f2053c3c7464c3103d2f676ad6c8956118c080ecf8c1938e8f56b55f08093c",
+  "metrics_source_sha256": "859582b1182f6d83dbf72ebdc6206202161247a5dd124d19b5bd2288d74d6f05"
+}

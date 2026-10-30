@@ -1,0 +1,196 @@
+{
+  "status": "PASS_EXECUTION_NOT_RELEASE",
+  "protocol": {
+    "scope": "post_holdout_development_train_val_only",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "features": [
+      "hybrid"
+    ],
+    "alpha": 1.0,
+    "hidden": 64,
+    "epochs": 100,
+    "patience": 15,
+    "learning_rate": 0.001,
+    "manifest_sha256": "4ed1e3c7909c81c239beaa2890f4adbcaef7545217e1d309a8b023e084182ca2",
+    "embeddings_sha256": "f97e19e6b34d0058290bf572f66e4780feaba3e6f2c0ac29d6ca3bd35b132b8f",
+    "test": "NOT EVALUATED",
+    "primary_seed": 42,
+    "promotion": "No automatic deployment; independent new set required"
+  },
+  "aggregate": {
+    "hybrid-ridge": {
+      "mae_mean": 1.0321192677650186,
+      "mae_std_population": 0.0,
+      "mae_each": [
+        1.0321192677650186,
+        1.0321192677650186,
+        1.0321192677650186
+      ]
+    },
+    "hybrid-mlp": {
+      "mae_mean": 0.780171475559473,
+      "mae_std_population": 0.0053069147471830145,
+      "mae_each": [
+        0.7844789463612768,
+        0.7833402665952841,
+        0.7726952137218581
+      ]
+    }
+  },
+  "runs": {
+    "hybrid-seed42": {
+      "metrics": {
+        "mean": {
+          "count": 1440,
+          "mae": 0.9378546448217497,
+          "rmse": 1.0736531337396205,
+          "spearman": null,
+          "pairwise": {
+            "accuracy": 0.0,
+            "eligible_pairs": 1940,
+            "correct_pairs": 0,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 1940,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "ridge": {
+          "count": 1440,
+          "mae": 1.0321192677650186,
+          "rmse": 1.2994340082943674,
+          "spearman": 0.307145468852484,
+          "pairwise": {
+            "accuracy": 0.5922680412371134,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1149,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 115,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "mlp": {
+          "count": 1440,
+          "mae": 0.7844789463612768,
+          "rmse": 0.9665491209878523,
+          "spearman": 0.46481778137643565,
+          "pairwise": {
+            "accuracy": 0.6412371134020619,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1244,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 0,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        }
+      },
+      "best_epoch": 12
+    },
+    "hybrid-seed43": {
+      "metrics": {
+        "mean": {
+          "count": 1440,
+          "mae": 0.9378546448217497,
+          "rmse": 1.0736531337396205,
+          "spearman": null,
+          "pairwise": {
+            "accuracy": 0.0,
+            "eligible_pairs": 1940,
+            "correct_pairs": 0,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 1940,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "ridge": {
+          "count": 1440,
+          "mae": 1.0321192677650186,
+          "rmse": 1.2994340082943674,
+          "spearman": 0.307145468852484,
+          "pairwise": {
+            "accuracy": 0.5922680412371134,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1149,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 115,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "mlp": {
+          "count": 1440,
+          "mae": 0.7833402665952841,
+          "rmse": 0.9554908164360368,
+          "spearman": 0.4714743363458587,
+          "pairwise": {
+            "accuracy": 0.6582474226804124,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1277,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 0,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        }
+      },
+      "best_epoch": 12
+    },
+    "hybrid-seed44": {
+      "metrics": {
+        "mean": {
+          "count": 1440,
+          "mae": 0.9378546448217497,
+          "rmse": 1.0736531337396205,
+          "spearman": null,
+          "pairwise": {
+            "accuracy": 0.0,
+            "eligible_pairs": 1940,
+            "correct_pairs": 0,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 1940,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "ridge": {
+          "count": 1440,
+          "mae": 1.0321192677650186,
+          "rmse": 1.2994340082943674,
+          "spearman": 0.307145468852484,
+          "pairwise": {
+            "accuracy": 0.5922680412371134,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1149,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 115,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        },
+        "mlp": {
+          "count": 1440,
+          "mae": 0.7726952137218581,
+          "rmse": 0.9429363717449125,
+          "spearman": 0.4880184637356533,
+          "pairwise": {
+            "accuracy": 0.6556701030927835,
+            "eligible_pairs": 1940,
+            "correct_pairs": 1272,
+            "excluded_label_ties": 1660,
+            "prediction_ties": 0,
+            "min_label_gap": 0.5,
+            "prediction_tie_credit": 0
+          }
+        }
+      },
+      "best_epoch": 11
+    }
+  }
+}

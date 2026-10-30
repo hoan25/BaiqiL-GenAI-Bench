@@ -1,0 +1,41 @@
+﻿sample_id,image_path,evaluation_prompt_en,original_image_id,prompt_source_id
+D01a,../external20/images/images/01.png,A blue mug on a wooden table.,01,02
+D01b,../external20/images/images/01.png,A woman wearing a red hat and a white shirt.,01,08
+D02a,../external20/images/images/02.png,A yellow bicycle leaning against a brick wall.,02,03
+D02b,../external20/images/images/02.png,"A red ball to the left of a blue box, viewed from the front.",02,09
+D03a,../external20/images/images/03.png,A black cat sleeping on a gray sofa.,03,04
+D03b,../external20/images/images/03.png,A cat sitting on top of a wooden chair.,03,10
+D04a,../external20/images/images/04.png,Three red apples on a white table.,04,05
+D04b,../external20/images/images/04.png,A person pouring water from a bottle into a glass.,04,11
+D05a,../external20/images/images/05.png,Three yellow bananas on a white plate.,05,06
+D05b,../external20/images/images/05.png,A young woman resting her hand on a puppy's paw.,05,12
+D06a,../external20/images/images/06.png,A green bottle beside a blue cup.,06,07
+D06b,../external20/images/images/06.png,"A white plate on an empty wooden table, with no food on the plate.",06,13
+D07a,../external20/images/images/07.png,A woman wearing a red hat and a white shirt.,07,08
+D07b,../external20/images/images/07.png,A wooden table holding a white plate with no spoon anywhere on the table.,07,14
+D08a,../external20/images/images/08.png,"A red ball to the left of a blue box, viewed from the front.",08,09
+D08b,../external20/images/images/08.png,A white mug with a small red heart printed on its side.,08,15
+D09a,../external20/images/images/09.png,A cat sitting on top of a wooden chair.,09,10
+D09b,../external20/images/images/09.png,A shop sign displaying exactly the word OPEN in large black letters.,09,16
+D10a,../external20/images/images/10.png,A person pouring water from a bottle into a glass.,10,11
+D10b,../external20/images/images/10.png,A watercolor painting of a small boat on a calm lake at sunset.,10,17
+D11a,../external20/images/images/11.png,A young woman resting her hand on a puppy's paw.,11,12
+D11b,../external20/images/images/11.png,A small yellow bird perched on the handle of a large red watering can.,11,18
+D12a,../external20/images/images/12.png,"A white plate on an empty wooden table, with no food on the plate.",12,13
+D12b,../external20/images/images/12.png,A white dog wearing a red scarf beside a blue suitcase on a train platform.,12,19
+D13a,../external20/images/images/13.png,A wooden table holding a white plate with no spoon anywhere on the table.,13,14
+D13b,../external20/images/images/13.png,A red bicycle parked in front of a white house.,13,20
+D14a,../external20/images/images/14.png,A white mug with a small red heart printed on its side.,14,15
+D14b,../external20/images/images/14.png,A red apple on a white plate.,14,01
+D15a,../external20/images/images/15.png,A shop sign displaying exactly the word OPEN in large black letters.,15,16
+D15b,../external20/images/images/15.png,A blue mug on a wooden table.,15,02
+D16a,../external20/images/images/16.png,A watercolor painting of a small boat on a calm lake at sunset.,16,17
+D16b,../external20/images/images/16.png,A yellow bicycle leaning against a brick wall.,16,03
+D17a,../external20/images/images/17.png,A small yellow bird perched on the handle of a large red watering can.,17,18
+D17b,../external20/images/images/17.png,A black cat sleeping on a gray sofa.,17,04
+D18a,../external20/images/images/18.png,A white dog wearing a red scarf beside a blue suitcase on a train platform.,18,19
+D18b,../external20/images/images/18.png,Three red apples on a white table.,18,05
+D19a,../external20/images/images/19.png,A red bicycle parked in front of a white house.,19,20
+D19b,../external20/images/images/19.png,Three yellow bananas on a white plate.,19,06
+D20a,../external20/images/images/20.png,A red apple on a white plate.,20,01
+D20b,../external20/images/images/20.png,A green bottle beside a blue cup.,20,07

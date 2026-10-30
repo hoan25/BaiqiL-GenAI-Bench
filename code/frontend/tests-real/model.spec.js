@@ -1,0 +1,20 @@
+import {test, expect} from '@playwright/test';
+const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAANUlEQVR4nO3QsQ0AMAzDsLT//9yeoCkbeYAN6LzZdZf3x0GSKEmUJEoSJYmSREmiJFGSaMoHo8QBPwYSAhsAAAAASUVORK5CYII=', 'base64');
+test('real checkpoint: upload, score, compare, validation dashboard', async ({page}) => {
+  await page.goto('/');
+  await expect(page.locator('.notice')).toContainText('validation GenAI-Bench', {timeout: 120000});
+  await page.getByLabel('Prompt dùng để đối chiếu').fill('a red square');
+  await page.getByLabel('Chọn ảnh').setInputFiles({name: 'red.png', mimeType: 'image/png', buffer: png});
+  await page.getByRole('button', {name: 'Chấm ảnh', exact: true}).click();
+  await expect(page.locator('.result')).toHaveCount(1, {timeout: 120000});
+  await expect(page.locator('.metadata').first()).toContainText('mlp-b8dba09efa0e');
+  await page.getByRole('button', {name: 'Xóa ảnh 1', exact: true}).click();
+  await page.getByLabel('Chọn ảnh').setInputFiles(['a', 'b'].map(n => ({name: n + '.png', mimeType: 'image/png', buffer: png})));
+  await page.getByRole('button', {name: 'So sánh →', exact: true}).click();
+  await expect(page.locator('.result')).toHaveCount(3, {timeout: 120000});
+  await page.getByRole('button', {name: 'Xem biểu đồ ↗'}).click();
+  await expect(page.getByRole('row').filter({hasText: 'mlp'})).toContainText('0.774');
+  await expect(page.getByRole('row').filter({hasText: 'CLIP cosine'})).toContainText('0.184');
+  await expect(page.getByRole('columnheader', {name: 'Pairwise accuracy'})).toBeVisible();
+  await page.screenshot({path: `../../project_records/reports/figures/G5-real-model-${Date.now()}.png`, fullPage: true});
+});

@@ -1,0 +1,61 @@
+﻿sample_id,reviewer,score_1_to_5,comment,rated_date
+01,hoan,5,"Đúng quả táo đỏ đặt trên đĩa trắng, đối tượng và màu sắc chính xác.",2026-10-27
+01,huy,5,Khớp đầy đủ: quả táo màu đỏ trên chiếc đĩa trắng sạch sẽ.,2026-10-27
+01,an,5,Đáp ứng đầy đủ yêu cầu: 1 quả táo đỏ trên đĩa màu trắng.,2026-10-27
+02,hoan,5,Đúng chiếc cốc màu xanh trên mặt bàn gỗ.,2026-10-27
+02,huy,5,Khớp hoàn toàn cốc sứ xanh lam đặt trên bàn gỗ.,2026-10-27
+02,an,5,Đáp ứng đầy đủ đối tượng cốc xanh và bối cảnh bàn gỗ.,2026-10-27
+03,hoan,5,Đúng xe đạp vàng dựng tựa vào bức tường gạch.,2026-10-27
+03,huy,5,Khớp đầy đủ xe đạp màu vàng và tường gạch phía sau.,2026-10-27
+03,an,5,"Đáp ứng tốt đối tượng xe đạp vàng, hành động tựa và nền tường gạch.",2026-10-27
+04,hoan,5,Đúng con mèo đen đang ngủ trên ghế sofa màu xám.,2026-10-27
+04,huy,5,"Khớp đầy đủ: mèo đen, tư thế ngủ, ghế sofa xám.",2026-10-27
+04,an,5,"Đáp ứng đầy đủ đối tượng, màu sắc và hành động đang ngủ trên sofa.",2026-10-27
+05,hoan,5,Đúng số lượng 3 quả táo màu đỏ trên bàn trắng.,2026-10-27
+05,huy,5,Khớp chính xác 3 quả táo đỏ xếp trên mặt bàn trắng.,2026-10-27
+05,an,5,"Đủ 3 quả táo đỏ, nền bàn màu trắng đúng yêu cầu.",2026-10-27
+06,hoan,3,Đúng chuối vàng trên đĩa trắng nhưng chỉ có 2 quả thay vì 3 quả.,2026-10-27
+06,huy,3,Khớp vật thể và màu sắc nhưng sai số lượng: đếm được 2 quả chuối.,2026-10-27
+06,an,2,"Sai số lượng yêu cầu rõ ràng, chỉ có 2 quả chuối thay vì 3.",2026-10-27
+07,hoan,5,Đúng chai màu xanh lá đặt cạnh cốc màu xanh dương.,2026-10-27
+07,huy,5,"Khớp đầy đủ cả hai vật thể và màu sắc xanh lá, xanh lam.",2026-10-27
+07,an,5,Đáp ứng tốt quan hệ vị trí cạnh nhau và màu sắc của chai và cốc.,2026-10-27
+08,hoan,3,"Đúng người phụ nữ và áo sơ mi trắng, nhưng mũ màu xanh dương chứ không phải màu đỏ.",2026-10-27
+08,huy,2,"Sai thuộc tính màu sắc quan trọng: mũ thực tế màu xanh lam, không phải mũ đỏ.",2026-10-27
+08,an,3,"Khớp người phụ nữ và áo trắng, nhưng sai màu mũ (màu xanh thay vì đỏ).",2026-10-27
+09,hoan,5,Đúng bóng đỏ nằm bên trái hộp xanh khi nhìn từ chính diện.,2026-10-27
+09,huy,5,Khớp chính xác vị trí quả bóng đỏ ở phía bên trái hộp xanh.,2026-10-27
+09,an,5,"Đáp ứng đầy đủ đối tượng, màu sắc và quan hệ không gian trái phải.",2026-10-27
+10,hoan,2,Có mèo và ghế gỗ nhưng sai vị trí: mèo ngồi dưới gầm ghế chứ không phải trên mặt ghế.,2026-10-27
+10,huy,2,Sai quan hệ không gian quan trọng: mèo ở dưới gầm ghế thay vì ngồi trên ghế.,2026-10-27
+10,an,2,"Đúng đối tượng mèo và ghế, nhưng mâu thuẫn quan hệ vị trí (ngồi dưới thay vì trên mặt ghế).",2026-10-27
+11,hoan,5,Đúng hành động một người đang rót nước từ chai vào cốc thủy tinh.,2026-10-27
+11,huy,5,"Khớp đầy đủ người, chai nước, cốc và hành động đang rót nước.",2026-10-27
+11,an,5,Hành động và hướng tương tác rót nước từ chai vào ly hoàn toàn chính xác.,2026-10-27
+12,hoan,3,"Đúng cô gái trẻ và chú chó con, nhưng tay đang đặt lên đầu chó thay vì chân (paw).",2026-10-27
+12,huy,2,Sai chi tiết vị trí tương tác: tay đặt trên đầu chứ không phải chân chó.,2026-10-27
+12,an,3,Khớp phần lớn đối tượng chính nhưng sai vị trí đặt tay (trên đầu thay vì chân chó).,2026-10-27
+13,hoan,5,"Đúng đĩa trắng trên bàn gỗ, thỏa mãn yêu cầu không có thức ăn trên đĩa.",2026-10-27
+13,huy,5,Khớp hoàn toàn: đĩa trắng trên bàn gỗ rỗng và không có đồ ăn.,2026-10-27
+13,an,5,Thỏa mãn đầy đủ cả đối tượng và điều kiện phủ định không có thức ăn.,2026-10-27
+14,hoan,1,Mâu thuẫn trực tiếp với yêu cầu phủ định: có chiếc thìa kim loại nằm ngay trên đĩa.,2026-10-27
+14,huy,2,Có bàn gỗ và đĩa trắng nhưng vi phạm rõ ràng yêu cầu không có thìa trên bàn.,2026-10-27
+14,an,1,Sai yêu cầu phủ định cốt lõi: trên đĩa xuất hiện một chiếc thìa kim loại.,2026-10-27
+15,hoan,5,Đúng chiếc cốc trắng có in hình trái tim đỏ nhỏ ở thân cốc.,2026-10-27
+15,huy,5,Khớp chi tiết trái tim màu đỏ nhỏ in trên chiếc cốc sứ màu trắng.,2026-10-27
+15,an,5,Đáp ứng đầy đủ đối tượng cốc trắng và chi tiết hình trái tim đỏ.,2026-10-27
+16,hoan,5,Đúng biển hiệu cửa hàng với chữ OPEN viết hoa to màu đen rất rõ nét.,2026-10-27
+16,huy,5,Khớp chính xác từng chữ OPEN màu đen kích thước lớn trên biển hiệu.,2026-10-27
+16,an,5,"Hiển thị đúng chính xác từ OPEN chữ đen lớn, không bị sai chính tả hay ký tự thừa.",2026-10-27
+17,hoan,5,"Đúng phong cách tranh màu nước, có thuyền nhỏ trên hồ yên ả lúc hoàng hôn.",2026-10-27
+17,huy,5,"Khớp đầy đủ chất liệu màu nước, bối cảnh hoàng hôn trên hồ và chiếc thuyền nhỏ.",2026-10-27
+17,an,5,Đáp ứng đầy đủ phong cách nghệ thuật màu nước và các yếu tố cảnh vật.,2026-10-27
+18,hoan,5,Đúng chim vàng nhỏ đang đậu trên quai cầm của chiếc bình tưới lớn màu đỏ.,2026-10-27
+18,huy,5,"Khớp hoàn toàn: chim nhỏ màu vàng, vị trí trên tay cầm bình tưới đỏ.",2026-10-27
+18,an,5,"Đáp ứng tốt cả đối tượng nhỏ (chim vàng), vị trí đậu và bình tưới màu đỏ.",2026-10-27
+19,hoan,5,Đầy đủ các chi tiết: chó trắng quàng khăn đỏ cạnh va li xanh tại sân ga tàu.,2026-10-27
+19,huy,5,"Khớp tất cả thuộc tính phức tạp: chó trắng, khăn quàng đỏ, va li xanh, sân ga.",2026-10-27
+19,an,5,Đáp ứng trọn vẹn nhiều thuộc tính và bối cảnh ga tàu theo yêu cầu.,2026-10-27
+20,hoan,1,Sai hoàn toàn đối tượng chính: ảnh là ô tô màu đỏ chứ không phải xe đạp.,2026-10-27
+20,huy,1,Không phù hợp: prompt yêu cầu xe đạp đỏ nhưng trong ảnh là xe ô tô đỏ.,2026-10-27
+20,an,1,"Đối tượng chính hoàn toàn sai (ô tô thay vì xe đạp), dù màu đỏ và nhà trắng đúng.",2026-10-27

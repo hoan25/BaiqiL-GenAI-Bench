@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-27",
+  "status": "PASS",
+  "scope": "Fresh isolated Python venv and npm ci on same Windows machine; existing browser, CLIP and reviewed artifact reused; not second-machine acceptance",
+  "venv": ".cache/g7-clean-20261027/venv",
+  "system_site_packages": false,
+  "pip_check": "PASS",
+  "python_tests": {
+    "passed": 17,
+    "seconds": 70.62,
+    "warning": "AnyIO BlockingPortal alias deprecation"
+  },
+  "frontend_install": "npm ci --offline --no-audit --no-fund: 20 packages",
+  "build": {
+    "status": "PASS",
+    "seconds": 2.07
+  },
+  "real_browser": {
+    "passed": 1,
+    "seconds": 30.4,
+    "test_seconds": 4.5,
+    "mock_api": false
+  },
+  "model_version": "mlp-b8dba09efa0e",
+  "fix": "Added requirements-web-win-cpu.txt including missing PyArrow dependency and clean install instructions",
+  "limitations": [
+    "No independent user UAT",
+    "No second physical machine",
+    "No test holdout",
+    "No new artifact acquisition/review; existing reviewed artifact reused"
+  ],
+  "source_sha256": {
+    "requirements-web-win-cpu.txt": "253130217a2e86084e02c8c28b29412cbba60343c76a561a39df84f219a3dedd",
+    "requirements-g0-win-cpu.lock.txt": "ca2eab55739033820cff814c82eadf8388d9d5fec85552db4e6b39a4a1f9a1ef",
+    "requirements-api.txt": "0633a0d222d71a282943cd81abd8f40ae251ebd69dc996b8f23b24fab2238a29",
+    "requirements-data.in": "b3cc83883b67e5539cad3585f037263a1545dc6880a5eef336080a7783773d94",
+    "frontend/package-lock.json": "841458dc018d15b549d685de1155da3140101ff9786d7bbd7642cdb5f2797333"
+  }
+}

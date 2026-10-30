@@ -16,10 +16,16 @@ data/raw/
 *.safetensors
 *.ckpt
 .cache/
-artifacts/*.zip
+*.zip
 reports/results/*install.log
 *.bin
 reports/results/kaggle/
 *.npz
 frontend/test-results/
 frontend/playwright-report/
+
+# Reorganized records and generated runtime files
+project_records/reports/results/*install.log
+project_records/reports/results/kaggle/
+code/frontend/test-results/
+code/frontend/playwright-report/

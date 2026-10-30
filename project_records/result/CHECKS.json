@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-27",
+  "status": "PASS",
+  "scope": "report_packaging_only_not_model_or_release_acceptance",
+  "checks": [
+    "12 evidence copies byte-identical by SHA256",
+    "tables generated from existing JSON metrics/config/history",
+    "split total 9598",
+    "seed42 best epoch20 / stopped35",
+    "16 authored Markdown links resolve; no pending table markers"
+  ],
+  "external20_ratings": {
+    "rows": 60,
+    "valid": 0,
+    "invalid_nonempty": 24,
+    "empty": 36
+  },
+  "external20_rating_status": "BLOCKED_INVALID_AND_MISSING_SCORES",
+  "not_run": [
+    "training",
+    "holdout",
+    "external20_inference",
+    "application_test_rerun"
+  ],
+  "git_diff_check": {
+    "status": "FAIL_PREEXISTING",
+    "detail": "PROJECT_PLAN.md:3 existing user edit has Markdown trailing spaces; preserved. Report packaging checks PASS."
+  }
+}

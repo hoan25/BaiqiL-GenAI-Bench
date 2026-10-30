@@ -1,0 +1,230 @@
+{
+  "status": "PASS",
+  "scope": "exploratory_external20_not_holdout",
+  "date": "2026-10-27",
+  "model_version": "mlp-b8dba09efa0e",
+  "metrics": {
+    "count": 20,
+    "mae": 1.456520183881124,
+    "rmse": 1.6230825670109468,
+    "spearman": -0.307533970810442
+  },
+  "ratings_sha256": "13252982b8c5e2bed95ab3b350ad9d39cab214cd690cb1c4a399b151381169f7",
+  "original_ratings_sha256": "57bdc99143f98b10ce27e468c2f452c9c02852825c1d47c6cc3a83120b60d7ea",
+  "samples_sha256": "7cce05fb55097501ecc62cfefda1468ac72298a6abaee966cf0921e77417d6a1",
+  "rating_distribution": {
+    "5": 42,
+    "3": 6,
+    "2": 7,
+    "1": 5
+  },
+  "reviewer_provenance": "User supplied scores under hoan/huy/an; independence not independently verified",
+  "limitations": [
+    "20 selected Muse AI images; not representative",
+    "No tuning on these results",
+    "No pairwise metric across different prompts",
+    "Not a release acceptance"
+  ],
+  "results": [
+    {
+      "sample_id": "01",
+      "group": "simple",
+      "prompt": "A red apple on a white plate.",
+      "human_mean": 5.0,
+      "human_std": 0.0,
+      "score": 4.072925567626953,
+      "cosine": 0.33589789271354675,
+      "absolute_error": 0.9270744323730469
+    },
+    {
+      "sample_id": "02",
+      "group": "simple",
+      "prompt": "A blue mug on a wooden table.",
+      "human_mean": 5.0,
+      "human_std": 0.0,
+      "score": 4.462214469909668,
+      "cosine": 0.34493488073349,
+      "absolute_error": 0.537785530090332
+    },
+    {
+      "sample_id": "03",
+      "group": "simple",
+      "prompt": "A yellow bicycle leaning against a brick wall.",
+      "human_mean": 5.0,
+      "human_std": 0.0,
+      "score": 4.2324066162109375,
+      "cosine": 0.35970252752304077,
+      "absolute_error": 0.7675933837890625
+    },
+    {
+      "sample_id": "04",
+      "group": "simple",
+      "prompt": "A black cat sleeping on a gray sofa.",
+      "human_mean": 5.0,
+      "human_std": 0.0,
+      "score": 4.257018089294434,
+      "cosine": 0.3324538469314575,
+      "absolute_error": 0.7429819107055664
+    },
+    {
+      "sample_id": "05",
+      "group": "count_attribute",
+      "prompt": "Three red apples on a white table.",
+      "human_mean": 5.0,
+      "human_std": 0.0,
+      "score": 3.9152777194976807,
+      "cosine": 0.29317227005958557,
+      "absolute_error": 1.0847222805023193
+    },
+    {
+      "sample_id": "06",
+      "group": "count_attribute",
+      "prompt": "Three yellow bananas on a white plate.",
+      "human_mean": 2.6666666666666665,
+      "human_std": 0.4714045207910317,
+      "score": 3.674738883972168,
+      "cosine": 0.33269667625427246,
+      "absolute_error": 1.0080722173055015
+    },
+    {
+      "sample_id": "07",
+      "group": "count_attribute",
+      "prompt": "A green bottle beside a blue cup.",
+      "human_mean": 5.0,
+      "human_std": 0.0,
+      "score": 3.510714054107666,
+      "cosine": 0.32183021306991577,
+      "absolute_error": 1.489285945892334
+    },
+    {
+      "sample_id": "08",
+      "group": "count_attribute",
+      "prompt": "A woman wearing a red hat and a white shirt.",
+      "human_mean": 2.6666666666666665,
+      "human_std": 0.4714045207910317,
+      "score": 4.400882720947266,
+      "cosine": 0.3123001456260681,
+      "absolute_error": 1.734216054280599
+    },
+    {
+      "sample_id": "09",
+      "group": "relation_action",
+      "prompt": "A red ball to the left of a blue box, viewed from the front.",
+      "human_mean": 5.0,
+      "human_std": 0.0,
+      "score": 2.767249584197998,
+      "cosine": 0.34738850593566895,
+      "absolute_error": 2.232750415802002
+    },
+    {
+      "sample_id": "10",
+      "group": "relation_action",
+      "prompt": "A cat sitting on top of a wooden chair.",
+      "human_mean": 2.0,
+      "human_std": 0.0,
+      "score": 4.098938941955566,
+      "cosine": 0.3177030384540558,
+      "absolute_error": 2.0989389419555664
+    },
+    {
+      "sample_id": "11",
+      "group": "relation_action",
+      "prompt": "A person pouring water from a bottle into a glass.",
+      "human_mean": 5.0,
+      "human_std": 0.0,
+      "score": 3.480304002761841,
+      "cosine": 0.29227930307388306,
+      "absolute_error": 1.5196959972381592
+    },
+    {
+      "sample_id": "12",
+      "group": "relation_action",
+      "prompt": "A young woman resting her hand on a puppy's paw.",
+      "human_mean": 2.6666666666666665,
+      "human_std": 0.4714045207910317,
+      "score": 4.337119102478027,
+      "cosine": 0.3009633421897888,
+      "absolute_error": 1.6704524358113608
+    },
+    {
+      "sample_id": "13",
+      "group": "detail_negation",
+      "prompt": "A white plate on an empty wooden table, with no food on the plate.",
+      "human_mean": 5.0,
+      "human_std": 0.0,
+      "score": 3.791785955429077,
+      "cosine": 0.36963286995887756,
+      "absolute_error": 1.2082140445709229
+    },
+    {
+      "sample_id": "14",
+      "group": "detail_negation",
+      "prompt": "A wooden table holding a white plate with no spoon anywhere on the table.",
+      "human_mean": 1.3333333333333333,
+      "human_std": 0.4714045207910317,
+      "score": 3.5298056602478027,
+      "cosine": 0.3174721598625183,
+      "absolute_error": 2.1964723269144697
+    },
+    {
+      "sample_id": "15",
+      "group": "detail_negation",
+      "prompt": "A white mug with a small red heart printed on its side.",
+      "human_mean": 5.0,
+      "human_std": 0.0,
+      "score": 3.853188991546631,
+      "cosine": 0.35024285316467285,
+      "absolute_error": 1.1468110084533691
+    },
+    {
+      "sample_id": "16",
+      "group": "detail_negation",
+      "prompt": "A shop sign displaying exactly the word OPEN in large black letters.",
+      "human_mean": 5.0,
+      "human_std": 0.0,
+      "score": 3.15602970123291,
+      "cosine": 0.2806012034416199,
+      "absolute_error": 1.8439702987670898
+    },
+    {
+      "sample_id": "17",
+      "group": "hard",
+      "prompt": "A watercolor painting of a small boat on a calm lake at sunset.",
+      "human_mean": 5.0,
+      "human_std": 0.0,
+      "score": 4.442936897277832,
+      "cosine": 0.3778562545776367,
+      "absolute_error": 0.557063102722168
+    },
+    {
+      "sample_id": "18",
+      "group": "hard",
+      "prompt": "A small yellow bird perched on the handle of a large red watering can.",
+      "human_mean": 5.0,
+      "human_std": 0.0,
+      "score": 3.4097487926483154,
+      "cosine": 0.4141910970211029,
+      "absolute_error": 1.5902512073516846
+    },
+    {
+      "sample_id": "19",
+      "group": "hard",
+      "prompt": "A white dog wearing a red scarf beside a blue suitcase on a train platform.",
+      "human_mean": 5.0,
+      "human_std": 0.0,
+      "score": 3.8885998725891113,
+      "cosine": 0.3855271637439728,
+      "absolute_error": 1.1114001274108887
+    },
+    {
+      "sample_id": "20",
+      "group": "hard",
+      "prompt": "A red bicycle parked in front of a white house.",
+      "human_mean": 1.0,
+      "human_std": 0.0,
+      "score": 4.662652015686035,
+      "cosine": 0.1759115308523178,
+      "absolute_error": 3.662652015686035
+    }
+  ]
+}
