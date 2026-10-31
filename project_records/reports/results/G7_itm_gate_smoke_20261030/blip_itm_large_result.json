@@ -1,0 +1,136 @@
+{
+  "status": "PASS_EXECUTION_NOT_MODEL_QUALITY",
+  "scope": "zero_shot_vqascore_development_no_release",
+  "model": "Salesforce/blip-itm-large-coco",
+  "scorer": "blip-itm",
+  "device": "cuda",
+  "batch_size": 8,
+  "manifest_sha256": "9d2a3930de7cd23441c50405811d1fdd07e11c2d0dadf2d9ac32285fb0af3be4",
+  "splits": [
+    "train",
+    "val"
+  ],
+  "count": 678,
+  "genai_bench": {
+    "splits": {
+      "train": {
+        "count": 558,
+        "raw_mean": 0.930929340619517,
+        "raw_std": 0.18991418837463717,
+        "raw_spearman": 0.33959948630049314,
+        "raw_pairwise": {
+          "accuracy": 0.7042079207920792,
+          "eligible_pairs": 808,
+          "correct_pairs": 569,
+          "excluded_label_ties": 587,
+          "prediction_ties": 0,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        }
+      },
+      "val": {
+        "count": 120,
+        "raw_mean": 0.9644658941077069,
+        "raw_std": 0.11712140796577332,
+        "raw_spearman": 0.10663759300305727,
+        "raw_pairwise": {
+          "accuracy": 0.751412429378531,
+          "eligible_pairs": 177,
+          "correct_pairs": 133,
+          "excluded_label_ties": 123,
+          "prediction_ties": 1,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        }
+      }
+    },
+    "calibration": {
+      "linear": {
+        "model": {
+          "kind": "linear",
+          "slope": 2.356332122234327,
+          "intercept": 1.381690108372113
+        },
+        "metrics": {
+          "train": {
+            "count": 558,
+            "mae": 0.9057075356182238,
+            "rmse": 1.043589736738236,
+            "spearman": 0.33959948630049314
+          },
+          "val": {
+            "count": 120,
+            "mae": 0.8318098254563449,
+            "rmse": 0.9880805212622797,
+            "spearman": 0.10663759300305727
+          }
+        }
+      },
+      "isotonic": {
+        "model": {
+          "kind": "isotonic",
+          "x": [
+            0.002055732300505042,
+            0.009011171758174896,
+            0.028210172429680824,
+            0.03053916245698929,
+            0.031732555478811264,
+            0.47529298067092896,
+            0.8681995868682861,
+            0.9463750720024109,
+            0.9466333985328674,
+            0.9732768535614014,
+            0.9765592813491821,
+            0.9955776929855347,
+            0.9961341619491577,
+            0.9987962245941162,
+            0.9999324083328247,
+            0.9999393224716187,
+            0.999943733215332
+          ],
+          "y": [
+            1.3333333333333335,
+            1.4444444444444444,
+            1.6666666666666667,
+            1.6666666666666667,
+            1.8888888888888888,
+            2.8518518518518525,
+            2.925925925925926,
+            3.0,
+            3.298850574712644,
+            3.361111111111111,
+            3.6014492753623193,
+            3.611111111111111,
+            3.7349397590361444,
+            3.887835703001578,
+            4.166666666666667,
+            4.212121212121212,
+            4.380952380952381
+          ]
+        },
+        "metrics": {
+          "train": {
+            "count": 558,
+            "mae": 0.8795474126305493,
+            "rmse": 1.0247153839028307,
+            "spearman": 0.33981202097146224
+          },
+          "val": {
+            "count": 120,
+            "mae": 0.886189551754875,
+            "rmse": 1.067486779884219,
+            "spearman": 0.10003415764428679
+          }
+        }
+      }
+    },
+    "reference_mlp42_validation": {
+      "source": "project_records/reports/model_card.md, MLP seed42 on GenAI-Bench validation",
+      "mae": 0.773777,
+      "rmse": 0.950154,
+      "spearman": 0.480619,
+      "pairwise_accuracy": 0.66134
+    }
+  },
+  "seconds": 119.6
+}

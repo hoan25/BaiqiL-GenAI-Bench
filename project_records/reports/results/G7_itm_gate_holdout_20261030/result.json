@@ -1,0 +1,153 @@
+{
+  "status": "PASS_EXECUTION_NOT_MODEL_QUALITY",
+  "scope": "development_itm_gate_no_release",
+  "splits": [
+    "test"
+  ],
+  "swap_seed": 1701,
+  "itm_model": "Salesforce/blip-itm-base-coco",
+  "manifest_sha256": "b218ad7dffe15bfbb1e2bcee5cbb5f999fb10f0821f409197fbefa3c23f17160",
+  "mlp_checkpoint_sha256": "a575abfed14dc3aeacf05b55af53c9f5a201dd497792d8fb371c6ee7ec670ef1",
+  "results": {
+    "test": {
+      "count": 1440,
+      "mlp": {
+        "count": 1440,
+        "mae": 0.7919657917486297,
+        "rmse": 0.9669371243088869,
+        "spearman": 0.43695943390348485,
+        "pairwise": {
+          "accuracy": 0.6709844559585493,
+          "eligible_pairs": 1930,
+          "correct_pairs": 1295,
+          "excluded_label_ties": 1670,
+          "prediction_ties": 0,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        },
+        "swap": {
+          "original_wins": 788,
+          "count": 1440,
+          "mean_drop": 0.08109961888856358
+        }
+      },
+      "gate_multiply": {
+        "count": 1440,
+        "mae": 0.8123581636877345,
+        "rmse": 1.0187565144762671,
+        "spearman": 0.4684403345614865,
+        "pairwise": {
+          "accuracy": 0.6994818652849741,
+          "eligible_pairs": 1930,
+          "correct_pairs": 1350,
+          "excluded_label_ties": 1670,
+          "prediction_ties": 0,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        },
+        "swap": {
+          "original_wins": 1438,
+          "count": 1440,
+          "mean_drop": 2.0740963969812967
+        }
+      },
+      "gate_min": {
+        "count": 1440,
+        "mae": 0.7991713600106002,
+        "rmse": 0.9860928514325961,
+        "spearman": 0.4589186160293417,
+        "pairwise": {
+          "accuracy": 0.6829015544041451,
+          "eligible_pairs": 1930,
+          "correct_pairs": 1318,
+          "excluded_label_ties": 1670,
+          "prediction_ties": 0,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        },
+        "swap": {
+          "original_wins": 1438,
+          "count": 1440,
+          "mean_drop": 2.1766647750942765
+        }
+      },
+      "gate_sqrt": {
+        "count": 1440,
+        "mae": 0.7903874239057435,
+        "rmse": 0.9772873629052017,
+        "spearman": 0.47155615072508217,
+        "pairwise": {
+          "accuracy": 0.6911917098445596,
+          "eligible_pairs": 1930,
+          "correct_pairs": 1334,
+          "excluded_label_ties": 1670,
+          "prediction_ties": 0,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        },
+        "swap": {
+          "original_wins": 1438,
+          "count": 1440,
+          "mean_drop": 2.125109748520603
+        }
+      },
+      "gate_soft25": {
+        "count": 1440,
+        "mae": 0.7885294908173331,
+        "rmse": 0.9814307077669955,
+        "spearman": 0.4720908429808213,
+        "pairwise": {
+          "accuracy": 0.6958549222797927,
+          "eligible_pairs": 1930,
+          "correct_pairs": 1343,
+          "excluded_label_ties": 1670,
+          "prediction_ties": 0,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        },
+        "swap": {
+          "original_wins": 1420,
+          "count": 1440,
+          "mean_drop": 1.5758472024581136
+        }
+      },
+      "match_only": {
+        "count": 1440,
+        "mae": 1.4842561394331926,
+        "rmse": 1.7803506779023783,
+        "spearman": 0.24530468675286704,
+        "pairwise": {
+          "accuracy": 0.6658031088082902,
+          "eligible_pairs": 1930,
+          "correct_pairs": 1285,
+          "excluded_label_ties": 1670,
+          "prediction_ties": 0,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        },
+        "swap": {
+          "original_wins": 1438,
+          "count": 1440,
+          "mean_drop": 3.62639524363566
+        }
+      },
+      "itm_quantiles": {
+        "original": [
+          0.0019,
+          0.6632,
+          0.9967,
+          0.9999,
+          1.0
+        ],
+        "swapped": [
+          0.0,
+          0.0,
+          0.0,
+          0.0002,
+          0.4833
+        ]
+      }
+    }
+  },
+  "seconds": 224.9
+}

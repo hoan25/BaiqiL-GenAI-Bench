@@ -8,6 +8,8 @@ import pytest
 
 from scripts import kaggle_train
 
+CODE_ROOT = Path(__file__).resolve().parents[2]
+
 
 def args(tmp_path, accept=False):
     return argparse.Namespace(workdir=tmp_path, qa_archive=tmp_path / "qa.zip",
@@ -71,4 +73,4 @@ def test_success_uses_fixed_primary_seed_and_no_holdout(tmp_path, monkeypatch):
     assert report["seeds"] == [42, 43, 44]
     assert not any("--development" in command for command in commands)
     assert not any("scripts/download_dataset.py" in command for command in commands)
-    assert all(Path(p).is_file() for c in commands if "pytest" in c for p in c if p.startswith("tests/"))
+    assert all((CODE_ROOT / p).is_file() for c in commands if "pytest" in c for p in c if p.startswith("tests/"))

@@ -1,0 +1,18 @@
+{
+  "model": "Salesforce/blip-itm-base-coco",
+  "revision": "bed8ad38cb2d04a5a4bdf2d071b3c3c0a4aa724c",
+  "rule": "gate_sqrt",
+  "source_report": "project_records/reports/results/G7_itm_gate_full_20261030.md",
+  "status": "REVIEWED_FOR_LOCAL_GATE",
+  "reviewed_at": "2026-10-30",
+  "snapshot_path": "E:\\ai-cache\\huggingface\\hub\\models--Salesforce--blip-itm-base-coco\\snapshots\\bed8ad38cb2d04a5a4bdf2d071b3c3c0a4aa724c",
+  "files_sha256": {
+    "config.json": "3e6464c2ce7c54512ddb101c5e9a8e77f4c2d637be9e3d005667ccd4a34c6ef2",
+    "preprocessor_config.json": "0aa66e2e9ac3ea3b5cd4388c35072e22db4e1cc1f96c7872bed07749c712ade1",
+    "pytorch_model.bin": "017fb3e7f4e125f13a8a4717f1402dbe0d0bb877474b4a203db13a4447b0227f",
+    "special_tokens_map.json": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+    "tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+    "tokenizer_config.json": "86da6fdb761b02f73a05561aba71711c2d7c205fe1fd1744046173a410263925",
+    "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+  }
+}

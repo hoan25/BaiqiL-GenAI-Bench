@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "scope": "cpu_latency_synthetic_image_not_quality_benchmark",
+  "predictor": "GatedPredictor",
+  "rule": "gate_sqrt",
+  "itm_model": "Salesforce/blip-itm-base-coco",
+  "itm_revision": "bed8ad38cb2d04a5a4bdf2d071b3c3c0a4aa724c",
+  "version": "mlp-a575abfed14d-gate_sqrt-bed8ad38cb2d",
+  "image": "512x512 synthetic RGB",
+  "device": "cpu",
+  "torch_threads": 6,
+  "torch": "2.14.1+cu126",
+  "python": "3.12.10",
+  "machine": "AMD64",
+  "load_ms": 3010.0,
+  "gated": {
+    "runs": 20,
+    "warmup": 2,
+    "mean_ms": 932.0,
+    "median_ms": 938.8,
+    "min_ms": 790.7,
+    "max_ms": 1089.2,
+    "p90_ms": 1007.4,
+    "sample_output": {
+      "score": 3.3888173353308066,
+      "cosine": 0.29423534870147705,
+      "mlp": 3.422194719314575,
+      "itm": 0.9726302623748779,
+      "gated": true
+    }
+  },
+  "gate_skipped": {
+    "runs": 20,
+    "warmup": 2,
+    "mean_ms": 92.3,
+    "median_ms": 92.5,
+    "min_ms": 75.6,
+    "max_ms": 106.2,
+    "p90_ms": 103.3,
+    "sample_output": {
+      "score": 2.1898036003112793,
+      "cosine": 0.22152304649353027,
+      "mlp": 2.1898036003112793,
+      "itm": null,
+      "gated": false,
+      "warning": "Prompt không phải tiếng Anh; chưa kiểm tra khớp prompt, điểm chỉ từ mô hình hồi quy."
+    }
+  },
+  "gate_overhead_ms_median": 846.3,
+  "note": "Chạy khi một agent khác đang chạy job GPU trên cùng máy; thời gian CPU có thể cao hơn bình thường một chút."
+}
