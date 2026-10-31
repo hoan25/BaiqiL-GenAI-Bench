@@ -29,3 +29,6 @@ project_records/reports/results/*install.log
 project_records/reports/results/kaggle/
 code/frontend/test-results/
 code/frontend/playwright-report/
+
+# Plugin scratch directories
+.omc/

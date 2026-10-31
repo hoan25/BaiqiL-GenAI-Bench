@@ -1,0 +1,113 @@
+{
+  "status": "PASS_EXECUTION_NOT_MODEL_QUALITY",
+  "scope": "development_itm_gate_no_release",
+  "splits": [
+    "val"
+  ],
+  "swap_seed": 1701,
+  "itm_model": "Salesforce/blip-itm-base-coco",
+  "manifest_sha256": "b218ad7dffe15bfbb1e2bcee5cbb5f999fb10f0821f409197fbefa3c23f17160",
+  "mlp_checkpoint_sha256": "a575abfed14dc3aeacf05b55af53c9f5a201dd497792d8fb371c6ee7ec670ef1",
+  "results": {
+    "val": {
+      "count": 1440,
+      "mlp": {
+        "count": 1440,
+        "mae": 0.7737410195999675,
+        "rmse": 0.9500698116536198,
+        "spearman": 0.48059410348132076,
+        "pairwise": {
+          "accuracy": 0.6608247422680412,
+          "eligible_pairs": 1940,
+          "correct_pairs": 1282,
+          "excluded_label_ties": 1660,
+          "prediction_ties": 0,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        },
+        "swap": {
+          "original_wins": 815,
+          "count": 1440,
+          "mean_drop": 0.09769562847084469
+        }
+      },
+      "gate_multiply": {
+        "count": 1440,
+        "mae": 0.784896958021384,
+        "rmse": 0.9840892320414358,
+        "spearman": 0.5224383436745222,
+        "pairwise": {
+          "accuracy": 0.6824742268041237,
+          "eligible_pairs": 1940,
+          "correct_pairs": 1324,
+          "excluded_label_ties": 1660,
+          "prediction_ties": 0,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        },
+        "swap": {
+          "original_wins": 1439,
+          "count": 1440,
+          "mean_drop": 2.189385478185931
+        }
+      },
+      "gate_min": {
+        "count": 1440,
+        "mae": 0.7808029102963701,
+        "rmse": 0.9667929937427492,
+        "spearman": 0.5078560620725736,
+        "pairwise": {
+          "accuracy": 0.6757731958762887,
+          "eligible_pairs": 1940,
+          "correct_pairs": 1311,
+          "excluded_label_ties": 1660,
+          "prediction_ties": 0,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        },
+        "swap": {
+          "original_wins": 1439,
+          "count": 1440,
+          "mean_drop": 2.280605153346984
+        }
+      },
+      "match_only": {
+        "count": 1440,
+        "mae": 1.4125508896084014,
+        "rmse": 1.725096643838633,
+        "spearman": 0.2462327168148427,
+        "pairwise": {
+          "accuracy": 0.6927835051546392,
+          "eligible_pairs": 1940,
+          "correct_pairs": 1344,
+          "excluded_label_ties": 1660,
+          "prediction_ties": 2,
+          "min_label_gap": 0.5,
+          "prediction_tie_credit": 0
+        },
+        "swap": {
+          "original_wins": 1439,
+          "count": 1440,
+          "mean_drop": 3.6459178198757387
+        }
+      },
+      "itm_quantiles": {
+        "original": [
+          0.0001,
+          0.7003,
+          0.9967,
+          0.9999,
+          1.0
+        ],
+        "swapped": [
+          0.0,
+          0.0,
+          0.0,
+          0.0002,
+          0.9357
+        ]
+      }
+    }
+  },
+  "seconds": 263.1
+}

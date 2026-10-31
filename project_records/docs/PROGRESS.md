@@ -475,3 +475,39 @@ Log cài: `reports/results/G0_torch_install.log`, `G0_dependencies_install.log` 
 - Trạng thái nghiệm thu (PASS / FAIL / BLOCKED / NOT RUN):
 - Review còn thiếu:
 - Nhiệm vụ chưa nghiệm thu đầu tiên và bước tiếp theo:
+## 2026-10-30 — Chuẩn bị thử nghiệm VQAScore zero-shot (chưa chạy dữ liệu thật)
+
+- Nguyên nhân chấm sai đã xác định từ bằng chứng cũ: head nối text/image bỏ qua prompt (G7_prompt_sensitivity), CLIP B/32 yếu đếm/vị trí/phủ định; MLP42 val MAE 0,774 so M0 0,938, gần như chỉ học prior ảnh. Hướng mới: dùng VQAScore (CLIP-FlanT5) thay backbone, không train.
+- File mới: code/src/evaluation/vqascore.py (ghép cặp manifest+Parquet có kiểm checksum, scorer inject, calibration linear/isotonic chỉ fit train), code/scripts/score_vqascore.py (CLI t2v_metrics, mặc định train+val, holdout cần --include-test, tùy chọn --external20), code/tests/unit/test_vqascore.py, project_records/docs/VQASCORE.md.
+- Lệnh: `..\.venv\Scripts\python.exe -m pytest tests/unit/test_vqascore.py tests/unit/test_metrics.py -q` từ code/: **15 PASS/1,17s**. Venv mới tạo trong clone này chỉ có numpy/pillow/pyarrow/pytest, chưa có torch; test CLI dùng stub torch/t2v_metrics.
+- Chưa cài t2v-metrics, chưa tải CLIP-FlanT5, chưa chạy trên GenAI-Bench hay external20: **NOT RUN**. Ngưỡng so sánh ghi trước trong VQASCORE.md (val Spearman 0,480619, pairwise 0,661340). Không đổi model web, không commit/push.
+- Thư mục .omc/ và code/.omc/ xuất hiện untracked do công cụ phiên, không thuộc source.
+- Nhiệm vụ tiếp theo: chạy script trên Kaggle GPU với manifest đã khóa, smoke --limit 50 trước, rồi ghi G7_vqascore_<ngày>.md và quyết định tích hợp.
+
+## 2026-10-30 — Smoke BLIP-ITM làm cổng khớp prompt trên 1 shard (local GPU 4GB)
+
+- User yêu cầu thử. Clone mới không có .cache/.venv gốc; tạo .venv (torch 2.14.1+cu126, transformers 5.22.1), tải 1 shard GenAI-Bench revision pinned (386MB) và CLIP pinned vào .cache. Manifest dev 804 cặp (train558/val120/test126), không phải lock.
+- Thêm `--scorer blip-itm` vào scripts/score_vqascore.py (BlipForImageTextRetrieval, P(match)). tests/unit/test_vqascore.py **7 PASS** (chạy từ code/). t2v-metrics không cài được (pkg_resources, pin torch2.5.1) và CLIP-FlanT5-XL không vừa GPU: VQAScore **BLOCKED local**, để Kaggle.
+- Chạy: BLIP-ITM base/large zero-shot, CLIP extraction + train_regression dev trên shard, 3 script dev về feature/negatives/fusion/tráo prompt. Kết quả chính (val120): MLP nối CLIP tráo prompt chỉ 56/120 đúng, tái hiện lỗi web; BLIP-ITM 120/120; fusion `1+(mlp−1)×itm` giữ MAE0,648/Spearman0,650/pairwise0,791 và tráo prompt 120/120. Chi tiết reports/results/G7_itm_gate_smoke_20261030.md và thư mục cùng tên.
+- Trạng thái: PASS_EXECUTION, chất lượng chỉ ở mức smoke; luật fusion chọn sau khi xem val nên cần xác nhận full validation. Không đổi web, không commit/push, không mở holdout.
+- Tiếp theo: tải đủ 12 shard, chạy ITM + MLP42 khóa trên full val, rồi holdout một lần; VQAScore trên Kaggle cho lỗi đếm/trạng thái.
+
+## 2026-10-30 — Cổng BLIP-ITM trên full train/val (local GPU)
+
+- Tải đủ 12 shard pinned (4,6GB, .cache/genai-bench-smoke), manifest dev full 9.598/2 loại/6.718-1.440-1.440 trùng lock. CLIP extraction + train_regression seed42 local **tái lập đúng** model card (val MAE 0,773777/Spearman 0,480619).
+- Thêm code/src/evaluation/itm_gate.py (luật fusion), code/scripts/experiment_itm_gate.py (MLP + BLIP-ITM, tráo prompt, metrics theo luật), tests/unit/test_itm_gate.py. pytest itm_gate + vqascore: **14 PASS/2,81s**.
+- Luật chọn trên train, xác nhận val: `gate_sqrt = 1+(mlp−1)·√itm` val MAE 0,7670 / Spearman 0,5191 / pairwise 0,6825 / tráo prompt 1.439/1.440, so MLP42 0,7737/0,4806/0,6608/815. Báo cáo reports/results/G7_itm_gate_full_20261030.md + thư mục bằng chứng.
+- Không mở holdout, không chạy external20/v2 (ảnh không có trong clone), không đổi web, không commit/push. VQAScore vẫn BLOCKED local, chờ Kaggle.
+- Nhiệm vụ chưa nghiệm thu tiếp theo: review báo cáo → holdout một lần → tích hợp predictor với checkpoint reviewed + BLIP checksum → external20/v2 → VQAScore Kaggle.
+
+## 2026-10-30/31 — Holdout cổng ITM một lần, tích hợp GatedPredictor, script ảnh rời (3 agent song song)
+
+- Người dùng yêu cầu làm hết các phần tồn đọng. Trạng thái trước: ứng viên `gate_sqrt` đã xác nhận trên val (G7_itm_gate_full_20261030.md), chưa holdout, chưa tích hợp web.
+- **Holdout** (chạy đúng một lần, `experiment_itm_gate.py --splits test`, cuda, 224,9s, exit 0; sha256 script/luật/manifest/mlp.pt kiểm trước và sau, không đổi): 1.440 cặp, 240 nhóm, cùng tập pair_id với holdout chính thức 27/10. MLP local khớp holdout reviewed đến 3 chữ số (MAE 0,791966 so 0,791899). `gate_sqrt`: MAE 0,790387 / RMSE 0,977287 / Spearman 0,471556 / pairwise 0,691192 / tráo prompt 1.438/1.440, so MLP 0,791966 / 0,966937 / 0,436959 / 0,670984 / 788. Thắng mọi chỉ số trừ RMSE (+0,010). Không chỉnh luật sau test. Báo cáo reports/results/G7_itm_gate_holdout_20261030.md + thư mục (result.json, scores.csv, run_log, checksums). **PASS** (thực thi và assert), chất lượng chưa review chéo.
+- **Tích hợp web**: code/src/inference/gated_predictor.py (`GatedPredictor`, `score = 1+(mlp−1)·√itm`, trả thêm mlp/itm/gated, BLIP CPU mặc định, kiểm receipt), code/src/inference/language.py (phát hiện prompt tiếng Việt/phi Latin: bỏ cổng, trả MLP + cảnh báo), code/scripts/review_blip_artifact.py tạo code/configs/blip_itm_base_coco_receipt.json (revision bed8ad38cb2d04a5a4bdf2d071b3c3c0a4aa724c, sha256 7 file). Backend: env `PROMPTALIGN_ITM_MODEL`, `PROMPTALIGN_ITM_RECEIPT`, `PROMPTALIGN_ITM_DEVICE`; validator nhận mlp∈[1,5], itm∈[0,1]|null, warning str. Frontend hiển thị "Khớp prompt (ITM)" và cảnh báo. Smoke end-to-end với CLIP + head dev + BLIP thật: prompt Anh gated=True, prompt Việt gated=False.
+- **Latency CPU** (benchmark_gated_latency.py, 512×512, 20 lần, GPU job chạy song song nên có thể cao hơn thực): có cổng median 939 ms, không cổng 93 ms. reports/results/G7_gated_latency_20261030.json.
+- **Ảnh rời**: code/scripts/score_external_itm_gate.py (prompts.csv + thư mục ảnh + ratings tùy chọn, hỗ trợ cột external20 và v2), test với ảnh tổng hợp; mục "Chấm ảnh rời với cổng ITM" trong docs/VQASCORE.md. Chưa chạy data thật: ảnh không có trong clone (**NOT RUN**).
+- Sửa test phụ thuộc cwd (test_vqascore, test_kaggle_train, test_notebook_clone); `.omc/` vào .gitignore. Cài requirements-api.txt vào .venv (venv mới thiếu fastapi).
+- Lệnh: `..\.venv\Scripts\python.exe -m pytest tests/unit tests/integration -q` từ code/: **158 PASS/44,55s** (sau đó integrate tách 7 case API sang integration: unit 126, integration 31).
+- Tồn tại: web production vẫn cần checkpoint reviewed `mlp-b8dba09efa0e` (không có trong clone; GatedPredictor chỉ chạy với artifact dev ở máy này). VQAScore BLOCKED local; lỗi đếm/trạng thái chưa giải quyết; tiếng Việt chỉ bỏ cổng chưa dịch; external20/v2 chưa chạy.
+- Nhiệm vụ tiếp theo: trên máy gốc bật `PROMPTALIGN_ITM_MODEL` với checkpoint reviewed, chạy score_external_itm_gate.py trên external20 + v2, VQAScore trên Kaggle, review chéo báo cáo holdout trước khi cập nhật model card.

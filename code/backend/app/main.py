@@ -1,6 +1,7 @@
 from io import BytesIO
 import math
 import os
+from pathlib import Path
 import time
 import uuid
 from typing import Literal
@@ -60,6 +61,21 @@ def create_app(predictor=None, store=None):
             raise HTTPException(503, "Chưa có mô hình được cấu hình. Không có điểm giả được trả về.")
         return app.state.predictor
 
+    def in_range(value, low, high):
+        return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value) and low <= value <= high
+
+    def valid_item(item):
+        # Optional gated fields: raw head score "mlp" in [1,5]; "itm" is P(match) in [0,1] or None when skipped.
+        if not in_range(item.get("score"), 1, 5) or not in_range(item.get("cosine"), -1, 1):
+            return False
+        if "mlp" in item and not in_range(item["mlp"], 1, 5):
+            return False
+        if item.get("itm") is not None and not in_range(item["itm"], 0, 1):
+            return False
+        if "warning" in item and not isinstance(item["warning"], str):
+            return False
+        return True
+
     def score(prompt, payloads, compare=False):
         prompt = prompt.strip()
         if not 1 <= len(prompt) <= 1000:
@@ -71,8 +87,7 @@ def create_app(predictor=None, store=None):
             for payload in payloads:
                 images.append(decode_image(payload))
             results = required_model().predict(prompt, images)
-            if len(results) != len(images) or any(not math.isfinite(r["score"]) or not 1 <= r["score"] <= 5
-                    or not math.isfinite(r["cosine"]) or not -1 <= r["cosine"] <= 1 for r in results):
+            if len(results) != len(images) or any(not valid_item(r) for r in results):
                 raise RuntimeError("invalid predictor output")
             values = sorted({r["score"] for r in results}, reverse=True)
             return [{**r, "index": i, "rank": values.index(r["score"]) + 1} for i, r in enumerate(results)]
@@ -162,6 +177,14 @@ def configured_app():
             from src.inference.ensemble import EnsemblePredictor
             predictor = EnsemblePredictor(model_path, training_path, os.environ["PROMPTALIGN_ENSEMBLE_CONFIG"],
                                           os.getenv("PROMPTALIGN_ALLOW_DEVELOPMENT") == "1")
+        elif os.getenv("PROMPTALIGN_ITM_MODEL"):
+            # Gate the regression score with BLIP ITM; the receipt pins the reviewed BLIP snapshot.
+            from src.inference.gated_predictor import GatedPredictor
+            receipt = os.getenv("PROMPTALIGN_ITM_RECEIPT") or str(
+                Path(__file__).resolve().parents[2] / "configs/blip_itm_base_coco_receipt.json")
+            predictor = GatedPredictor(model_path, training_path, os.environ["PROMPTALIGN_ITM_MODEL"], receipt,
+                                       os.getenv("PROMPTALIGN_ALLOW_DEVELOPMENT") == "1",
+                                       os.getenv("PROMPTALIGN_ITM_DEVICE", "cpu"))
         else:
             predictor = Predictor(model_path, training_path, os.getenv("PROMPTALIGN_ALLOW_DEVELOPMENT") == "1")
     return create_app(predictor)

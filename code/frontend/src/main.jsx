@@ -78,7 +78,7 @@ function App() {
       {message.reply?.type === 'text' && <p>{message.reply.data.text}</p>}
       {message.reply?.type === 'metrics' && <Metrics data={message.reply.data}/>}
       {message.reply?.data.items && <div className="results">{message.reply.data.items.map(item => <div className="result" key={item.index}>
-        {message.thumbnails[item.index] && <img src={message.thumbnails[item.index]} alt={`Ảnh ${item.index + 1}`}/>}<span>Ảnh {item.index + 1} · Hạng {item.rank}</span><strong>{item.score.toFixed(2)}<small> / 5</small></strong><small>CLIP cosine: {item.cosine.toFixed(3)}</small></div>)}</div>}
+        {message.thumbnails[item.index] && <img src={message.thumbnails[item.index]} alt={`Ảnh ${item.index + 1}`}/>}<span>Ảnh {item.index + 1} · Hạng {item.rank}</span><strong>{item.score.toFixed(2)}<small> / 5</small></strong><small>CLIP cosine: {item.cosine.toFixed(3)}</small>{typeof item.itm === 'number' && <small>Khớp prompt (ITM): {Math.round(item.itm * 100)}%</small>}{item.warning && <small className="warning">{item.warning}</small>}</div>)}</div>}
       {message.reply && <small className="metadata">{message.reply.model_version || 'Chưa có model'} · {message.reply.elapsed_ms} ms</small>}
     </article>)}<div ref={bottom}/></section>
     <section className="composer"><label htmlFor="prompt">Prompt dùng để đối chiếu</label><textarea id="prompt" value={prompt} maxLength={1000} onChange={e => setPrompt(e.target.value)} placeholder="Ví dụ: A red bicycle leaning against a stone wall…"/><div className="previews">{files.map((f, i) => <div key={f.url}><img src={f.url} alt={`Ảnh đã chọn ${i + 1}`}/><button aria-label={`Xóa ảnh ${i + 1}`} onClick={() => setFiles(files.filter((_, j) => j !== i))}>×</button></div>)}</div>

@@ -6,6 +6,7 @@ import pytest
 
 from backend.app.main import create_app
 from backend.app.services import SessionStore
+from src.inference.gated_predictor import NON_ENGLISH_WARNING
 
 
 class FakePredictor:
@@ -73,6 +74,37 @@ def test_session_isolation_followup_and_expiry():
     now[0] = 6
     assert c.post("/api/chat", json=body).status_code == 404
     assert not store.items
+
+
+class StubGated(FakePredictor):
+    """Mimics GatedPredictor output without loading CLIP or BLIP."""
+    def __init__(self, items):
+        self.items = items
+
+    def predict(self, prompt, images):
+        return [dict(self.items[i]) for i in range(len(images))]
+
+
+def test_api_accepts_gated_fields():
+    gated = {"score": 3.0, "cosine": 0.2, "mlp": 4.0, "itm": 0.25, "gated": True}
+    skipped = {"score": 4.0, "cosine": 0.2, "mlp": 4.0, "itm": None, "gated": False, "warning": NON_ENGLISH_WARNING}
+    c = TestClient(create_app(StubGated([gated, skipped])))
+    response = c.post("/api/compare", data={"prompt": "red"}, files=[("images", ("a.png", png()))] * 2)
+    assert response.status_code == 200
+    items = response.json()["data"]["items"]
+    assert items[0]["itm"] == 0.25 and items[0]["gated"] is True and "warning" not in items[0]
+    assert items[1]["itm"] is None and items[1]["warning"] == NON_ENGLISH_WARNING
+    assert [i["rank"] for i in items] == [2, 1]
+
+
+@pytest.mark.parametrize("bad", [{"itm": 1.5}, {"itm": -0.1}, {"itm": float("nan")}, {"mlp": 7.0},
+                                 {"itm": "0.5"}, {"warning": 3}])
+def test_api_rejects_invalid_gated_fields(bad):
+    item = {"score": 3.0, "cosine": 0.2, "mlp": 3.0, "itm": 0.5, "gated": True, **bad}
+    c = TestClient(create_app(StubGated([item])))
+    response = c.post("/api/evaluate", data={"prompt": "red"}, files={"image": ("a.png", png())})
+    assert response.status_code == 500
+    assert response.json()["data"]["code"] == "INTERNAL_ERROR"
 
 
 def test_exception_is_sanitized():

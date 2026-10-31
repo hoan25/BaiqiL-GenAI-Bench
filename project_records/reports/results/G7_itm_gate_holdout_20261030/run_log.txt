@@ -1,0 +1,21 @@
+[transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|##########| 398/398 [00:00<00:00, 26534.83it/s]
+Loading weights:   0%|          | 0/472 [00:00<?, ?it/s]Loading weights: 100%|##########| 472/472 [00:00<00:00, 23599.74it/s]
+16/1440 (19s)
+336/1440 (40s)
+656/1440 (62s)
+976/1440 (84s)
+1296/1440 (106s)
+16/1440 (117s)
+336/1440 (139s)
+656/1440 (164s)
+976/1440 (189s)
+1296/1440 (213s)
+== test (n=1440)
+mlp            MAE 0.7920 spearman 0.4370 pairwise 0.6710 | swap 788/1440 drop 0.081
+gate_multiply  MAE 0.8124 spearman 0.4684 pairwise 0.6995 | swap 1438/1440 drop 2.074
+gate_min       MAE 0.7992 spearman 0.4589 pairwise 0.6829 | swap 1438/1440 drop 2.177
+gate_sqrt      MAE 0.7904 spearman 0.4716 pairwise 0.6912 | swap 1438/1440 drop 2.125
+gate_soft25    MAE 0.7885 spearman 0.4721 pairwise 0.6959 | swap 1420/1440 drop 1.576
+match_only     MAE 1.4843 spearman 0.2453 pairwise 0.6658 | swap 1438/1440 drop 3.626
+EXIT=0

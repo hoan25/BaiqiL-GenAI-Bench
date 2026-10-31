@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "scope": "development_only_not_full_data_acceptance",
+  "device": "cuda",
+  "batch_size": 32,
+  "torch": "2.14.1+cu126",
+  "transformers": "5.22.1",
+  "git_commit": "a33c9e36bca8731190274fe251aee2113ae3a10a",
+  "model_files_sha256": {
+    "config.json": "b575ef3c36f2a057fa19e221650105052d61cc9c1a972ec15019c6261ec98770",
+    "merges.txt": "f526393189112391ce6f9795d4695f704121ce452c3aad1f5335cc41337eba85",
+    "preprocessor_config.json": "910e70b3956ac9879ebc90b22fb3bc8a75b6a0677814500101a4c072bd7857bd",
+    "pytorch_model.bin": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f",
+    "special_tokens_map.json": "f8c0d6c39aee3f8431078ef6646567b0aba7f2246e9c54b8b99d55c22b707cbf",
+    "tokenizer.json": "b556ac8c99757ffb677208af34bc8c6721572114111a6e0aaf5fa69ff0b8d842",
+    "tokenizer_config.json": "34b7336e4bee12e0a9730eaf5189f582ef3c3eea5027f65730e5717256755aad",
+    "vocab.json": "5047b556ce86ccaf6aa22b3ffccfc52d391ea4accdab9c2f2407da5b742d4363"
+  },
+  "manifest_sha256": "b218ad7dffe15bfbb1e2bcee5cbb5f999fb10f0821f409197fbefa3c23f17160",
+  "count": 9598,
+  "dimension": 512,
+  "model_state_sha256": "12f1a938acc3449fcf1a9acfe20a35e200eced3fe9e7b755362374b9fc103aa8",
+  "frozen_state_unchanged": true,
+  "validation": {
+    "split": "val",
+    "train_count": 6718,
+    "val_count": 1440,
+    "M0": {
+      "train_mean": 3.3885084846680558,
+      "count": 1440,
+      "mae": 0.9378546304565952,
+      "rmse": 1.073653138166897,
+      "spearman": null,
+      "pairwise": {
+        "accuracy": 0.0,
+        "eligible_pairs": 1940,
+        "correct_pairs": 0,
+        "excluded_label_ties": 1660,
+        "prediction_ties": 1940,
+        "min_label_gap": 0.5,
+        "prediction_tie_credit": 0
+      }
+    },
+    "M1": {
+      "spearman": 0.18425308991452147,
+      "pairwise": {
+        "accuracy": 0.5623711340206186,
+        "eligible_pairs": 1940,
+        "correct_pairs": 1091,
+        "excluded_label_ties": 1660,
+        "prediction_ties": 0,
+        "min_label_gap": 0.5,
+        "prediction_tie_credit": 0
+      },
+      "score_type": "raw_cosine_not_1_to_5"
+    }
+  },
+  "embeddings_sha256": "f18e0234caadf87a61123f7d5c344a10eadebbac7f77d9397976842a44c9084a",
+  "elapsed_seconds": 222.13892300002044
+}
